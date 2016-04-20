@@ -50,8 +50,32 @@ class UserService{
         }
     }
 
-    public static function volidateLogin($loginInfo){
-
+    /**
+     * 登录校验，返回error_code和msg
+     * @param $phone
+     * @param $password
+     * @return mixed
+     */
+    public static function loginVolidate($phone,$password){
+        if( !$phone ){
+            $ret['error_code'] = 1;
+            $ret['msg'] = "请填写手机号！";
+        }
+        $user = self::getUserByPhone($phone);
+        if( !$user ){
+            $ret['error_code'] = 2;
+            $ret['msg'] = "此手机号未被注册！";
+        }
+        if( $user['password'] == md5($password) ){
+            $ret['error_code'] = 0;
+            $ret['msg'] = "登录成功！";
+            $ret['userid'] = $user['id'];
+        }else{
+            $ret['error_code'] = 3;
+            $ret['msg'] = "密码错误！";
+        }
+        return $ret;
     }
+
 
 }
