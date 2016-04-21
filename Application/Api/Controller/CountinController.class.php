@@ -54,6 +54,11 @@ class CountinController extends CommonController{
         $id = I("userid");
         $ret['totalNum'] = CountinService::getUserTotalNumById($id);
         $ret['todayNum'] = CountinService::getUserTodayNumById($id);
+        if( $ret['totalNum'] != null && $ret['todayNum'] != null ){
+            $ret['error_code'] = 0;
+        }else{
+            $ret['error_code'] = 1;
+        }
         echo json_encode($ret);
     }
 
