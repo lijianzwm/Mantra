@@ -34,7 +34,7 @@ class CountinController extends CommonController{
         echo json_encode($ret);
     }
 
-    public function getTotalNum(){
+    public function getUserTotalNum(){
         $id = I("userid");
         $total = CountinService::getUserTotalNumById($id);
         if( $total != null ){
@@ -44,6 +44,16 @@ class CountinController extends CommonController{
             $ret['error_code'] = 1;
             $ret['num'] = $total;
         }
+        echo json_encode($ret);
+    }
+
+    /**
+     * 返回今日总数和全部总数
+     */
+    public function getUserCurNums(){
+        $id = I("userid");
+        $ret['totalNum'] = CountinService::getUserTotalNumById($id);
+        $ret['todayNum'] = CountinService::getUserTodayNumById($id);
         echo json_encode($ret);
     }
 

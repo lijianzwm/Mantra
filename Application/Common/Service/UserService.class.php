@@ -69,7 +69,6 @@ class UserService{
         if( $user['password'] == md5($password) ){
             $ret['error_code'] = 0;
             $ret['msg'] = "登录成功！";
-            $ret['userid'] = $user['id'];
             $ret['user'] = $user;
         }else{
             $ret['error_code'] = 3;
