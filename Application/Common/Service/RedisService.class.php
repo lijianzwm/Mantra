@@ -207,8 +207,9 @@ class RedisService{
         $currentNum = self::getRedisUserTodayNumById($userid);
         if( $currentNum == false ){
             $currentNum = self::cachingUserTodayNum($userid);
-        }
-        if ($currentNum != null ) {
+            //这里缓存完了不用再加$num了，因为前面sql数据库中已经加过了
+            self::set($todayKey, $currentNum, C("TODAY_KEY_EXPIRE"));
+        }else{
             $num = $num+$currentNum;
             self::set($todayKey,$num, C("TODAY_KEY_EXPIRE"));
         }
