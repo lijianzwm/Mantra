@@ -221,6 +221,7 @@
                 var aj = $.ajax({
                     url: "{:U('Api/Countin/addNum')}",
                     data: {
+                        apikey:"{:C('API_ACCESS_KEY')}",
                         userid: '{$Think.session.userid}',
                         num: num
                     },

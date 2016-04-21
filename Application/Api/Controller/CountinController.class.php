@@ -12,7 +12,7 @@ namespace Api\Controller;
 use Think\Controller;
 use Common\Service\CountinService;
 
-class CountinController extends Controller{
+class CountinController extends CommonController{
 
     /**
      * url: /Api/Countin/addNum?num=1&userid=1

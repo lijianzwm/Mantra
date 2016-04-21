@@ -13,7 +13,7 @@ use Common\Service\CountinService;
 use Think\Controller;
 use Common\Service\UserService;
 
-class UserController extends Controller{
+class UserController extends CommonController{
 
     public function updateUserInfo(){
         $user['id'] = I("id");

@@ -10,7 +10,7 @@ namespace Api\Controller;
 use Think\Controller;
 use Common\Service\MessageService;
 
-class MessageController extends Controller{
+class MessageController extends CommonController{
 
     public function sendVerifyCode(){
         $phone = I("phone");

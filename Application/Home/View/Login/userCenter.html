@@ -92,6 +92,7 @@
         var aj = $.ajax({
             url: "{:U('Api/User/updateUserInfo')}",
             data: {
+                apikey:"{:C('API_ACCESS_KEY')}",
                 id:'{$user.id}',
                 phone:'{$user.phone}',
                 realname:$('#realname').val(),
