@@ -77,6 +77,12 @@ class UserController extends CommonController{
 
     public function regist(){
         $phone = I("phone");
+        if( UserService::isPhoneUserd( $phone )){
+            $ret['error_code'] = 0;
+            $ret['msg'] = "电话号码已经被注册过！";
+            echo json_encode($ret);
+            die();
+        }
         $password = I("password");
         $user['phone'] = $phone;
         $user['password'] = md5($password);

@@ -82,5 +82,13 @@ class UserService{
         return $ret;
     }
 
+    public static function isPhoneUserd($phone){
+        if( M("user")->where("phone=$phone")->find() ){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 }
