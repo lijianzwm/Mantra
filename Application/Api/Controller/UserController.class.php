@@ -78,7 +78,6 @@ class UserController extends CommonController{
             $ret['msg'] = "请将信息填写完整！";
             $ret['error_code'] = 1;
         }
-
         $id = M("user")->add($user);
         if( $id ){
             $ret['msg'] = "注册成功！";
@@ -87,6 +86,7 @@ class UserController extends CommonController{
             $ret['msg'] = "注册失败！";
             $ret['error_code'] = 1;
         }
+        echo json_encode($ret);
     }
 
 }
