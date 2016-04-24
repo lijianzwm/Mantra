@@ -97,4 +97,22 @@ class UserController extends CommonController{
         echo json_encode($ret);
     }
 
+    public function getUserInfo(){
+        $userid = I("userid");
+        if( $userid ){
+            if( is_numeric($userid) ){
+                $ret['error_code'] = 0;
+                $ret['msg'] = "获取用户信息成功！";
+                $ret['user'] = UserService::getUserById($userid);
+            }else{
+                $ret['error_code'] = 1;
+                $ret['msg'] = "用户id非法！";
+            }
+        }else{
+            $ret['error_code'] = 1;
+            $ret['msg'] = "用户id为空！";
+        }
+        echo json_encode($ret);
+    }
+
 }
