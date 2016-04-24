@@ -82,6 +82,9 @@ class UserController extends CommonController{
         $user['password'] = md5($password);
         $user['realname'] = I("realname");
         $user['showname'] = "师兄".substr($phone, -4);
+        if( $user['realname'] ){
+            $user['showname'] = $user['realname'];
+        }
         if( !UserService::checkUserInfo($user) ){
             $ret['msg'] = "请将信息填写完整！";
             $ret['error_code'] = 1;
