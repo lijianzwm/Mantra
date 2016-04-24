@@ -68,4 +68,25 @@ class UserController extends CommonController{
         echo json_encode($ret);
     }
 
+    public function regist(){
+        $phone = I("phone");
+        $password = I("password");
+        $user['phone'] = $phone;
+        $user['password'] = md5($password);
+        $user['showname'] = "师兄".substr($phone, -4);
+        if( !UserService::checkUserInfo($user) ){
+            $ret['msg'] = "请将信息填写完整！";
+            $ret['error_code'] = 1;
+        }
+
+        $id = M("user")->add($user);
+        if( $id ){
+            $ret['msg'] = "注册成功！";
+            $ret['error_code'] = 0;
+        }else{
+            $ret['msg'] = "注册失败！";
+            $ret['error_code'] = 1;
+        }
+    }
+
 }
