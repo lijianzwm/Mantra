@@ -11,6 +11,10 @@ namespace Common\Service;
 
 class UserService{
 
+    public static function getUserById($userid){
+        return M("user")->where("id=$userid")->find();
+    }
+
     /**
      * 通过手机号来获取用户信息
      * @param $phone
@@ -35,8 +39,9 @@ class UserService{
     }
 
     public static function updateUserInfo($user){
-        if (M("user")->save($user)) {
-            return true;
+        $result = M("user")->save($user);
+        if ($result) {
+            return $result;
         }else{
             return false;
         }

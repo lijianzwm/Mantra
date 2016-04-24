@@ -15,21 +15,27 @@ use Common\Service\UserService;
 
 class UserController extends CommonController{
 
+    /**
+     * /Api/User/updateUserInfo?
+     */
     public function updateUserInfo(){
         $user['id'] = I("id");
         $user['phone'] = I("phone");
         $goal = I("goal");
         $dayGoal = I("day_goal");
+        $realname = I("realname");
+        $dharma = I("dharma");
         $ret['msg'] = "";
-        if( I("realname") ){
-            $user['realname'] = I("realname");
-            $user['showname'] = I("realname");//如果有真实姓名的话，显示真实姓名
+        $user['showname'] = "师兄".substr($user['phone'], -4);
+        if( $realname ){
+            $user['realname'] = $realname;
+            $user['showname'] = $realname;//如果有真实姓名的话，显示真实姓名
         }
-        if( I("dharma")){
-            $user['dharma'] = I("dharma");
-            $user['showname'] = I("dharma");//如果有法名的话，最优先显示法名，然后是真实姓名
+        if( $dharma ){
+            $user['dharma'] = $dharma;
+            $user['showname'] = $dharma;//如果有法名的话，最优先显示法名，然后是真实姓名
         }
-        if( I("goal") ){
+        if( $goal ){
             if (CountinService::isCountNumLegal($goal)) {
                 $user['goal'] = $goal;
 
@@ -51,6 +57,7 @@ class UserController extends CommonController{
         if( UserService::updateUserInfo($user)){
             $ret['error_code'] = 0;
             $ret['msg'] .= "更新用户信息成功！";
+            $ret['user'] = UserService::getUserById($user['id']);
         }else{
             $ret['error_code'] = 1;
             $ret['msg'] .= "用户信息未被修改！";
@@ -73,6 +80,7 @@ class UserController extends CommonController{
         $password = I("password");
         $user['phone'] = $phone;
         $user['password'] = md5($password);
+        $user['realname'] = I("realname");
         $user['showname'] = "师兄".substr($phone, -4);
         if( !UserService::checkUserInfo($user) ){
             $ret['msg'] = "请将信息填写完整！";
