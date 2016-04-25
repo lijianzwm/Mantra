@@ -70,14 +70,15 @@ class UserService{
         if( !$user ){
             $ret['error_code'] = 2;
             $ret['msg'] = "此手机号未被注册！";
-        }
-        if( $user['password'] == md5($password) ){
-            $ret['error_code'] = 0;
-            $ret['msg'] = "登录成功！";
-            $ret['user'] = $user;
         }else{
-            $ret['error_code'] = 3;
-            $ret['msg'] = "密码错误！";
+            if( $user['password'] == md5($password) ){
+                $ret['error_code'] = 0;
+                $ret['msg'] = "登录成功！";
+                $ret['user'] = $user;
+            }else{
+                $ret['error_code'] = 3;
+                $ret['msg'] = "密码错误！";
+            }
         }
         return $ret;
     }
