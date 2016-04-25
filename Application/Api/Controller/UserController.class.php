@@ -77,7 +77,7 @@ class UserController extends CommonController{
 
     public function regist(){
         $phone = I("phone");
-        if( UserService::isPhoneUserd( $phone )){
+        if( UserService::isPhoneUsed( $phone )){
             $ret['error_code'] = 1;
             $ret['msg'] = "电话号码已经被注册过！";
             echo json_encode($ret);
@@ -122,6 +122,48 @@ class UserController extends CommonController{
             $ret['msg'] = "用户id为空！";
         }
         echo json_encode($ret);
+    }
+
+    public function isPhoneUsed(){
+        $phone = I("phone");
+        if( $phone ){
+            if (UserService::isPhoneUsed($phone)) {
+                $ret['error_code'] = 0;
+                $ret['msg'] = "该号码可以重置密码！";
+            }else{
+                $ret['error_code'] = 1;
+                $ret['msg'] = "该号码未被注册！";
+            }
+        }else{
+            $ret['error_code'] = 1;
+            $ret['msg'] = "手机号码为空！";
+        }
+        echo json_encode($ret);
+    }
+
+    public function resetPassword(){
+        $phone = I("phone");
+        $newPassword = I("newPassword");
+        if( UserService::isPhoneUsed($phone)){
+            if (UserService::checkPasswordFormat($newPassword)) {
+                $user = UserService::getUserByPhone($phone);
+                if( $user ){
+                    $user['password'] = md5($newPassword);
+                    UserService::updateUserInfo($user);
+                    $ret['error_code'] = 0;
+                    $ret['msg'] = "修改密码成功！";
+                }else{
+                    $ret['error_code'] = 1;
+                    $ret['msg'] = "查无此用户";
+            }
+            }else{
+                $ret['error_code'] = 1;
+                $ret['msg'] = "密码格式不正确！";
+            }
+        }else{
+            $ret['error_code'] = 1;
+            $ret['msg'] = "无此用户！";
+        }
     }
 
 }

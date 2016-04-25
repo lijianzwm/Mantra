@@ -82,13 +82,17 @@ class UserService{
         return $ret;
     }
 
-    public static function isPhoneUserd($phone){
+    public static function isPhoneUsed($phone){
         if( M("user")->where("phone=$phone")->find() ){
             return true;
         }else{
             return false;
         }
+    }
 
+    public static function checkPasswordFormat($password){
+        //TODO 检查密码格式是否合法
+        return true;
     }
 
 }
