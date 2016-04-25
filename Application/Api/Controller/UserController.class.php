@@ -164,6 +164,7 @@ class UserController extends CommonController{
             $ret['error_code'] = 1;
             $ret['msg'] = "无此用户！";
         }
+        echo json_encode($ret);
     }
 
 }
