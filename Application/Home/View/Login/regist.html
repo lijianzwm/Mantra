@@ -36,7 +36,7 @@
     (function(){
         eventHandler();
         function eventHandler(){
-            addSendVerifyCode('#send_code_button','#phone',"{:U('Api/Message/sendVerifyCode')}");
+            addSendVerifyCode('#send_code_button','#phone',"{:U('Api/Message/sendVerifyCode')}","{:C('API_ACCESS_KEY')}");
             addVolidateVerifyCode('#verify_code','#send_code_button','#submit_button');
 
             $('#phone').blur(function(){
