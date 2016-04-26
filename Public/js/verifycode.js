@@ -49,7 +49,7 @@ function addSendVerifyCode(buttonId,phoneId,url){
                 data: {
                     apikey: 'mscuuaB24FLrdTgBbNla3nn9WgVVecy8',
                     phone: phoneNum,
-                    code: jsSendVerifyCode,
+                    code: jsSendVerifyCode
                 },
                 type: 'post',
                 cache: false,
