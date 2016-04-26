@@ -17,7 +17,7 @@ class CommonController extends Controller{
         $rightKey = C("API_ACCESS_KEY");
         if( $apiKey != $rightKey ){
             $ret["error_code"] = 1;
-            $ret["msg"] = "apikey错误！"."$apiKey, $rightKey";
+            $ret["msg"] = "apikey错误！"."get:$apiKey, right:$rightKey";
             echo json_encode($ret);
             die();
         }
