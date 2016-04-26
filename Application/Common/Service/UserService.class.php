@@ -11,6 +11,10 @@ namespace Common\Service;
 
 class UserService{
 
+    public static function getUserById($userid){
+        return M("user")->where("id=$userid")->find();
+    }
+
     /**
      * 通过手机号来获取用户信息
      * @param $phone
@@ -35,8 +39,9 @@ class UserService{
     }
 
     public static function updateUserInfo($user){
-        if (M("user")->save($user)) {
-            return true;
+        $result = M("user")->save($user);
+        if ($result) {
+            return $result;
         }else{
             return false;
         }
@@ -65,17 +70,30 @@ class UserService{
         if( !$user ){
             $ret['error_code'] = 2;
             $ret['msg'] = "此手机号未被注册！";
-        }
-        if( $user['password'] == md5($password) ){
-            $ret['error_code'] = 0;
-            $ret['msg'] = "登录成功！";
-            $ret['user'] = $user;
         }else{
-            $ret['error_code'] = 3;
-            $ret['msg'] = "密码错误！";
+            if( $user['password'] == md5($password) ){
+                $ret['error_code'] = 0;
+                $ret['msg'] = "登录成功！";
+                $ret['user'] = $user;
+            }else{
+                $ret['error_code'] = 3;
+                $ret['msg'] = "密码错误！";
+            }
         }
         return $ret;
     }
 
+    public static function isPhoneUsed($phone){
+        if( M("user")->where("phone=$phone")->find() ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function checkPasswordFormat($password){
+        //TODO 检查密码格式是否合法
+        return true;
+    }
 
 }
