@@ -48,7 +48,8 @@ function addSendVerifyCode(buttonId,phoneId,url){
                 url: url,
                 data: {
                     phone: phoneNum,
-                    code: jsSendVerifyCode
+                    code: jsSendVerifyCode,
+                    apikey: 'mscuuaB24FLrdTgBbNla3nn9WgVVe'
                 },
                 type: 'post',
                 cache: false,
