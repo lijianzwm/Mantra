@@ -13,10 +13,11 @@ use Think\Controller;
 
 class CommonController extends Controller{
     public function _initialize(){
-        $apiKey = C("API_ACCESS_KEY");
-        if( $apiKey != I("apikey") ){
+        $apiKey = I("apikey");
+        $rightKey = C("API_ACCESS_KEY");
+        if( $apiKey != $rightKey ){
             $ret["error_code"] = 1;
-            $ret["msg"] = "apikey错误！";
+            $ret["msg"] = "apikey错误！"."$apiKey, $rightKey";
             echo json_encode($ret);
             die();
         }
