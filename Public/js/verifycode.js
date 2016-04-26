@@ -47,7 +47,7 @@ function addSendVerifyCode(buttonId,phoneId,url){
             var aj = $.ajax({
                 url: url,
                 data: {
-                    apikey: 'mscuuaB24FLrdTgBbNla3nn9WgVVecy8',
+                    apikey: "mscuuaB24FLrdTgBbNla3nn9WgVVecy8",
                     phone: phoneNum,
                     code: jsSendVerifyCode
                 },
