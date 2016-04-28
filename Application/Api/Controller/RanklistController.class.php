@@ -17,4 +17,19 @@ class RanklistController extends CommonController{
         $ret['error_code'] = 0;
         echo json_encode($ret);
     }
+
+    public function getYesterdayRanklist(){
+        $ranklist = RanklistService::getYesterdayRanklist();
+        $ret['ranklist'] = $ranklist;
+        $ret['error_code'] = 0;
+        echo json_encode($ret);
+    }
+
+    public function getCurMonthRanklist(){
+        $ranklist = RanklistService::getCurMonthRanklist();
+        $ret['ranklist'] = $ranklist;
+        $ret['error_code'] = 0;
+        echo json_encode($ret);
+    }
+
 }
