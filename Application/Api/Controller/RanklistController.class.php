@@ -32,4 +32,11 @@ class RanklistController extends CommonController{
         echo json_encode($ret);
     }
 
+    public function getTotalRanklist(){
+        $ranklist = RanklistService::getTotalRanklist();
+        $ret['ranklist'] = $ranklist;
+        $ret['error_code'] = 0;
+        echo json_encode($ret);
+    }
+
 }
