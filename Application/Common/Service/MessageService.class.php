@@ -83,7 +83,7 @@ class MessageService{
         }else{
             $ret['error_code'] = 1;
             $ret['msg'] = "短信发送失败！";
-            $ret['json'] = $result;
+//            $ret['json'] = $result;
         }
         return $ret;
     }
