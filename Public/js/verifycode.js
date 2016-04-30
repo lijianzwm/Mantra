@@ -36,7 +36,7 @@ function checkPhoneNum(phoneNum){
  * @param phoneId 输入手机号的文本框id
  * @param url 后台ajax的链接
  */
-function addSendVerifyCode(buttonId,phoneId,url){
+function addSendVerifyCode(buttonId,phoneId,url,apikey){
     btn = $(buttonId);
     btn.attr("disabled",false);
     $(buttonId).click(function() {
@@ -47,7 +47,7 @@ function addSendVerifyCode(buttonId,phoneId,url){
             var aj = $.ajax({
                 url: url,
                 data: {
-                    apikey: "mscuuaB24FLrdTgBbNla3nn9WgVVecy8",
+                    apikey: apikey,
                     phone: phoneNum,
                     code: jsSendVerifyCode
                 },
