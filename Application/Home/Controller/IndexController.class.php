@@ -41,7 +41,11 @@ class IndexController extends Controller {
         if( $stageGX ){
             $stageGXTotalNum = StageGXService::getStageGXTotalNum($stageGX);
             $stageGXPercent = $stageGXTotalNum / floatval($stageGX['num']) * 100;
+            $stageGXRequireNum = intval($stageGX['num']) - $stageGXTotalNum;
+            $stageGXRequireNum = $stageGXRequireNum < 0 ? 0 : $stageGXRequireNum;
+            $stageGXPercent = round($stageGXPercent ,3);
             $this->assign("stageGX", $stageGX);
+            $this->assign("stageGXRequireNum", $stageGXRequireNum);
             $this->assign("stageGXTotalNum", $stageGXTotalNum);
             $this->assign("stageGXPercent", $stageGXPercent);
         }
