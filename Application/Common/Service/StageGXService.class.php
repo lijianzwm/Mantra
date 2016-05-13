@@ -31,7 +31,9 @@ class StageGXService{
 
     public static function getStageGX(){
         $todayDate = DateService::getCurrentYearMonthDay();
+        DebugService::displayLog("getStageGX()\ttodayDate=".$todayDate);
         $stageGX = M("stage_gx")->where("beg_date >= '$todayDate' and end_date <= '$todayDate'")->find();
+        DebugService::displayLog("getStageGX()\tstageGX=".$stageGX);
         return $stageGX;
     }
 

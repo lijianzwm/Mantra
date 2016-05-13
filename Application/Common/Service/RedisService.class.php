@@ -156,6 +156,7 @@ class RedisService{
 
     public static function cachingStageGXTotalNum($stageGX){
         $stageGXTotalNum = MysqlService::getStageGXTotalNum($stageGX);
+        DebugService::displayLog("cachingStageGXTotalNum()\tstageGXTotalNum=" . $stageGXTotalNum);
         if( !$stageGX ){
             $stageGXTotalNum = 0;
         }
