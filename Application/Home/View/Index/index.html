@@ -96,6 +96,22 @@
             margin-right:15px;
         }
 
+        .stage-num {
+            font-size: 50px;
+            color: #0000ff;
+            display: inline-block;
+            margin-left: 15px;
+            margin-right:15px;
+        }
+
+        .stage-percent{
+            font-size: 50px;
+            color: #0000ff;
+            display: inline-block;
+            margin-left: 15px;
+            margin-right:15px;
+        }
+
 
     </style>
 </head>
@@ -115,6 +131,14 @@
 </div>
 
 <div class="total-num-bar">当前共修总数<div class="total-num">{$totalNum}</div></div>
+<if condition="stageGX eq null">
+    <div class="total-num-bar">
+        {$stageGX.title}
+        <div class="stage-num">{$stageGXTotalNum}</div>
+        <div class="stage-percent">{$stageGXPercent}</div>
+    </div>
+</if>
+
 
 <div class="menu-button-wrapper">
     <div class="menu-button"><a href="http://{:C('GX_YIGUI')}">共修仪轨</a></div>

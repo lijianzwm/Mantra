@@ -154,6 +154,16 @@ class RedisService{
         return $num;
     }
 
+    public static function cachingStageGXTotalNum($stageGX){
+        $stageGXTotalNum = MysqlService::getStageGXTotalNum($stageGX);
+        if( !$stageGX ){
+            $stageGXTotalNum = 0;
+        }
+        $key = RedisKeyService::getStageGXKey();
+        self::set($key, $stageGXTotalNum, C("STAGE_GX_TOTAL_NUM_EXPIRE"));
+        return $stageGXTotalNum;
+    }
+
     /**
      * 获取缓存中的总排行，如果没有，返回false
      * @return mixed
@@ -251,6 +261,11 @@ class RedisService{
     public static function updateTotalNum($num){
         $key = RedisKeyService::getTotalNumKey();
         self::set($key, $num, C("TOTAL_NUM_EXPIRE"));
+    }
+
+    public static function getRedisStageGXTotalNum(){
+        $key = RedisKeyService::getStageGXKey();
+        return self::get($key);
     }
 
 }

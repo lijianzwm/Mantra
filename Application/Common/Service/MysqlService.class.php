@@ -264,4 +264,15 @@ class MysqlService{
         return $totalNum;
     }
 
+    public static function getStageGXTotalNum($stageGX){
+        $totalNum = 0;
+        $begDate = $stageGX['beg_date'];
+        $endDate = $stageGX['end_date'];
+        $result = M("day_count")->where("beg_date >= '$begDate' and end_date <= '$endDate'")->field("sum(num) as num")->select();
+        if( $result ){
+            $totalNum = $result[0]['num'];
+        }
+        return $totalNum;
+    }
+
 }

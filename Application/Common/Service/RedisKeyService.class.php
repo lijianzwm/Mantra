@@ -55,4 +55,8 @@ class RedisKeyService{
         return "total-" . $yearMonth;
     }
 
+    public static function getStageGXKey(){
+        return "stage-total-num";
+    }
+
 }

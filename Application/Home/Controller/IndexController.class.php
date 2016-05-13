@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Service\CountinService;
+use Common\Service\StageGXService;
 use Think\Controller;
 use Common\Service\DateService;
 
@@ -34,6 +35,15 @@ class IndexController extends Controller {
                 $this->assign("begTime", $seconds);
                 $state = "started";
             }
+        }
+
+        $stageGX = StageGXService::getStageGX();
+        if( $stageGX ){
+            $stageGXTotalNum = StageGXService::getStageGXTotalNum($stageGX);
+            $stageGXPercent = $stageGXTotalNum / floatval($stageGX['num']) * 100;
+            $this->assign("stageGX", $stageGX);
+            $this->assign("stageGXTotalNum", $stageGXTotalNum);
+            $this->assign("stageGXPercent", $stageGXPercent);
         }
 
         $totalNum = CountinService::getAllUserTotalNum();
