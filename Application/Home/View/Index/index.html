@@ -97,12 +97,12 @@
         }
 
         .stage-num-bar{
-            font-size:40px;
+            font-size:20px;
             margin-bottom:20px;
         }
 
         .stage-label{
-            font-size: 40px;
+            font-size: 20px;
             color: #9D804B;
             display: inline-block;
             margin-left: 15px;
@@ -110,7 +110,7 @@
         }
 
         .stage-num {
-            font-size: 40px;
+            font-size: 20px;
             color: #ff0000;
             display: inline-block;
             margin-left: 15px;
@@ -133,6 +133,7 @@
     </div>
 <else/>
     <div id="title" class="title">{:C('WEBSITE_TITLE')}</div>
+    <div class="total-num-bar">全部共修总数<div class="total-num">{$totalNum}</div></div>
 </if>
 
 <div>
@@ -146,10 +147,6 @@
         <div>距共修开始还有&nbsp;<div id="remain_seconds" class="remain-seconds"></div>&nbsp;秒</div>
     </div>
 </div>
-
-<div class="total-num-bar">全部共修总数<div class="total-num">{$totalNum}</div></div>
-
-
 
 <div class="menu-button-wrapper">
     <div class="menu-button"><a href="http://{:C('GX_YIGUI')}">共修仪轨</a></div>
