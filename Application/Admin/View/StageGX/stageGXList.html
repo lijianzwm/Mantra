@@ -8,7 +8,7 @@
 <div><a href="{:U('StageGX/addStageGX')}">添加阶段性共修</a></div>
 <foreach name="list" item="v">
     <div>{$v.title}</div>
-    <div><a href="{U('StageGX/editStageGX',array('id'=>$v['id']))}">修改</a></div>
+    <div><a href="{:U('StageGX/editStageGX',array('id'=>$v['id']))}">修改</a></div>
     <div><a href="#">删除</a></div>
 </foreach>
 </body>
