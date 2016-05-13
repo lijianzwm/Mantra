@@ -131,7 +131,7 @@
 </div>
 
 <div class="total-num-bar">当前共修总数<div class="total-num">{$totalNum}</div></div>
-<if condition="stageGX eq null">
+<if condition="$stageGX neq null">
     <div class="total-num-bar">
         {$stageGX.title}
         <div class="stage-num">{$stageGXTotalNum}</div>
