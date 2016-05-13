@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阶段性共修列表</title>
+</head>
+<body>
+<foreach name="list" item="v">
+    <div>{$v.title}</div>
+    <div><a href="{U('StageGX/editStageGX',array('id'=>$v['id']))}">修改</a></div>
+    <div><a href="#">删除</a></div>
+</foreach>
+</body>
+</html>

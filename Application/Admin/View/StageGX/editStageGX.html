@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阶段性共修</title>
+</head>
+<body>
+<form action="{:U('StageGX/editStageGXHandler')}" method="post">
+    <input type="hidden" name="id" value="{$stageGX.id}"/>
+    <div>
+        <div>共修题目:</div><div><input name="title" value="{$stageGX.title}"/></div>
+        <div>开始时间:</div><div><input type="date" name="begDate" value="{$stageGX.beg_date}"/></div>
+        <div>结束时间:</div><div><input type="date" name="endDate" value="{$stageGX.end_date}"/></div>
+        <div>目标数目:</div><div><input name="num" value="{$stageGX.num}"/></div>
+        <div><input type="submit" value="提交"/></div>
+    </div>
+</form>
+
+</body>
+</html>
