@@ -63,6 +63,7 @@ class CountinService{
             MysqlService::addMysqlTodayNum($userid, $num);
         }
         self::addTotalNum($num);
+        self::addStageTotalNum($num);
         RedisService::addRedisTodayNum($userid, $num);
         RedisService::addRedisUserTotalNum($userid,$num);
         MysqlService::addMysqlUserTotalNum($userid,$num);
@@ -71,8 +72,12 @@ class CountinService{
 
     private static function addTotalNum($num){
         $totalNum = self::getAllUserTotalNum();
-
         RedisService::updateTotalNum($totalNum + $num);
+    }
+
+    private static function addStageTotalNum($num){
+        $totalNum = RedisService::getRedisStageGXTotalNum();
+        RedisService::updateStageTotalNum($totalNum + $num);
     }
 
     /**

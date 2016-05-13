@@ -269,5 +269,10 @@ class RedisService{
         return self::get($key);
     }
 
+    public static function updateStageTotalNum($num){
+        $key = RedisKeyService::getStageGXKey();
+        self::set($key,$num,C("STAGE_GX_TOTAL_NUM_EXPIRE"));
+    }
+
 }
 
