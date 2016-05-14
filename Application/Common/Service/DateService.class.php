@@ -88,7 +88,7 @@ class DateService{
     }
 
     public static function yearMonthDay2YearMonth($date){
-        return substr(strval($date), 7);
+        return substr(strval($date), 0,7);
     }
 
 }
