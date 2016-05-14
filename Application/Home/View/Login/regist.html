@@ -13,6 +13,10 @@
 <body>
 <div class="user-box-title">用户注册</div>
 <form action="{:U('Login/registHandler')}" method="post">
+    <div class="user-box-item">
+        真实姓名
+        <input name="phone" id="realname" value="{$realname}"/>
+    </div>
     <div class="user-box-item" id="phone_item">
         手机号码
         <input name="phone" id="phone" value="{$phone}"/>

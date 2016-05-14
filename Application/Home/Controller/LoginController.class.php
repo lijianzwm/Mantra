@@ -59,9 +59,14 @@ class LoginController extends Controller{
     public function registHandler(){
         $phone = I("phone");
         $password = I("password");
+        $realname = I("realname");
         $user['phone'] = $phone;
         $user['password'] = md5($password);
         $user['showname'] = "师兄".substr($phone, -4);
+        if( $realname ){
+            $user['realname'] = $realname;
+            $user['showname'] = $realname;
+        }
         if( !UserService::checkUserInfo($user) ){
             $this->error("请将信息填写完整！");
         }

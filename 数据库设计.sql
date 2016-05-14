@@ -1,3 +1,12 @@
+CREATE TABLE `gx_admin` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `username` varchar(20) NOT NULL COMMENT '用户名',
+  `realname` varchar(20) NOT NULL COMMENT '真实姓名',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `phone` varchar(20) DEFAULT NULL COMMENT '联系电话',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `gx_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
   `phone` varchar(50) NOT NULL UNIQUE COMMENT '联系电话',
