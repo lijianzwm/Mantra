@@ -176,4 +176,55 @@ class CountinService{
         return round($percent*100,2)."%";
     }
 
+    /**
+     * 补报数目,更新总数,个人数,日排行,月排行
+     * @param $phone
+     * @param $date
+     * @param $num
+     * @return bool
+     */
+    public static function supplementNum( $phone, $date, $num ){
+        //TODO 检查一下date的格式是否合法
+        if( !self::isSupplementDateLegeal($date) ){
+            DebugService::displayLog("补报数目日期非法!");
+            return false;
+        }
+        if (DateService::checkYearMonthDay($date)) {
+            if( UserService::isExistUser($phone)){
+                $dayCount = M("day_count")->where("phone=$phone and today_date=$date")->find();
+                $userid = $dayCount['userid'];
+                if( $dayCount ){
+                    if( !MysqlService::addMysqlDayNum($userid, $num, $date ) ){
+                        return false;
+                    }
+                }else{
+                    if( !MysqlService::insertMysqlDayNum($userid, $num, $date) ){
+                        return false;
+                    }
+                }
+                //TODO 如果补报日期属于阶段性共修,更新阶段性共修数目
+                RedisService::addRedisUserTotalNum($userid,$num);
+                MysqlService::addMysqlUserTotalNum($userid,$num);
+                if( DateService::isYearMonthDayInPassedMonth($date) ){
+                    $yearMonth = DateService::yearMonthDay2YearMonth($date);
+                    MysqlService::refreshMysqlMonthRanklist($yearMonth);
+                    RedisService::cachingMonthRanklist($yearMonth);
+                }
+                MysqlService::refreshMysqlSomeDayRanklist($date);
+                RedisService::cachingSomedayRanklist($date);
+                RedisService::cachingTotalNum();
+            }
+        }
+        return false;
+    }
+
+    public static function isSupplementDateLegeal($date){
+        $curYearMonthDay = DateService::getStrYearMonthDay();
+        if( $date >= $curYearMonthDay ){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }

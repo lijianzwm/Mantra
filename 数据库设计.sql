@@ -33,7 +33,7 @@ CREATE TABLE `gx_day_count` (
 
 CREATE TABLE `gx_day_ranklist` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
-  `date` date NOT NULL COMMENT '日期',
+  `date` date UNIQUE NOT NULL COMMENT '日期',
   `total` bigint(30) NOT NULL COMMENT '总数',
   `ranklist` longtext COMMENT '排行榜',
   PRIMARY KEY (`id`),
@@ -42,7 +42,7 @@ CREATE TABLE `gx_day_ranklist` (
 
 CREATE TABLE `gx_month_ranklist` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
-  `yearmonth` varchar(7) NOT NULL COMMENT '年月',
+  `yearmonth` varchar(7) UNIQUE NOT NULL COMMENT '年月',
   `total` bigint(30) NOT NULL COMMENT '总数',
   `ranklist` longtext COMMENT '排行榜',
   PRIMARY KEY (`id`),
