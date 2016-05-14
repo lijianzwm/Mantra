@@ -185,6 +185,10 @@ class CountinService{
      */
     public static function supplementNum( $phone, $date, $num ){
         //TODO 检查一下date的格式是否合法
+        if( !DateService::checkYearMonthDay($date)){
+            DebugService::displayLog("date输入格式不合法!");
+            return false;
+        }
         if( !self::isSupplementDateLegeal($date) ){
             DebugService::displayLog("补报数目日期非法!");
             return false;
