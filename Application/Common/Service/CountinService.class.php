@@ -218,6 +218,7 @@ class CountinService{
                 MysqlService::refreshMysqlSomeDayRanklist($date);
                 RedisService::cachingSomedayRanklist($date);
                 RedisService::cachingTotalNum();
+                return true;
             }
         }
         return false;
