@@ -13,7 +13,7 @@ use Think\Controller;
 class CommonController extends Controller{
     public function _initialize(){
         if( !session("adminuser") ){
-            $this->redirect("Login/index");
+            $this->redirect("User/index");
         }
     }
 }
