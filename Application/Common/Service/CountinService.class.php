@@ -194,9 +194,10 @@ class CountinService{
             return false;
         }
         if (DateService::checkYearMonthDay($date)) {
-            if( UserService::isExistUser($phone)){
-                $dayCount = M("day_count")->where("phone=$phone and today_date=$date")->find();
-                $userid = $dayCount['userid'];
+            $user = UserService::getUserByPhone($phone);
+            if( $user ){
+                $userid = $user['id'];
+                $dayCount = M("day_count")->where("userid=$userid and today_date=$date")->find();
                 if( $dayCount ){
                     if( !MysqlService::addMysqlDayNum($userid, $num, $date ) ){
                         return false;
