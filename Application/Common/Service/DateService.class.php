@@ -59,7 +59,11 @@ class DateService{
     }
 
     public static function checkYearMonthDay($date){
-        return true;
+        if( preg_match('[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]', $date) ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

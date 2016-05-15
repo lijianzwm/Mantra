@@ -184,7 +184,7 @@ class CountinService{
      * @return bool
      */
     public static function supplementNum( $phone, $date, $num ){
-        //TODO 检查一下date的格式是否合法
+        $date = trim($date);
         if( !DateService::checkYearMonthDay($date)){
             DebugService::displayLog("date输入格式不合法!");
             return false;
@@ -207,16 +207,27 @@ class CountinService{
                         return false;
                     }
                 }
-                //TODO 如果补报日期属于阶段性共修,更新阶段性共修数目
+
+                //如果补报日期属于阶段性共修,更新阶段性共修数目
+                if( StageGXService::isInStage($date) ){
+                    self::addStageTotalNum($num);
+                }
+
+                //更新用户表总数
                 RedisService::addRedisUserTotalNum($userid,$num);
                 MysqlService::addMysqlUserTotalNum($userid,$num);
+
+                //如果是过去的月份,更新月排行,并做缓存
                 if( DateService::isYearMonthDayInPassedMonth($date) ){
                     $yearMonth = DateService::yearMonthDay2YearMonth($date);
                     MysqlService::refreshMysqlMonthRanklist($yearMonth);
                     RedisService::cachingMonthRanklist($yearMonth);
                 }
+
+                //更新并缓存日排行
                 MysqlService::refreshMysqlSomeDayRanklist($date);
                 RedisService::cachingSomedayRanklist($date);
+
                 RedisService::cachingTotalNum();
                 return true;
             }

@@ -17,12 +17,14 @@ namespace Common\Service;
 class StageGXService{
 
     /**
-     * 判断当前时间是否处于阶段性共修中
+     * 判断当前时间是否处于阶段性共修中,输入保证$date的格式
      * @return bool
      */
-    public static function isInStage(){
-        $todayDate = DateService::getCurrentYearMonthDay();
-        if( M("stage_gx")->where("beg_date >= '$todayDate' and end_date <= '$todayDate'")->find()){
+    public static function isInStage( $date=null ){
+        if( $date == null ){
+            $date = DateService::getCurrentYearMonthDay();
+        }
+        if( M("stage_gx")->where("beg_date >= '$date' and end_date <= '$date'")->find()){
             return true;
         }else{
             return false;
