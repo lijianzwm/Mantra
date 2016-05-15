@@ -59,6 +59,7 @@ class DateService{
     }
 
     public static function checkYearMonthDay($date){
+        DebugService::displayLog("checkYearMonthDay(): ".$date);
         if( preg_match('[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]', $date) ){
             return true;
         }else{

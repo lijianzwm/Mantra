@@ -42,7 +42,6 @@ class CountinService{
         }
     }
 
-
     /**
      * 添加本日数目，用户不存在返回false
      * @param $userid
