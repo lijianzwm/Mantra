@@ -198,8 +198,10 @@ class CountinService{
                 $userid = $user['id'];
                 DebugService::displayLog("userid=".$userid);
                 DebugService::displayLog("date=" . $date);
-                die();
                 $dayCount = M("day_count")->where("userid=$userid and today_date=$date")->find();
+                DebugService::displayLog("dayCount:");
+                DebugService::displayLog($dayCount);
+                die();
                 if( $dayCount ){
                     if( !MysqlService::addMysqlDayNum($userid, $num, $date ) ){
                         return false;
