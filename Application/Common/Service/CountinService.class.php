@@ -196,6 +196,9 @@ class CountinService{
             $user = UserService::getUserByPhone($phone);
             if( $user ){
                 $userid = $user['id'];
+                DebugService::displayLog("userid=".$userid);
+                DebugService::displayLog("date=" . $date);
+                die();
                 $dayCount = M("day_count")->where("userid=$userid and today_date=$date")->find();
                 if( $dayCount ){
                     if( !MysqlService::addMysqlDayNum($userid, $num, $date ) ){
