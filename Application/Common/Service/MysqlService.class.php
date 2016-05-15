@@ -177,11 +177,35 @@ class MysqlService{
         self::addMysqlDayNum($userid, $num, $todayDate);
     }
 
+    /**
+     * @param $userid
+     * @param $num
+     * @param $date
+     * @param null $currentTime
+     * @return bool
+     */
     public static function addMysqlDayNum( $userid, $num, $date ){
         $dao = M();
         $table = C("DB_PREFIX")."day_count";
         $currentTime = DateService::getCurrentTime();
         if( $dao->execute("update $table set num=num+$num, update_time='$currentTime' where userid='$userid' AND today_date='$date'") ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 添加补报数目功能
+     * @param $userid
+     * @param $num
+     * @param $date
+     * @return bool
+     */
+    public static function addSupplementMysqlDayNum( $userid, $num, $date ){
+        $dao = M();
+        $table = C("DB_PREFIX")."day_count";
+        if( $dao->execute("update $table set num=num+$num where userid='$userid' AND today_date='$date'") ){
             return true;
         }else{
             return false;
@@ -205,10 +229,19 @@ class MysqlService{
         return self::insertMysqlDayNum($userid, $num, $todayDate );
     }
 
-    public static function insertMysqlDayNum( $userid, $num, $date ){
+    public static function insertSupplementMysqlDayNum( $userid, $num, $date ){
+        $insertDateTime = $date." 00:00:00";
+        return self::insertMysqlDayNum($userid,$num,$date,$insertDateTime);
+    }
+
+    public static function insertMysqlDayNum( $userid, $num, $date, $currentTime=null ){
         $count['userid'] = $userid;
         $count['num'] = $num;
         $count['today_date'] = $date;
+        if( $currentTime == null ){
+            $currentTime = DateService::getCurrentTime();
+        }
+        $count['update_time'] = $currentTime;
         if( M("day_count")->add($count) ){
             return true;
         }else{

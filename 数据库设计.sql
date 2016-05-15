@@ -20,13 +20,12 @@ CREATE TABLE `gx_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `gx_day_count` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
   `userid` varchar(50) NOT NULL COMMENT '用户id',
   `today_date` date NOT NULL COMMENT '日期',
   `num` bigint(20) NOT NULL DEFAULT '0' COMMENT '今日修持数目',
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
+  `update_time` DATETIME NOT NULL COMMENT '提交时间',
   PRIMARY KEY (`id`),
   KEY `index_date` (`today_date`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

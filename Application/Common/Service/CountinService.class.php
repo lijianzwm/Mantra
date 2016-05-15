@@ -202,11 +202,11 @@ class CountinService{
                 DebugService::displayLog("dayCount:");
                 DebugService::displayLog($dayCount);
                 if( $dayCount ){
-                    if( !MysqlService::addMysqlDayNum($userid, $num, $date ) ){
+                    if( !MysqlService::addSupplementMysqlDayNum($userid, $num, $date ) ){
                         return false;
                     }
                 }else{
-                    if( !MysqlService::insertMysqlDayNum($userid, $num, $date) ){
+                    if( !MysqlService::insertSupplementMysqlDayNum($userid, $num, $date) ){
                         return false;
                     }
                 }
