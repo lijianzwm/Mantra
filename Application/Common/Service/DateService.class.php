@@ -59,15 +59,24 @@ class DateService{
     }
 
     public static function checkYearMonthDay($date){
-        DebugService::displayLog("checkYearMonthDay(): ".$date);
-        $matchResult = preg_match('[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]', $date);
-        DebugService::displayLog($matchResult);
-        if( $matchResult ){
+        $unixTime=strtotime($date);
+        $checkDate= date("Y-m-d", $unixTime);
+        if($checkDate==$date)
             return true;
-        }else{
+        else
             return false;
-        }
     }
+
+//    public static function checkYearMonthDay($date){
+//        DebugService::displayLog("checkYearMonthDay(): ".$date);
+//        $matchResult = preg_match('[2000-9999]-[01-12]-[01-31]', $date);
+//        DebugService::displayLog($matchResult);
+//        if( $matchResult ){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
 
     /**
      * 输入的$date必须保证格式为"2000-01-01",且为字符串
