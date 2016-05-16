@@ -66,6 +66,9 @@ class CountinController extends CommonController{
         echo json_encode($ret);
     }
 
+    /**
+     * 补报数目
+     */
     public function supplementNum(){
         $userid = I("userid");
         $date = I("date");

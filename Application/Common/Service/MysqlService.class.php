@@ -52,7 +52,7 @@ class MysqlService{
      * @param $date
      */
     public static function refreshMysqlSomeDayRanklist($date){
-        M("day_ranklist")->where("date=$date")->delete();
+        M("day_ranklist")->where("date='$date''")->delete();
         self::generateMysqlSomeDayRanklist($date);
     }
 
