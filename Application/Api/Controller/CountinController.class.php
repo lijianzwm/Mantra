@@ -66,4 +66,16 @@ class CountinController extends CommonController{
         echo json_encode($ret);
     }
 
+    public function supplementNum(){
+        $userid = I("userid");
+        $date = I("date");
+        $num = I("num");
+        if( CountinService::supplementNumByUserid($userid, $date, $num) ){
+            $ret['error_code'] = 0;
+        }else{
+            $ret['error_code'] = 1;
+            $ret['msg'] = "补报失败!";
+        }
+    }
+
 }
