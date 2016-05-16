@@ -56,4 +56,10 @@ class CountinController extends CommonController{
         $this->display();
     }
 
+    public function supplement(){
+        $phone = session("phone");
+        $this->assing("phone", $phone);
+        $this->display();
+    }
+
 }
