@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>补报数目</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
     <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
     <script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
+    <style>
+        .wrapper{
+            text-align:center;
+        }
+    </style>
     <script>
         $(function() {
             $( "#datepicker" ).datepicker();
@@ -13,11 +19,14 @@
     </script>
 </head>
 <body>
-<form action="{:U('Countin/supplementHandler')}" method="post">
-    <input type="hidden" name="phone" value="{$phone}"/>
-    <div>补报日期</div><div><input type="text" name="date" id="datepicker"/></div>
-    <div>补报数目</div><div><input name="num"/></div>
-    <div><input type="submit" value="提交"/></div>
-</form>
+<div class="wrapper">
+    <form action="{:U('Countin/supplementHandler')}" method="post">
+        <input type="hidden" name="phone" value="{$phone}"/>
+        <div>补报日期</div><div><input type="text" name="date" id="datepicker"/></div>
+        <div>补报数目</div><div><input name="num"/></div>
+        <div><input type="submit" value="提交"/></div>
+    </form>
+</div>
+
 </body>
 </html>
