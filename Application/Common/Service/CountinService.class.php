@@ -183,6 +183,10 @@ class CountinService{
      * @return bool
      */
     public static function supplementNum( $phone, $date, $num ){
+        if( !self::isCountNumLegal($num) ){
+            DebugService::displayLog("补报数目num非法".$num);
+            return false;
+        }
         $date = trim($date);
         if( !DateService::checkYearMonthDay($date)){
             DebugService::displayLog("date输入格式不合法!");
