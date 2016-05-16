@@ -62,4 +62,15 @@ class CountinController extends CommonController{
         $this->display();
     }
 
+    public function supplementHandler(){
+        $phone = I("phone");
+        $date = I("date");
+        $num = I("num");
+        if( CountinService::supplementNum($phone, $date, $num) ){
+            $this->success("补报成功!");
+        }else{
+            $this->error("补报失败!");
+        }
+    }
+
 }
