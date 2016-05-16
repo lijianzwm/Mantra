@@ -79,6 +79,7 @@ class CountinController extends CommonController{
             $ret['error_code'] = 1;
             $ret['msg'] = "补报失败!";
         }
+        echo json_encode($ret);
     }
 
 }
