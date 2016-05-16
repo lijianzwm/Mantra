@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>精进排行</title>
     <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
     <style>
 
         .title{
@@ -90,7 +91,7 @@
     <a href="{:U('Ranklist/yesterdayRanklist')}">查昨日榜</a>&nbsp;&nbsp;
     <a href="{:U('Ranklist/todayRanklist')}">查今日榜</a>&nbsp;&nbsp;
     <form action="{:U('Ranklist/dayRanklist')}" method="post">
-        <input type="date" name="date" value="{$yearMonthDay}"/>
+        <input type="text" name="date" id="datepicker"/>
         <input type="submit" class="day-button" value="查询日榜"/>
     </form>
 </div>
@@ -124,7 +125,11 @@
     </for>
 </div>
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
 <script type="text/javascript">
+    $(function() {
+        $( "#datepicker" ).datepicker();
+    });
     dayBoxDom = $('#query_day_box');
     monthBoxDom = $('#query_month_box');
     function showQueryDayBox(){
