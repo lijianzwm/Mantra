@@ -66,7 +66,7 @@ class CountinController extends CommonController{
         $phone = I("phone");
         $date = I("date");
         $num = I("num");
-        if( CountinService::supplementNum($phone, $date, $num) ){
+        if( CountinService::supplementNumByPhone($phone, $date, $num) ){
             $this->success("补报成功!");
         }else{
             $this->error("补报失败!");
