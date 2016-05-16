@@ -98,7 +98,23 @@
 <div id="query_month_box" class="query-box hide">
     <a href="{:U('Ranklist/curMonthRanklist')}">查本月榜</a>&nbsp;&nbsp;
     <form action="{:U('Ranklist/monthRanklist')}" method="post">
-        <input type="month" name="month" value="{$monthDay}"/>
+        <select name="year">
+            <option value ="2016" selected = "selected">2016年</option>
+        </select>
+        <select name="month">
+            <option value ="01" selected = "selected">一月</option>
+            <option value ="02">二月</option>
+            <option value="03">三月</option>
+            <option value="04">四月</option>
+            <option value="05">五月</option>
+            <option value="06">六月</option>
+            <option value="07">七月</option>
+            <option value="08">八月</option>
+            <option value="09">九月</option>
+            <option value="10">十月</option>
+            <option value="11">十一月</option>
+            <option value="12">十二月</option>
+        </select>
         <input type="submit" class="month-button" value="查询月榜"/>
     </form>
 </div>
