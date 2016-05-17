@@ -36,7 +36,7 @@
     </div>
     <div class="user-box-item">
         确认密码
-        <input type="password" id="confirm_password" name="confirmPassword" onblur="confirmPassword()"/>
+        <input type="password" id="confirm_password" name="confirmPassword" onblur="checkConfirmPassword()"/>
         <div id="confirm_hint"></div>
     </div>
     <div class="user-box-item">
@@ -108,7 +108,7 @@
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
-                    if( checkPassword() && confirmPassword() ){
+                    if( checkPassword() && checkConfirmPassword() ){
                         registHandler(username,password);
                     }
                 }
@@ -135,7 +135,7 @@
         return true;
     }
 
-    function confirmPassword(){
+    function checkConfirmPassword(){
         password = $("#password").val();
         confirm_pwd = $("#confirm_password").val();
         confirmHintDom = $("#confirm_hint");
