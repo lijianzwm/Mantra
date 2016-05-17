@@ -31,19 +31,6 @@
 
     isUsernamelegal = false;
 
-    function checkPassword2( password, confimPassword ){
-        var patrn = /^(\w){6,20}$/;
-        if (!patrn.exec(password)){
-            dialog.error("密码须由6-20个字母、数字、下划线组成");
-            return false;
-        }
-        if( password != confimPassword ){
-            dialog.error("两次输入的密码不一致!");
-            return false;
-        }
-        return true;
-    }
-
     function regist(){
         username = $('#username').val();
         password = $('#password').val();
@@ -86,6 +73,19 @@
             }
         });
 
+    }
+
+    function checkPassword( password, confimPassword ){
+        var patrn = /^(\w){6,20}$/;
+        if (!patrn.exec(password)){
+            dialog.error("密码须由6-20个字母、数字、下划线组成");
+            return false;
+        }
+        if( password != confimPassword ){
+            dialog.error("两次输入的密码不一致!");
+            return false;
+        }
+        return true;
     }
 
 
