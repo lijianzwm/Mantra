@@ -22,7 +22,9 @@ class UserService{
 
 
     public static function checkChineseName($name){
-        dump(strlen($name));
+        if( strlen( $name ) > 30 ){
+            return false;
+        }
         if( preg_match('/^[\x{4E00}-\x{9FA5}]+$/u', $name) ){
             return true;
         }else{

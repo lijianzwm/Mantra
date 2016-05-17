@@ -26,6 +26,12 @@ class UserController extends CommonController{
         $realname = I("realname");
         $dharma = I("dharma");
         $user['showname'] = I("username");
+        if( !UserService::checkChineseName($realname) ){
+            echoJson(1,"姓名只能是中文,并且在10个字符之内!");
+        }
+        if( !UserService::checkChineseName($realname) ){
+            echoJson(1,"法名只能是中文,并且在10个字符之内!");
+        }
         if( $realname ){
             $user['realname'] = $realname;
             $user['showname'] = $realname;//如果有真实姓名的话，显示真实姓名
