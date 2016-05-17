@@ -139,6 +139,8 @@
         password = $("#password").val();
         confirm_pwd = $("#confirm_password").val();
         confirmHintDom = $("#confirm_hint");
+        confirmHintDom.html("");
+        confirmHintDom.removeClass();
         if( password != confirm_pwd ){
             confirmHintDom.html("两次密码不一致");
             confirmHintDom.addClass("wrong");
