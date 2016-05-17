@@ -18,11 +18,6 @@ class LoginController extends Controller{
         $this->display();
     }
 
-    public function loginLayer(){
-        layout(false);
-        $this->diaplay();
-    }
-
     public function loginHandler(){
         $phone = I("phone");
         if( !$phone ){
