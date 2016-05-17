@@ -73,6 +73,7 @@ class UserController extends CommonController{
      * /Api/User/loginVolidate?phone=&password=
      */
     public function loginVolidate(){
+        $username = I("username");
         $phone = I("phone");
         $password = I("password");
         $ret = UserService::loginVolidate($phone, $password);

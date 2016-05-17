@@ -90,26 +90,20 @@ class UserService{
      * @param $password
      * @return mixed
      */
-    public static function loginVolidate($phone,$password){
-        if( !$phone ){
-            $ret['error_code'] = 1;
-            $ret['msg'] = "请填写手机号！";
+    public static function loginVolidate($username,$password){
+        if( !trim($username) ){
+            echoJson(1, "用户名为空!");
         }
-        $user = self::getUserByPhone($phone);
+        $user = self::getUserByUsername($username);
         if( !$user ){
-            $ret['error_code'] = 2;
-            $ret['msg'] = "此手机号未被注册！";
+            echoJson(2, "该用户未注册!");
         }else{
             if( $user['password'] == md5($password) ){
-                $ret['error_code'] = 0;
-                $ret['msg'] = "登录成功！";
-                $ret['user'] = $user;
+                echoJson(0, "登录成功!", $user);
             }else{
-                $ret['error_code'] = 3;
-                $ret['msg'] = "密码错误！";
+                echoJson(3, "密码错误!");
             }
         }
-        return $ret;
     }
 
     public static function isPhoneUsed($phone){
