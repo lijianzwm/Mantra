@@ -33,13 +33,9 @@
 
     function regist(){
         username = $('#username').val();
-        password = $('#password').val();
-        confimPassword = $("#confirm_password").val();
         checkUsername(username);
-        if( isUsernamelegal && checkPassword(password,confimPassword) ) {
-            if( checkPassword(password,confimPassword) ){
-                alert("校验成功!");
-            }
+        if( isUsernamelegal && checkPassword() ) {
+            alert('校验成功!');
         }
     }
 
@@ -75,8 +71,9 @@
 
     }
 
-    function checkPassword( password, confimPassword ){
-        alert("123123");
+    function checkPassword(){
+        var password = $('#password').val();
+        var confimPassword = $("#confirm_password").val();
         var patrn = /^(\w){6,20}$/;
         if (!patrn.exec(password)){
             dialog.error("密码须由6-20个字母、数字、下划线组成");
