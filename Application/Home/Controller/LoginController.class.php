@@ -110,7 +110,7 @@ class LoginController extends Controller{
 
     public function logout(){
         session("userid", null);
-        session("phone", null);
+        session("username", null);
         session("showname", null);
         redirect(U('Index/index'));
     }
