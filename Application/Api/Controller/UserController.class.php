@@ -123,6 +123,19 @@ class UserController extends CommonController{
         }
         echo json_encode($ret);
     }
+    
+    public function checkUsername(){
+        $username = I("username");
+        if( !trim($username) ){
+            if( UserService::isUsernameUsed($username) ){
+                echoJson(1, "用户名已存在");
+            }else{
+                echoJson(0, "用户名可以使用!");
+            }
+        }else{
+            echoJson(1, "用户名非法");
+        }
+    }
 
     public function isPhoneUsed(){
         $phone = I("phone");

@@ -24,6 +24,10 @@ class UserService{
         return M("user")->where("phone=$phone")->find();
     }
 
+    public static function getUserByUsername($username){
+        return M("user")->where("username='$username'")->find();
+    }
+
     /**
      * 判断手机号为$phone的用户是否存在
      * @param $phone
@@ -32,6 +36,14 @@ class UserService{
     public static function isExistUser($phone){
         $user = UserService::getUserByPhone($phone);
         if( $user ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function isUsernameUsed($username){
+        if (self::getUserByUsername($username)) {
             return true;
         }else{
             return false;
