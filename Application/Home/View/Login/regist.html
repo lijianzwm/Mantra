@@ -34,9 +34,8 @@
         username = $('#username').val();
         checkUsername(username);
         alert($('#check_username').val());
-        if( $('#check_username').val() == "1" ) {
-            alert('用户名校验成功!');
-            checkPassword();
+        if( $('#check_username').val() == "1" && checkPassword() ) {
+            alert("用户名密码符合要求");
         }else{
             alert("用户校验失败!");
         }
@@ -76,17 +75,14 @@
     }
 
     function checkPassword(){
-        alert('checkPassword');
         var password = $('#password').val();
         var confirm_password = $("#confirm_password").val();
-        alert(password);
-        alert(confirm_password);
         var patrn = /^(\w){6,20}$/;
         if (!patrn.exec(password)){
             dialog.error("密码须由6-20个字母、数字、下划线组成");
             return false;
         }else{
-            alert("密码符合要求");
+            return true;
         }
         if( password != confimPassword ){
             dialog.error("两次输入的密码不一致!");
