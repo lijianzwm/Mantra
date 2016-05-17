@@ -33,11 +33,8 @@
     function regist(){
         username = $('#username').val();
         checkUsername(username);
-        alert($('#check_username').val());
         if( $('#check_username').val() == "1" && checkPassword() ) {
             alert("用户名密码符合要求");
-        }else{
-            alert("用户校验失败!");
         }
     }
 
@@ -60,7 +57,6 @@
             cache: false,
             dataType: 'json',
             success: function (data) {
-                alert(data.error_code);
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
@@ -87,8 +83,6 @@
         if( password != confimPassword ){
             dialog.error("两次输入的密码不一致!");
             return false;
-        }else{
-            alert('两次密码相同');
         }
         return true;
     }
