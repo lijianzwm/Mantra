@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>精进排行</title>
     <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
     <style>
 
         .title{
@@ -28,6 +29,8 @@
 
         .rank-title-elem{
             display:inline-block;
+            zoom: 1;
+            *display: inline;
             width:100px;
             text-align:center;
         }
@@ -43,6 +46,8 @@
         .rank-item-elem{
             font-size:20px;
             display:inline-block;
+            zoom: 1;
+            *display: inline;
             width:100px;
             text-align:center;
         }
@@ -57,10 +62,14 @@
 
         .day-button{
             display:inline-block;
+            zoom: 1;
+            *display: inline;
         }
 
         .month-button{
             display:inline-block;
+            zoom: 1;
+            *display: inline;
         }
 
         .hide{
@@ -82,14 +91,30 @@
     <a href="{:U('Ranklist/yesterdayRanklist')}">查昨日榜</a>&nbsp;&nbsp;
     <a href="{:U('Ranklist/todayRanklist')}">查今日榜</a>&nbsp;&nbsp;
     <form action="{:U('Ranklist/dayRanklist')}" method="post">
-        <input type="date" name="date" value="{$yearMonthDay}"/>
+        <input type="text" name="date" id="datepicker"/>
         <input type="submit" class="day-button" value="查询日榜"/>
     </form>
 </div>
 <div id="query_month_box" class="query-box hide">
     <a href="{:U('Ranklist/curMonthRanklist')}">查本月榜</a>&nbsp;&nbsp;
     <form action="{:U('Ranklist/monthRanklist')}" method="post">
-        <input type="month" name="month" value="{$monthDay}"/>
+        <select name="year">
+            <option value ="2016" selected = "selected">2016年</option>
+        </select>
+        <select name="month">
+            <option value ="01" selected = "selected">一月</option>
+            <option value ="02">二月</option>
+            <option value="03">三月</option>
+            <option value="04">四月</option>
+            <option value="05">五月</option>
+            <option value="06">六月</option>
+            <option value="07">七月</option>
+            <option value="08">八月</option>
+            <option value="09">九月</option>
+            <option value="10">十月</option>
+            <option value="11">十一月</option>
+            <option value="12">十二月</option>
+        </select>
         <input type="submit" class="month-button" value="查询月榜"/>
     </form>
 </div>
@@ -116,7 +141,11 @@
     </for>
 </div>
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
 <script type="text/javascript">
+    $(function() {
+        $( "#datepicker" ).datepicker();
+    });
     dayBoxDom = $('#query_day_box');
     monthBoxDom = $('#query_month_box');
     function showQueryDayBox(){

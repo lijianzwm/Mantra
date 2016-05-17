@@ -42,7 +42,6 @@ class CountinService{
         }
     }
 
-
     /**
      * 添加本日数目，用户不存在返回false
      * @param $userid
@@ -174,6 +173,88 @@ class CountinService{
             return "已完成";
         }
         return round($percent*100,2)."%";
+    }
+
+    public static function supplementNumByPhone($phone, $date, $num ){
+        $user = UserService::getUserByPhone($phone);
+        if( !$user ){
+            DebugService::displayLog($phone."所对应的用户不存在");
+            return false;
+        }
+        $userid = $user['id'];
+        return self::supplementNumByUserid($userid, $date, $num );
+    }
+
+    /**
+     * 补报数目,更新总数,个人数,日排行,月排行
+     * @param $userid
+     * @param $date
+     * @param $num
+     * @return bool
+     */
+    public static function supplementNumByUserid( $userid, $date, $num ){
+        if( !self::isCountNumLegal($num) ){
+            DebugService::displayLog("补报数目num非法".$num);
+            return false;
+        }
+        $date = trim($date);
+        if( !DateService::checkYearMonthDay($date)){
+            DebugService::displayLog("date输入格式不合法!");
+            return false;
+        }
+        if( !self::isSupplementDateLegeal($date) ){
+            DebugService::displayLog("补报数目日期非法!");
+            return false;
+        }
+        if (DateService::checkYearMonthDay($date)) {
+            DebugService::displayLog("userid=".$userid);
+            DebugService::displayLog("date=" . $date);
+            $dayCount = M("day_count")->where("userid='$userid' and today_date='$date'")->find();
+            DebugService::displayLog("dayCount:");
+            DebugService::displayLog($dayCount);
+            if( $dayCount ){
+                if( !MysqlService::addSupplementMysqlDayNum($userid, $num, $date ) ){
+                    return false;
+                }
+            }else{
+                if( !MysqlService::insertSupplementMysqlDayNum($userid, $num, $date) ){
+                    return false;
+                }
+            }
+
+            //如果补报日期属于阶段性共修,更新阶段性共修数目
+            if( StageGXService::isInStage($date) ){
+                self::addStageTotalNum($num);
+            }
+
+            //更新用户表总数
+            RedisService::addRedisUserTotalNum($userid,$num);
+            MysqlService::addMysqlUserTotalNum($userid,$num);
+
+            //如果是过去的月份,更新月排行,并做缓存
+            if( DateService::isYearMonthDayInPassedMonth($date) ){
+                $yearMonth = DateService::yearMonthDay2YearMonth($date);
+                MysqlService::refreshMysqlMonthRanklist($yearMonth);
+                RedisService::cachingMonthRanklist($yearMonth);
+            }
+
+            //更新并缓存日排行
+            MysqlService::refreshMysqlSomeDayRanklist($date);
+            RedisService::cachingSomedayRanklist($date);
+
+            RedisService::cachingTotalNum();
+            return true;
+        }
+        return false;
+    }
+
+    public static function isSupplementDateLegeal($date){
+        $curYearMonthDay = DateService::getStrYearMonthDay();
+        if( $date >= $curYearMonthDay ){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

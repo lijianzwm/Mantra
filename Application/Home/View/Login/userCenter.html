@@ -22,11 +22,21 @@
         .num-percent{
             color: #0000ff;
             display:inline-block;
+            zoom: 1;
+            *display: inline;
         }
 
         .num{
             font-weight:bold;
             display:inline-block;
+            zoom: 1;
+            *display: inline;
+        }
+
+        .big-button{
+            width:200px;
+            background:#9B410E;
+            color:#fff;
         }
 
     </style>
@@ -69,7 +79,9 @@
 <div class="user-box-item">每日目标：<input name="day_goal" id="day_goal" placeholder="每日计划数目(可不填写）" value="{$user.day_goal}"/></div>
 <div class="user-box-item">发愿目标：<input name="goal" id="goal" placeholder="发愿完成总数(可不填写）" value="{$user.goal}"/></div>
 <div class="user-box-item">
-    <input class="common-button" type="button" value="保存信息" onclick="updateUserInfo()"/>
+    <div>
+        <input class="big-button" type="button" value="保存信息" onclick="updateUserInfo()"/>
+    </div>
     <input class="common-button" type="button" value="修改密码" onclick="modifyPassword()"/>
     <input class="common-button" type="button" value="退出登录" onclick="logout()"/>
 </div>

@@ -45,8 +45,9 @@ class RanklistController extends Controller{
     }
 
     public function monthRanklist(){
-        $yearMonth = I("month");
-        //TODO 校验一下传过来的数据是否合法
+        $year = I("year");
+        $month = I("month");
+        $yearMonth = $year."-".$month;
         $ranklist = RanklistService::getMonthRanklist($yearMonth);
         $total = CountinService::getRanklistTotalNum($ranklist);
         $this->assign("total", $total);

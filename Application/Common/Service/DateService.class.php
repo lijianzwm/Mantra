@@ -24,6 +24,14 @@ class DateService{
         return strval(date('m-d',time()));
     }
 
+    public static function getStrYearMonth(){
+        return strval(date('Y-m',time()));
+    }
+
+    public static function getStrYearMonthDay(){
+        return strval(date('Y-m-d',time()));
+    }
+
     public static function getCrrentTimeHis(){
         return date('H:i:s', time());
     }
@@ -48,6 +56,55 @@ class DateService{
         $date1 = strtotime($time1);
         $date2 = strtotime($time2);
         return $date1-$date2;
+    }
+
+    public static function checkYearMonthDay($date){
+        $unixTime=strtotime($date);
+        $checkDate= date("Y-m-d", $unixTime);
+        if($checkDate==$date)
+            return true;
+        else
+            return false;
+    }
+
+//    public static function checkYearMonthDay($date){
+//        DebugService::displayLog("checkYearMonthDay(): ".$date);
+//        $matchResult = preg_match('[2000-9999]-[01-12]-[01-31]', $date);
+//        DebugService::displayLog($matchResult);
+//        if( $matchResult ){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
+
+    /**
+     * 输入的$date必须保证格式为"2000-01-01",且为字符串
+     * @param $date
+     * @return mixed
+     */
+    public static function isYearMonthDayInPassedMonth($date){
+        $yearMonth = substr($date, 7);
+        $curYearMonth = self::getStrYearMonth();
+        if( $yearMonth <= $curYearMonth ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function isYearMonthDayInFutureMonth($date){
+        $yearMonth = substr($date, 7);
+        $curYearMonth = self::getStrYearMonth();
+        if( $yearMonth > $curYearMonth ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function yearMonthDay2YearMonth($date){
+        return substr(strval($date), 0,7);
     }
 
 }

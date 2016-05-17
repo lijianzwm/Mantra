@@ -1,3 +1,12 @@
+CREATE TABLE `gx_admin` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `username` varchar(20) NOT NULL COMMENT '用户名',
+  `realname` varchar(20) NOT NULL COMMENT '真实姓名',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `phone` varchar(20) DEFAULT NULL COMMENT '联系电话',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `gx_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
   `phone` varchar(50) NOT NULL UNIQUE COMMENT '联系电话',
@@ -11,20 +20,19 @@ CREATE TABLE `gx_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `gx_day_count` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
   `userid` varchar(50) NOT NULL COMMENT '用户id',
   `today_date` date NOT NULL COMMENT '日期',
   `num` bigint(20) NOT NULL DEFAULT '0' COMMENT '今日修持数目',
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
+  `update_time` DATETIME NOT NULL COMMENT '提交时间',
   PRIMARY KEY (`id`),
   KEY `index_date` (`today_date`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `gx_day_ranklist` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
-  `date` date NOT NULL COMMENT '日期',
+  `date` date UNIQUE NOT NULL COMMENT '日期',
   `total` bigint(30) NOT NULL COMMENT '总数',
   `ranklist` longtext COMMENT '排行榜',
   PRIMARY KEY (`id`),
@@ -33,7 +41,7 @@ CREATE TABLE `gx_day_ranklist` (
 
 CREATE TABLE `gx_month_ranklist` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
-  `yearmonth` varchar(7) NOT NULL COMMENT '年月',
+  `yearmonth` varchar(7) UNIQUE NOT NULL COMMENT '年月',
   `total` bigint(30) NOT NULL COMMENT '总数',
   `ranklist` longtext COMMENT '排行榜',
   PRIMARY KEY (`id`),

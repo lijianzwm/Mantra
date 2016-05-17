@@ -11,9 +11,9 @@ namespace Admin\Controller;
 use Think\Controller;
 
 class CommonController extends Controller{
-//    public function _initialize(){
-//        if( !session("adminuser") ){
-//            $this->redirect("Login/index");
-//        }
-//    }
+    public function _initialize(){
+        if( !session("adminuser") ){
+            $this->redirect("User/index");
+        }
+    }
 }
