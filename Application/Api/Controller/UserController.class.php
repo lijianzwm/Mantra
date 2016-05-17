@@ -206,7 +206,12 @@ class UserController extends CommonController{
         }
         if( $user['password'] == md5($oldPassword) ){
             $user['password'] = md5($newPassword);
-            echoJson(0, "修改密码成功!");
+            if( M("user")->save($user) ){
+                echoJson(0, "修改密码成功!");
+            }else{
+                echoJson(1, "新密码写入数据库失败!");
+            }
+
         }else{
             echoJson(1, "密码错误!");
         }
