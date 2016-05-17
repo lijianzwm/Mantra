@@ -38,7 +38,7 @@ class LoginController extends Controller{
         }
     }
 
-    
+
 
     /**
      * 查询当前手机号的用户是否存在
@@ -112,10 +112,10 @@ class LoginController extends Controller{
 
     public function userCenter(){
         $id =  session("userid");
-        $phone = session("phone");
+        $username = session("username");
         $todayNum = CountinService::getUserTodayNumById($id);
-        if( $id && $phone ){
-            $user = UserService::getUserByPhone($phone);
+        if( $id && $username ){
+            $user = UserService::getUserByUsername($username);
             $user['goal'] = $user['goal'] == 0 ? null : $user['goal'];
             $user['day_goal'] = $user['day_goal'] == 0 ? null : $user['day_goal'];
             if( $user['goal'] != null ){

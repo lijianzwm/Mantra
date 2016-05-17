@@ -89,7 +89,7 @@ class UserController extends CommonController{
         $user['showname'] = $username;
         $id = UserService::addNewUser($user);
         if( $id ){
-            session("userid", $user['id']);
+            session("userid", $id);
             session("username", $username);
             session("showname", $user['showname']);
             echoJson(0, "注册成功!", $id);
