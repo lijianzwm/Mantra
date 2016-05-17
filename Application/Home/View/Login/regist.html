@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="user-box-title">用户注册</div>
-<form action="{:U('Login/registHandler')}" method="post">
+
     <div class="user-box-item">
         用户姓名
         <input name="username" id="username" onblur="checkUsername()"/>
@@ -42,7 +42,7 @@
     <div class="user-box-item">
         <input type="button" id="regist_button" class="common-button" onclick="regist()" value="注册"/>
     </div>
-</form>
+
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
 <script src="__PUBLIC__/lib/layer/layer.js"></script>
 <script src="__PUBLIC__/js/common/dialog.js"></script>
@@ -114,7 +114,7 @@
                     }
                 },
                 error: function () {
-                    dialog.error("checkUsername:ajax请求失败!");
+                    dialog.error("Api/User/regist:ajax请求失败!");
                 }
             });
         }
