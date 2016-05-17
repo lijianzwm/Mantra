@@ -109,7 +109,7 @@
                     if (data.error_code) {
                         dialog.error(data.msg);
                     }else{
-                        dialog.success("注册成功!","{:U('Login/loginHandler', array('username'=>" + username + ",'password'=>" + password + "))}");
+                        dialog.success("注册成功!","{:U('Login/userCenter')}");
                     }
                 },
                 error: function () {

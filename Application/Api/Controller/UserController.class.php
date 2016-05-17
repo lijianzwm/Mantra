@@ -89,6 +89,9 @@ class UserController extends CommonController{
         $user['showname'] = $username;
         $id = UserService::addNewUser($user);
         if( $id ){
+            session("userid", $user['id']);
+            session("username", $username);
+            session("showname", $user['showname']);
             echoJson(0, "注册成功!", $id);
         }else{
             echoJson(1, "无法写入数据库,注册失败!", $id);

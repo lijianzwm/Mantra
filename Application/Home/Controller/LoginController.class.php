@@ -38,6 +38,8 @@ class LoginController extends Controller{
         }
     }
 
+    
+
     /**
      * 查询当前手机号的用户是否存在
      */
