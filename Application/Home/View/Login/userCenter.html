@@ -87,6 +87,8 @@
 </div>
 
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/layer/layer.js"></script>
+<script src="__PUBLIC__/js/common/dialog.js"></script>
 <script type="text/javascript">
 
     function modifyPassword(){
@@ -117,9 +119,9 @@
             dataType: 'json',
             success: function (data) {
                 if( data.error_code ){
-                    alert(data.msg);
+                    dialog.error(data.msg);
                 }else{
-                    alert("保存成功！");
+                    dialog.success("保存成功!","{:U('Login/userCenter')}");
                 }
             },
             error: function () {
