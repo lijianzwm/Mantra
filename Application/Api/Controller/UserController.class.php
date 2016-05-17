@@ -126,7 +126,7 @@ class UserController extends CommonController{
 
     public function checkUsername(){
         $username = I("username");
-        if( preg_match('^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$',$username) ){
+        if( preg_match('/^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$/',$username) ){
             if( UserService::isUsernameUsed($username) ){
                 echoJson(1, "用户名已存在");
             }else{
