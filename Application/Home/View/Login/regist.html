@@ -108,7 +108,7 @@
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
-                    if( checkPassword(password, confirm_password) ){
+                    if( checkPassword() && confirmPassword() ){
                         registHandler(username,password);
                     }
                 }
@@ -130,7 +130,9 @@
             passwordHintDom.html("密码格式错误");
             passwordHintDom.addClass("wrong");
             dialog.error("密码须由6-20个字母、数字、下划线组成");
+            return false;
         }
+        return true;
     }
 
     function confirmPassword(){
