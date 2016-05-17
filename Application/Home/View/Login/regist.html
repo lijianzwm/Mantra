@@ -29,10 +29,10 @@
 <script src="__PUBLIC__/js/common/dialog.js"></script>
 <script type="text/javascript">
 
+    isUsernamelegal = false;
+
     function checkPassword2( password, confimPassword ){
-        alert('111');
         var patrn = /^(\w){6,20}$/;
-        alert('22');
         if (!patrn.exec(password)){
             dialog.error("密码须由6-20个字母、数字、下划线组成");
             return false;
@@ -48,18 +48,16 @@
         username = $('#username').val();
         password = $('#password').val();
         confimPassword = $("#confirm_password").val();
-        if( checkUsername(username)) {
-            alert(111);
-            if( checkPassword2(password,confimPassword) ){
+        checkUsername(username);
+        if( isUsernamelegal && checkPassword(password,confimPassword) ) {
+            if( checkPassword(password,confimPassword) ){
                 alert("校验成功!");
             }
-        }else{
-            alert('校验失败!');
         }
     }
 
     function checkUsername(username){
-
+        isUsernamelegal = false;
         var patrn= /^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$/;
         if(!patrn.exec(username)){
             dialog.error("用户名长度为5-20位,只能以字母或数字(1-9)开头、后可带数字、“_”、“.”、“@”");
@@ -80,12 +78,11 @@
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
-                    return true;
+                    isUsernamelegal = true;
                 }
             },
             error: function () {
                 dialog.error("checkUsername:ajax请求失败!");
-                return false;
             }
         });
 
