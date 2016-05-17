@@ -21,20 +21,20 @@ class LoginController extends Controller{
     public function loginHandler(){
         $username = I("username");
         if( !trim($username) ){
-            echoJson(1, "用户名为空!");
+            $this->error("用户名为空");
         }
         $user = UserService::getUserByUsername($username);
         if( !$user ){
-            echoJson(1, "用户名为 ".$username." 的用户不存在!");
+            $this->error("用户名为" . $username . "的用户不存在");
         }
 
         if( $user['password'] == md5(I("password")) ){
             session("userid", $user['id']);
             session("username", $username);
             session("showname", $user['showname']);
-            echoJson(0, "登录成功!");
+            $this->redirect(U("userCenter"));
         }else{
-            echoJson(1, "密码错误!");
+            $this->error("密码错误!");
         }
     }
 

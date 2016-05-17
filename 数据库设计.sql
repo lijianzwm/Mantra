@@ -11,7 +11,7 @@ CREATE TABLE `gx_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
   `username` varchar(20) NOT NULL UNIQUE COMMENT '用户名',
   `password` varchar(32) NOT NULL COMMENT '密码',
-  `phone` varchar(50) NOT NULL UNIQUE COMMENT '联系电话',
+  `phone` varchar(50) DEFAULT NULL COMMENT '联系电话',
   `realname` varchar(50) DEFAULT NULL COMMENT '真实姓名',
   `dharma` varchar(50) DEFAULT NULL COMMENT '法名',
   `showname` varchar(50) DEFAULT NULL COMMENT '显示名',
