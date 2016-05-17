@@ -80,10 +80,14 @@
         if (!patrn.exec(password)){
             dialog.error("密码须由6-20个字母、数字、下划线组成");
             return false;
+        }else{
+            alert("密码符合要求");
         }
         if( password != confimPassword ){
             dialog.error("两次输入的密码不一致!");
             return false;
+        }else{
+            alert('两次密码相同');
         }
         return true;
     }
