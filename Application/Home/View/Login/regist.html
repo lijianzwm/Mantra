@@ -11,6 +11,7 @@
     <div class="user-box-item">
         用户姓名
         <input name="username" id="username" value="{$username}"/>
+        <input type="hidden" id="check_username" value="0"/>
     </div>
     <div class="user-box-item">
         登录密码
@@ -29,12 +30,10 @@
 <script src="__PUBLIC__/js/common/dialog.js"></script>
 <script type="text/javascript">
 
-    isUsernamelegal = false;
-
     function regist(){
         username = $('#username').val();
         checkUsername(username);
-        if( isUsernamelegal ) {
+        if( $('#check_username').val() == "1" ) {
             alert('用户名校验成功!');
             checkPassword();
         }else{
@@ -65,7 +64,7 @@
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
-                    isUsernamelegal = true;
+                    $('#check_username').val(1);
                 }
             },
             error: function () {
