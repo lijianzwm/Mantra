@@ -25,13 +25,18 @@ class UserController extends CommonController{
         $dayGoal = I("day_goal");
         $realname = I("realname");
         $dharma = I("dharma");
+        $user['showname'] = I("username");
         if( $realname ){
             $user['realname'] = $realname;
             $user['showname'] = $realname;//如果有真实姓名的话，显示真实姓名
+        }else{
+
         }
         if( $dharma ){
             $user['dharma'] = $dharma;
             $user['showname'] = $dharma;//如果有法名的话，最优先显示法名，然后是真实姓名
+        }else{
+            $user['dharma'] = null;
         }
         if( $goal ){
             if (CountinService::isCountNumLegal($goal)) {
