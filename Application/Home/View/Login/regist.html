@@ -51,7 +51,7 @@
             url: "{:U('Api/User/checkUsername')}",
             data: {
                 username: username,
-                apikey:"API_ACCESS_KEY"
+                apikey:"{:C('API_ACCESS_KEY')}"
             },
             type: 'post',
             cache: false,
