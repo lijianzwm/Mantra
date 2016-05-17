@@ -29,7 +29,7 @@ class UserController extends CommonController{
         if( !UserService::checkChineseName($realname) ){
             echoJson(1,"姓名只能是中文,并且在10个字符之内!");
         }
-        if( !UserService::checkChineseName($realname) ){
+        if( !UserService::checkChineseName($dharma) ){
             echoJson(1,"法名只能是中文,并且在10个字符之内!");
         }
         if( $realname ){
