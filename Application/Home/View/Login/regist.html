@@ -29,14 +29,32 @@
 <script src="__PUBLIC__/js/common/dialog.js"></script>
 <script type="text/javascript">
 
+    function checkPassword2( password, confimPassword ){
+        alert('111');
+        var patrn = /^(\w){6,20}$/;
+        alert('22');
+        if (!patrn.exec(password)){
+            dialog.error("密码须由6-20个字母、数字、下划线组成");
+            return false;
+        }
+        if( password != confimPassword ){
+            dialog.error("两次输入的密码不一致!");
+            return false;
+        }
+        return true;
+    }
+
     function regist(){
         username = $('#username').val();
         password = $('#password').val();
         confimPassword = $("#confirm_password").val();
         if( checkUsername(username)) {
+            alert(111);
             if( checkPassword2(password,confimPassword) ){
                 alert("校验成功!");
             }
+        }else{
+            alert('校验失败!');
         }
     }
 
@@ -73,20 +91,7 @@
 
     }
 
-    function checkPassword2( password, confimPassword ){
-        alert('111');
-        var patrn = /^(\w){6,20}$/;
-        alert('22');
-        if (!patrn.exec(password)){
-            dialog.error("密码须由6-20个字母、数字、下划线组成");
-            return false;
-        }
-        if( password != confimPassword ){
-            dialog.error("两次输入的密码不一致!");
-            return false;
-        }
-        return true;
-    }
+
 
 </script>
 </body>
