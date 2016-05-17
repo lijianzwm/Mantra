@@ -74,8 +74,9 @@
     }
 
     function checkPassword2( password, confimPassword ){
-
+        alert('111');
         var patrn = /^(\w){6,20}$/;
+        alert('22');
         if (!patrn.exec(password)){
             dialog.error("密码须由6-20个字母、数字、下划线组成");
             return false;
