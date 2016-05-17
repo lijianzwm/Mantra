@@ -30,20 +30,17 @@
 <script src="__PUBLIC__/js/common/dialog.js"></script>
 <script type="text/javascript">
 
-    function regist(){
-        username = $('#username').val();
-        checkUsername(username);
-        if( $('#check_username').val() == "1" && checkPassword() ) {
-            alert("用户名密码符合要求");
-        }
-    }
 
-    function checkUsername(username){
-        isUsernamelegal = false;
+
+    function retist(){
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var confirm_password = $("#confirm_password").val();
         var patrn= /^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$/;
         if(!patrn.exec(username)){
             dialog.error("用户名长度为5-20位,只能以字母或数字(1-9)开头、后可带数字、“_”、“.”、“@”");
-            return false;
+            return;
         }
 
         url = "{:U('Api/User/checkUsername')}";
@@ -60,7 +57,9 @@
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
-                    $('#check_username').val("1");
+                    if( checkPassword(password, confirm_password) ){
+                        registHandler(username,password);
+                    }
                 }
             },
             error: function () {
@@ -70,15 +69,11 @@
 
     }
 
-    function checkPassword(){
-        var password = $('#password').val();
-        var confirm_password = $("#confirm_password").val();
+    function checkPassword(password, confirm_password){
         var patrn = /^(\w){6,20}$/;
         if (!patrn.exec(password)){
             dialog.error("密码须由6-20个字母、数字、下划线组成");
             return false;
-        }else{
-            return true;
         }
         if( password != confimPassword ){
             dialog.error("两次输入的密码不一致!");
@@ -87,6 +82,9 @@
         return true;
     }
 
+    function registHandler(username,password){
+        alert("可以提交到后端进行注册");
+    }
 
 
 </script>
