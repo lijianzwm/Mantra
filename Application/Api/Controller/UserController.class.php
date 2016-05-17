@@ -62,7 +62,11 @@ class UserController extends CommonController{
         }else{
             $user['day_goal'] = 0;
         }
-        if( UserService::updateUserInfo($user)){
+        $user = UserService::updateUserInfo($user);
+        if( $user ){
+            session("userid", $user['userid']);
+            session("username", $user['username']);
+            session("showname", $user['showname']);
             echoJson(0,"更新用户信息成功！", UserService::getUserById($user['id']));
         }else{
             echoJson(1,"师兄别闹,您并没有修改您的信息!");
@@ -73,11 +77,26 @@ class UserController extends CommonController{
      * /Api/User/loginVolidate?phone=&password=
      */
     public function loginVolidate(){
+
         $username = I("username");
-        $phone = I("phone");
         $password = I("password");
-        $ret = UserService::loginVolidate($phone, $password);
-        echo json_encode($ret);
+
+        if( !trim($username) ){
+            echoJson(1, "用户名为空!");
+        }
+        $user = UserService::getUserByUsername($username);
+        if( !$user ){
+            echoJson(2, "该用户未注册!");
+        }else{
+            if( $user['password'] == md5($password) ){
+                session("userid", $user['userid']);
+                session("username", $user['username']);
+                session("showname", $user['showname']);
+                echoJson(0, "登录成功!", $user);
+            }else{
+                echoJson(3, "密码错误!");
+            }
+        }
     }
 
     /**

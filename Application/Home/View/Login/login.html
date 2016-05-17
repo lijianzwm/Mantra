@@ -64,25 +64,20 @@
             password = $('#password').val();
 
             $.ajax({
-                url: "{:U('Api/User/login')}",
+                url: "{:U('Api/User/loginVolidate')}",
                 data: {
                     username: username,
+                    password:password,
                     apikey:"{:C('API_ACCESS_KEY')}"
                 },
                 type: 'post',
                 cache: false,
                 dataType: 'json',
                 success: function (data) {
-                    if (data.error_code) {
-                        usernameHintDom.html(data.msg);
-                        usernameHintDom.addClass("wrong");
-                    }else{
-                        usernameHintDom.html("用户名可以使用");
-                        usernameHintDom.addClass("right");
-                    }
+                    dialog.success("登录成功!","{:U('Login/userCenter')}");
                 },
                 error: function () {
-                    dialog.error("checkUsername:ajax请求失败!");
+                    dialog.error("Api/User/loginVolidate:ajax请求失败!");
                 }
             });
 
