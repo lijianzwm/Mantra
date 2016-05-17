@@ -30,7 +30,7 @@ class UserController extends CommonController{
             $user['realname'] = $realname;
             $user['showname'] = $realname;//如果有真实姓名的话，显示真实姓名
         }else{
-
+            $user['realname'] = null;
         }
         if( $dharma ){
             $user['dharma'] = $dharma;
