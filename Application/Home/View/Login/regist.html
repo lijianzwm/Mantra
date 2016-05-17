@@ -37,6 +37,8 @@
         if( isUsernamelegal ) {
             alert('用户名校验成功!');
             checkPassword();
+        }else{
+            alert("用户校验失败!");
         }
     }
 
@@ -59,6 +61,7 @@
             cache: false,
             dataType: 'json',
             success: function (data) {
+                alert(JSON.stringify(data));
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
