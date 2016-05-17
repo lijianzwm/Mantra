@@ -162,7 +162,7 @@
     <div class="menu-button"><a href="{:U('Countin/counter')}">在线持咒</a></div>
     <div class="menu-button"><a href="{:U('Ranklist/todayRanklist')}">精进排行</a></div>
     <if condition="$isLogin eq 0">
-        <div class="menu-button"><a href="{:U('Login/login')}">用户登录</a></div>
+        <div class="menu-button"><a id="login">用户登录</a></div>
     <else />
         <div class="menu-button"><a href="{:U('Login/userCenter')}">个人中心</a></div>
     </if>
@@ -213,7 +213,22 @@
             video.currentTime = begTime;
         }
 
+        $('#login').on('click', function(){
+            layer.open({
+                type: 2,
+                title: '登录',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['800px' , '520px'],
+                content: "{:U('Login/login')}"
+            });
+        });
+
     })();
+
+
+
+
 
 </script>
 
