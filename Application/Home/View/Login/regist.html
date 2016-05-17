@@ -33,6 +33,7 @@
     function regist(){
         username = $('#username').val();
         checkUsername(username);
+        alert($('#check_username').val());
         if( $('#check_username').val() == "1" ) {
             alert('用户名校验成功!');
             checkPassword();
@@ -64,7 +65,7 @@
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
-                    $('#check_username').val(1);
+                    $('#check_username').val("1");
                 }
             },
             error: function () {
