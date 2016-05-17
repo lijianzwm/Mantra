@@ -75,35 +75,24 @@ class UserController extends CommonController{
         echo json_encode($ret);
     }
 
+    /**
+     * 用户注册接口,注册成功时,返回的json中,data字段值为用户id
+     */
     public function regist(){
-        $phone = I("phone");
-        if( UserService::isPhoneUsed( $phone )){
-            $ret['error_code'] = 1;
-            $ret['msg'] = "电话号码已经被注册过！";
-            echo json_encode($ret);
-            die();
+        $username = I("username");
+        if( UserService::isUsernameUsed( $username )){
+            echoJson(1, "该用户名已经被注册过");
         }
         $password = I("password");
-        $user['phone'] = $phone;
+        $user['username'] = $username;
         $user['password'] = md5($password);
-        $user['realname'] = I("realname");
-        $user['showname'] = "师兄".substr($phone, -4);
-        if( $user['realname'] ){
-            $user['showname'] = $user['realname'];
-        }
-        if( !UserService::checkUserInfo($user) ){
-            $ret['msg'] = "请将信息填写完整！";
-            $ret['error_code'] = 1;
-        }
-        $id = M("user")->add($user);
+        $user['showname'] = $username;
+        $id = UserService::addNewUser($user);
         if( $id ){
-            $ret['msg'] = "注册成功！";
-            $ret['error_code'] = 0;
+            echoJson(0, "注册成功!", $id);
         }else{
-            $ret['msg'] = "注册失败！";
-            $ret['error_code'] = 1;
+            echoJson(1, "无法写入数据库,注册失败!", $id);
         }
-        echo json_encode($ret);
     }
 
     public function getUserInfo(){

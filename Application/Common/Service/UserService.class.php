@@ -11,6 +11,11 @@ namespace Common\Service;
 
 class UserService{
 
+    public static function addNewUser($user ){
+        $id = M("user")->add($user);
+        return $id;
+    }
+
     public static function getUserById($userid){
         return M("user")->where("id=$userid")->find();
     }
