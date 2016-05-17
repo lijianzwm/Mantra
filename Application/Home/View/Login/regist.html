@@ -61,7 +61,7 @@
             cache: false,
             dataType: 'json',
             success: function (data) {
-                alert(JSON.stringify(data));
+                alert(data.error_code);
                 if (data.error_code) {
                     dialog.error(data.msg);
                 }else{
