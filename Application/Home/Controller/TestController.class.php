@@ -13,9 +13,9 @@ use Common\Service\UserService;
 class TestController{
     public function index(){
         if( UserService::checkChineseName("李健") ){
-            dump("是中文");
+            dump("is Chinese");
         }else{
-            dump("非中文");
+            dump("not Chinese");
         }
     }
 }
