@@ -40,7 +40,7 @@
 
     function checkUsername(username){
 
-        var patrn= '^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$';
+        var patrn= /^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$/;
         if(!patrn.exec(username)){
             dialog.error("用户名长度为5-20位,只能以字母或数字(1-9)开头、后可带数字、“_”、“.”、“@”");
             return false;
@@ -72,7 +72,7 @@
     }
 
     function checkPassword(password,confimPassword){
-        var patrn='^(\w){6,20}$';
+        var patrn= /^(\w){6,20}$/;
         if (!patrn.exec(password)){
             dialog.error("密码须由6-20个字母、数字、下划线组成");
             return false;
