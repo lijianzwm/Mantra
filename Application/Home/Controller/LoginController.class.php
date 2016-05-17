@@ -32,7 +32,7 @@ class LoginController extends Controller{
             session("userid", $user['id']);
             session("username", $username);
             session("showname", $user['showname']);
-            $this->redirect(U("userCenter"));
+            redirect(U("Login/userCenter"));
         }else{
             $this->error("密码错误!");
         }
