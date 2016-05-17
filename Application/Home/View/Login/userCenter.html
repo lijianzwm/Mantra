@@ -98,7 +98,7 @@
     }
 
     function updateUserInfo(){
-        phone = '{$user.phone}';
+        username = $('#username').val();;
         realname = $('#realname').val();
         dharma = $('#dharma').val();
         var aj = $.ajax({
@@ -106,7 +106,7 @@
             data: {
                 apikey:"{:C('API_ACCESS_KEY')}",
                 id:'{$user.id}',
-                username:'{$user.username}',
+                username:username,
                 realname:$('#realname').val(),
                 dharma:$('#dharma').val(),
                 goal:$('#goal').val(),
