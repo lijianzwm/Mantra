@@ -19,21 +19,22 @@ class LoginController extends Controller{
     }
 
     public function loginHandler(){
-        $phone = I("phone");
-        if( !$phone ){
-            $this->error("请填写手机号！");
+        $username = I("username");
+        if( !trim($username) ){
+            echoJson(1, "用户名为空!");
         }
-        $user = UserService::getUserByPhone($phone);
+        $user = UserService::getUserByUsername($username);
         if( !$user ){
-            $this->error("此手机号未被注册，正在跳转到注册页面！", U('Login/regist', array('phone'=>$phone)));
+            echoJson(1, "用户名为 ".$username." 的用户不存在!");
         }
+
         if( $user['password'] == md5(I("password")) ){
             session("userid", $user['id']);
-            session("phone", $phone);
+            session("username", $username);
             session("showname", $user['showname']);
-            $this->success("登录成功！",U('Login/userCenter'));
+            echoJson(0, "登录成功!");
         }else{
-            $this->error("密码错误！");
+            echoJson(1, "密码错误!");
         }
     }
 
