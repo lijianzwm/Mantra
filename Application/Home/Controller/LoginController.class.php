@@ -64,8 +64,8 @@ class LoginController extends Controller{
     }
 
     public function modifyPassword(){
-        $phone = I("phone");
-        $this->assign("phone", $phone);
+        $username = I("username");
+        $this->assign("username", $username);
         $this->display();
     }
 

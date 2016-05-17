@@ -196,4 +196,20 @@ class UserController extends CommonController{
         echo json_encode($ret);
     }
 
+    public function modifyPassword(){
+        $username = I("username");
+        $oldPassword = I("oldPassword");
+        $newPassword = I("newPassword");
+        $user = UserService::getUserByUsername($username);
+        if( !$user ){
+            echoJson(1, "账号 ".$username." 不存在!");
+        }
+        if( $user['password'] == md5($oldPassword) ){
+            $user['password'] = md5($newPassword);
+            echoJson(0, "修改密码成功!");
+        }else{
+            echoJson(1, "密码错误!");
+        }
+    }
+
 }
