@@ -16,17 +16,15 @@ use Common\Service\UserService;
 class UserController extends CommonController{
 
     /**
+     * 更新用户信息接口,返回的json中data字段存的是更新好的用户类
      * /Api/User/updateUserInfo?
      */
     public function updateUserInfo(){
         $user['id'] = I("id");
-        $user['phone'] = I("phone");
         $goal = I("goal");
         $dayGoal = I("day_goal");
         $realname = I("realname");
         $dharma = I("dharma");
-        $ret['msg'] = "";
-        $user['showname'] = "师兄".substr($user['phone'], -4);
         if( $realname ){
             $user['realname'] = $realname;
             $user['showname'] = $realname;//如果有真实姓名的话，显示真实姓名
@@ -38,9 +36,8 @@ class UserController extends CommonController{
         if( $goal ){
             if (CountinService::isCountNumLegal($goal)) {
                 $user['goal'] = $goal;
-
             }else{
-                $ret['msg'] .= "“发愿目标”数字输入不正确，已放弃保存！\n";
+                echoJson(1,"发愿目标”数字输入不正确，保存失败！");
             }
         }else{
             $user['goal'] = 0;
@@ -49,20 +46,16 @@ class UserController extends CommonController{
             if (CountinService::isCountNumLegal($dayGoal)) {
                 $user['day_goal'] = $dayGoal;
             }else{
-                $ret['msg'] .= "“每日目标”数字输入不正确，已放弃保存！\n";
+                echoJson(1,"每日目标”数字输入不正确，保存失败！");
             }
         }else{
             $user['day_goal'] = 0;
         }
         if( UserService::updateUserInfo($user)){
-            $ret['error_code'] = 0;
-            $ret['msg'] .= "更新用户信息成功！";
-            $ret['user'] = UserService::getUserById($user['id']);
+            echoJson(0,"更新用户信息成功！", UserService::getUserById($user['id']));
         }else{
-            $ret['error_code'] = 1;
-            $ret['msg'] .= "用户信息未被修改！";
+            echoJson(1,"师兄别闹,您并没有修改您的信息!");
         }
-        echo json_encode($ret);
     }
 
     /**

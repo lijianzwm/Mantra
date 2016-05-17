@@ -59,32 +59,6 @@ class LoginController extends Controller{
         $this->display();
     }
 
-    public function registHandler(){
-        $phone = I("phone");
-        $password = I("password");
-        $realname = I("realname");
-        $user['phone'] = $phone;
-        $user['password'] = md5($password);
-        $user['showname'] = "师兄".substr($phone, -4);
-        if( $realname ){
-            $user['realname'] = $realname;
-            $user['showname'] = $realname;
-        }
-        if( !UserService::checkUserInfo($user) ){
-            $this->error("请将信息填写完整！");
-        }
-
-        $id = M("user")->add($user);
-        if( $id ){
-            session("userid",$id);
-            session("phone", $phone);
-            session("showname", $user['showname']);
-            $this->success("注册成功，快去完善个人信息吧~", U('Login/userCenter'));
-        }else{
-            $this->error("注册失败！");
-        }
-    }
-
     public function findPassword(){
         $this->display("modifyPassword");
     }
