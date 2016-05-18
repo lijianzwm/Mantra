@@ -123,14 +123,16 @@ class UserService{
         }
     }
 
+    /**
+     * 校验用户名长度,注意,此处并没有校验格式
+     * @param $username
+     * @return bool
+     */
     public static function checkUsernameFormat($username ){
         if( strlen($username) > 10 || strlen($username)< 2 ){
             return false;
-        }
-        if( preg_match("/^[\xE00-\x9FA5A-Za-z0-9_]+$/", $username) ){
-            return true;
         }else{
-            return false;
+            return true;
         }
     }
 
