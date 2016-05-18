@@ -38,7 +38,7 @@ class CountinController extends CommonController{
         $id = session("userid");
         if( $num > 0 ){
             if( CountinService::addTodayNum($id,$num) ){
-                $this->success("报数成功！", U('Ranklist/todayRanklist'));
+                $this->success("报数成功！", U('Login/userCenter'));
             }else{
                 $this->error("报数失败！");
             }

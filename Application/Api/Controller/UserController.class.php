@@ -64,9 +64,6 @@ class UserController extends CommonController{
         }
         $user = UserService::updateUserInfo($user);
         if( $user ){
-            session("userid", $user['userid']);
-            session("username", $user['username']);
-            session("showname", $user['showname']);
             echoJson(0,"更新用户信息成功！", UserService::getUserById($user['id']));
         }else{
             echoJson(1,"师兄别闹,您并没有修改您的信息!");
@@ -206,12 +203,8 @@ class UserController extends CommonController{
         }
         if( $user['password'] == md5($oldPassword) ){
             $user['password'] = md5($newPassword);
-            if( M("user")->save($user) ){
-                echoJson(0, "修改密码成功!");
-            }else{
-                echoJson(1, "新密码写入数据库失败!");
-            }
-
+            M("user")->save($user);
+            echoJson(0, "修改密码成功!");
         }else{
             echoJson(1, "密码错误!");
         }
