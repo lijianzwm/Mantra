@@ -102,15 +102,17 @@ class UserController extends CommonController{
      */
     public function regist(){
         $username = I("username");
-        if( !UserService::checkUsername($username)){
+        $password = I("password");
+        if( !UserService::checkUsernameFormat($username)){
             echoJson(1, "用户名非法!");
         }
         if( UserService::isUsernameUsed( $username )){
             echoJson(1, "该用户名已经被注册过");
         }
+        if( !UserService::checkPasswordFormat($password)) {
+            echoJson(1, "密码须由6-20个字母、数字、下划线组成");
+        }
 
-
-        $password = I("password");
         $user['username'] = $username;
         $user['password'] = md5($password);
         $user['showname'] = $username;

@@ -123,7 +123,7 @@ class UserService{
         }
     }
 
-    public static function checkUsername( $username ){
+    public static function checkUsernameFormat($username ){
         $patrn = '/^[\u4E00-\u9FA5A-Za-z0-9_]+$/';
         if( strlen( $username ) > 10 || strlen( $username < 2 ) ){
             return false;
