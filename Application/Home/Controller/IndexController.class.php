@@ -55,4 +55,9 @@ class IndexController extends Controller {
         $this->assign("state", $state);
         $this->display();
     }
+
+    public function yigui(){
+        $this->display();
+    }
+
 }
