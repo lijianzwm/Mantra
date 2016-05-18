@@ -147,14 +147,10 @@ class UserController extends CommonController{
 
     public function checkUsername(){
         $username = I("username");
-        if( preg_match('/^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$/',$username) ){
-            if( UserService::isUsernameUsed($username) ){
-                echoJson(1, "用户名已存在");
-            }else{
-                echoJson(0, "用户名可以使用!");
-            }
+        if ( !UserService::checkUsernameFormat($username)) {
+            echoJson( 1, "用户名非法!");
         }else{
-            echoJson(1, "用户名长度为5-20位,只能以字母或数字(1-9)开头、后可带数字、“_”、“.”、“@”");
+            echoJson( 0, "用户名合法!" );
         }
     }
 
