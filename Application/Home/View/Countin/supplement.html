@@ -13,26 +13,26 @@
     <script>
         $(function() {
             $( "#datepicker" ).datepicker();
-            $("#submit").click(function(){
-                userid = $('#userid').val();
-                num = $('#num').val();
-                date = $('#date').val();
-                url = "{:U('Api/Countin/supplementNum')}";
-                data = {
-                    userid:userid,
-                    num:num,
-                    date:date,
-                    apikey:"{:C('API_ACCESS_KEY')}"
-                };
-                myAjax(url, data, succFunc, errorFunc );
-                function succFunc(data){
-                    dialog.success(data.msg,"{:U('Login/userCenter')}");
-                }
-
-                function errorFunc(data){
-                    dialog.error(data.msg);
-                }
-            });
+//            $("#submit").click(function(){
+//                userid = $('#userid').val();
+//                num = $('#num').val();
+//                date = $('#date').val();
+//                url = "{:U('Api/Countin/supplementNum')}";
+//                data = {
+//                    userid:userid,
+//                    num:num,
+//                    date:date,
+//                    apikey:"{:C('API_ACCESS_KEY')}"
+//                };
+//                myAjax(url, data, succFunc, errorFunc );
+//                function succFunc(data){
+//                    dialog.success(data.msg,"{:U('Login/userCenter')}");
+//                }
+//
+//                function errorFunc(data){
+//                    dialog.error(data.msg);
+//                }
+//            });
         });
     </script>
     <style>
