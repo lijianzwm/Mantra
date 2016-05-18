@@ -119,4 +119,8 @@ class UserService{
         return true;
     }
 
+    public static function checkUsername( $username ){
+        
+    }
+
 }

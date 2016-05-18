@@ -33,9 +33,9 @@
         var username = $('#username').val();
         var password = $('#password').val();
         var comfirmPassword = $('#confirm_password').val();
-        var patrn= /^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]){4,19}$/;
+        var patrn= /^[a-zA-Z1-9]{1}([a-zA-Z0-9]|[.@_]|[\u2E80-\u9FFF]){4,19}$/;
         if(!patrn.exec(username)){
-            dialog.error("用户名长度为5-20位,只能以字母或数字(1-9)开头、后可带数字、“_”、“.”、“@”");
+            dialog.error("用户名长度为5-20位,只能以字母,数字(1-9)或中文开头、后可带数字、“_”、“.”、“@”");
             return;
         }
         $.ajax({

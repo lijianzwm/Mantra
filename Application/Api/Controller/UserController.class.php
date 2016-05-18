@@ -105,6 +105,11 @@ class UserController extends CommonController{
         if( UserService::isUsernameUsed( $username )){
             echoJson(1, "该用户名已经被注册过");
         }
+        if( !UserService::checkUsername($username)){
+
+        }
+
+
         $password = I("password");
         $user['username'] = $username;
         $user['password'] = md5($password);
