@@ -20,18 +20,18 @@ class CountinController extends CommonController{
     public function addNum(){
         $num = I("num");
         $id = I("userid");
+        if( !$id ){
+            echoJson(1, "没有传入用户id!");
+        }
         if (CountinService::isCountNumLegal($num)) {
             if( CountinService::addTodayNum($id,$num) ){
-                $ret['error_code'] = 0;
+                echoJson(0, "报数成功!");
             }else{
-                $ret['error_code'] = 1;
-                $ret['msg'] = "用户不存在！";
+                echoJson(1, "用户不存在!");
             }
         }else{
-            $ret['error_code'] = 1;
-            $ret['msg'] = "请输入正确的数字！";
+            echoJson(0, "请输入正确的数字！");
         }
-        echo json_encode($ret);
     }
 
     public function getUserTotalNum(){
