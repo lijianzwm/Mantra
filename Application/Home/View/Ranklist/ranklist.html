@@ -58,6 +58,9 @@
 
         .query-box{
             font-size:20px;
+            display:inline-block;
+            zoom: 1;
+            *display: inline;
         }
 
         .day-button{
@@ -79,10 +82,12 @@
     </style>
 </head>
 <body>
-<div class="title">{$title}</div>
-<div class="title">总数为：{$total}</div>
-<div class="sub-title">(每{$refreshTime}秒刷新一次)</div>
-
+<div class="menu">
+    <a href="{:U('Ranklist/todayRanklist')}" >今日排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/yesterdayRanklist')}">昨日排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/curMonthRanklist')}">本月排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/totalRanklist')}">总排行榜</a>&nbsp;&nbsp;
+</div>
 <div id="query_day_box" class="query-box">
     <form action="{:U('Ranklist/dayRanklist')}" method="post">
         <input type="text" name="date" id="datepicker"/>
@@ -111,12 +116,10 @@
         <input type="submit" class="month-button" value="查询月榜"/>
     </form>
 </div>
-<div class="menu">
-    <a href="{:U('Ranklist/todayRanklist')}" >今日排行</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/yesterdayRanklist')}">昨日排行</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/curMonthRanklist')}">本月排行</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/totalRanklist')}">总排行榜</a>&nbsp;&nbsp;
-</div>
+
+<div class="title">{$title}</div>
+<div class="title">总数为：{$total}</div>
+<div class="sub-title">(每{$refreshTime}秒刷新一次)</div>
 <div class="rank-wrapper">
     <div class="rank-title">
         <div class="rank-title-elem">排名</div>
