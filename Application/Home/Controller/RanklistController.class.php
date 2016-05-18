@@ -38,7 +38,12 @@ class RanklistController extends Controller{
         if( !DateService::checkYearMonthDay($date) ){
             $this->error("日期格式错误!");
         }
-        $ranklist = RanklistService::getSomedayRanklist($date);
+        $todayDate = DateService::getStrYearMonthDay();
+        if( $date == $todayDate ){
+            $ranklist = RanklistService::getTodayRanklist();
+        }else{
+            $ranklist = RanklistService::getSomedayRanklist($date);
+        }
         $total = CountinService::getRanklistTotalNum($ranklist);
         $this->assign("title", $date."排行榜");
         $this->assign("refreshTime", C("SOMEDAY_RANKLIST_EXPIRE"));
@@ -51,7 +56,13 @@ class RanklistController extends Controller{
         $year = I("year");
         $month = I("month");
         $yearMonth = $year."-".$month;
-        $ranklist = RanklistService::getMonthRanklist($yearMonth);
+
+        $curYearMonth = DateService::getStrYearMonth();
+        if( $yearMonth == $curYearMonth ){
+            $ranklist = RanklistService::getCurMonthRanklist();
+        }else{
+            $ranklist = RanklistService::getMonthRanklist($yearMonth);
+        }
         $total = CountinService::getRanklistTotalNum($ranklist);
         $this->assign("total", $total);
         $this->assign("title", $yearMonth."排行榜");
