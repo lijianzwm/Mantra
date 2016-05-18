@@ -16,16 +16,37 @@
         $(function() {
             $( "#datepicker" ).datepicker();
         });
+
+        function supplementNum(){
+            userid = $('#userid').val();
+            num = $('#num').val();
+            date = $('#date').val();
+            url = "{:U('Api/Countin/supplementNum')}";
+            data = {
+                userid:userid,
+                num:num,
+                date:date,
+                apikey:"{:C('API_ACCESS_KEY')}"
+            };
+            myAjax(url, data, succFunc, errorFunc );
+        }
+
+        function succFunc(data){
+            dialog.success(data.msg,"{:U('Login/userCenter')}");
+        }
+
+        function errorFunc(data){
+            dialog.error(data.msg);
+        }
+
     </script>
 </head>
 <body>
 <div class="wrapper">
-    <form action="{:U('Countin/supplementHandler')}" method="post">
-        <input type="hidden" name="phone" value="{$phone}"/>
-        <div>补报日期</div><div><input type="text" name="date" id="datepicker"/></div>
-        <div>补报数目</div><div><input name="num"/></div>
-        <div><input type="submit" value="提交"/></div>
-    </form>
+    <input type="hidden" name="userid" value="{$userid}"/>
+    <div>补报日期</div><div><input type="text" name="date" id="datepicker"/></div>
+    <div>补报数目</div><div><input name="num"/></div>
+    <div><input type="button" value="提交" onclick="supplementNum()"/></div>
 </div>
 
 </body>
