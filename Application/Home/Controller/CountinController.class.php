@@ -24,6 +24,7 @@ class CountinController extends CommonController{
                 $todayNum = 0;
             }
         }
+        $this->assign("userid", $userid);
         $this->assign("todayNum", $todayNum);
         $this->assign("total", $total);
         $this->display();
