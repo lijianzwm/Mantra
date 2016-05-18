@@ -35,6 +35,9 @@ class RanklistController extends Controller{
     public function dayRanklist(){
         $date = I("date");
         //TODO 校验一下传过来的数据是否合法
+        if( !DateService::checkYearMonthDay($date) ){
+            $this->error("日期格式错误!");
+        }
         $ranklist = RanklistService::getSomedayRanklist($date);
         $total = CountinService::getRanklistTotalNum($ranklist);
         $this->assign("title", $date."排行榜");
