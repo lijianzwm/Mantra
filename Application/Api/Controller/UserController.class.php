@@ -148,8 +148,7 @@ class UserController extends CommonController{
     public function checkUsername(){
         $username = I("username");
 
-
-        $patrn = '/^[\u4E00-\u9FA5A-Za-z0-9_]+$/';
+        $patrn = "/^[\u4E00-\u9FA5A-Za-z0-9_]+$/";
         if( strlen($username) > 10 || strlen($username)< 2 ){
             echoJson(1, "用户名长度非法!");
         }
