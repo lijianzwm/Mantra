@@ -90,6 +90,12 @@ class LoginController extends Controller{
         $todayNum = CountinService::getUserTodayNumById($id);
         if( $id && $username ){
             $user = UserService::getUserByUsername($username);
+            if( !$user ){
+                session("userid", null);
+                session("username", null);
+                session("showname",null);
+                redirect(U('Login/login'));
+            }
             $user['goal'] = $user['goal'] == 0 ? null : $user['goal'];
             $user['day_goal'] = $user['day_goal'] == 0 ? null : $user['day_goal'];
             if( $user['goal'] != null ){
