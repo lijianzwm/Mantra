@@ -51,9 +51,11 @@
 <script src="__PUBLIC__/js/common/ajax.js"></script>
 <script type="text/javascript">
     function addNum(){
+        userid = $('#userid').val();
         num = $('#num').val();
         url = "{:U('Api/Countin/addNum')}";
         data = {
+            userid:userid,
             num:num,
             apikey:"{:C('API_ACCESS_KEY')}"
         };
