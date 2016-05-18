@@ -44,6 +44,8 @@ class UserController extends CommonController{
         }else{
             $user['dharma'] = "";
         }
+        dump($user['realname']);
+        dump($user['dharma']);
         if( $goal ){
             if (CountinService::isCountNumLegal($goal)) {
                 $user['goal'] = $goal;
