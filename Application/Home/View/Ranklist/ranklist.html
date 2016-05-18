@@ -82,21 +82,14 @@
 <div class="title">{$title}</div>
 <div class="title">总数为：{$total}</div>
 <div class="sub-title">(每{$refreshTime}秒刷新一次)</div>
-<div class="menu">
-    <a href="#" onclick="showQueryDayBox()">查询日榜</a>&nbsp;&nbsp;
-    <a href="#" onclick="showQueryMonthBox()">查询月榜</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/totalRanklist')}">查询总榜</a>&nbsp;&nbsp;
-</div>
-<div id="query_day_box" class="query-box hide">
-    <a href="{:U('Ranklist/yesterdayRanklist')}">查昨日榜</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/todayRanklist')}">查今日榜</a>&nbsp;&nbsp;
+
+<div id="query_day_box" class="query-box">
     <form action="{:U('Ranklist/dayRanklist')}" method="post">
         <input type="text" name="date" id="datepicker"/>
         <input type="submit" class="day-button" value="查询日榜"/>
     </form>
 </div>
-<div id="query_month_box" class="query-box hide">
-    <a href="{:U('Ranklist/curMonthRanklist')}">查本月榜</a>&nbsp;&nbsp;
+<div id="query_month_box" class="query-box">
     <form action="{:U('Ranklist/monthRanklist')}" method="post">
         <select name="year">
             <option value ="2016" selected = "selected">2016年</option>
@@ -117,6 +110,12 @@
         </select>
         <input type="submit" class="month-button" value="查询月榜"/>
     </form>
+</div>
+<div class="menu">
+    <a href="{:U('Ranklist/todayRanklist')}" >今日排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/yesterdayRanklist')}">昨日排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/curMonthRanklist')}">本月排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/totalRanklist')}">总排行榜</a>&nbsp;&nbsp;
 </div>
 <div class="rank-wrapper">
     <div class="rank-title">
