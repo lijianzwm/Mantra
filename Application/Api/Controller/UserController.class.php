@@ -57,7 +57,7 @@ class UserController extends CommonController{
             if (CountinService::isCountNumLegal($dayGoal)) {
                 $user['day_goal'] = $dayGoal;
             }else{
-                echoJson(1,"每日目标”数字输入不正确，保存失败！");
+                echoJson(1,"每日目标数字输入不正确，保存失败！");
             }
         }else{
             $user['day_goal'] = 0;
