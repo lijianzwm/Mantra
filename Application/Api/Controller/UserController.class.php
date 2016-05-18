@@ -20,12 +20,12 @@ class UserController extends CommonController{
      * /Api/User/updateUserInfo?
      */
     public function updateUserInfo(){
-        $user['id'] = I("id");
+        $username = I("username");
         $goal = I("goal");
         $dayGoal = I("day_goal");
         $realname = I("realname");
         $dharma = I("dharma");
-        $user['showname'] = I("username");
+        $user['showname'] = $username;
         if( $realname && !UserService::checkChineseName($realname) ){
             echoJson(1,"姓名只能是中文,并且在10个字符之内!");
         }
@@ -64,7 +64,7 @@ class UserController extends CommonController{
         }
         $user = UserService::updateUserInfo($user);
         if( $user ){
-            echoJson(0,"更新用户信息成功！", UserService::getUserById($user['id']));
+            echoJson(0,"更新用户信息成功！", UserService::getUserByUsername($username));
         }else{
             echoJson(1,"师兄别闹,您并没有修改您的信息!");
         }
