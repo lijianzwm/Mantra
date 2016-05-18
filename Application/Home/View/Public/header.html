@@ -51,14 +51,14 @@
 </div>
 <div class="menu-button-wrapper">
     <div class="menu-button"><a href="{:U('/Home/Index')}">首页</a></div>
-    <div class="menu-button"><a href="{:U('Countin/addNum')}">共修报数</a></div>
-    <div class="menu-button"><a href="{:U('Ranklist/todayRanklist')}">精进排行</a></div>
+    <div class="menu-button"><a href="{:U('Countin/addNum')}">报数</a></div>
+    <div class="menu-button"><a href="{:U('Ranklist/todayRanklist')}">排行</a></div>
     <!--<div class="menu-button"><a href="{:U('Countin/counter')}">在线持咒</a></div>-->
-    <div class="menu-button"><a href="http://{:C('GX_YIGUI')}">共修仪轨</a></div>
+    <div class="menu-button"><a href="http://{:C('GX_YIGUI')}">仪轨</a></div>
     <if condition="$Think.session.userid gt 0">
-            <div class="menu-button"><a href="{:U('Login/userCenter')}">个人中心</a></div>
+            <div class="menu-button"><a href="{:U('Login/userCenter')}">个人</a></div>
         <else />
-            <div class="menu-button"><a href="{:U('Login/login')}">用户登录</a></div>
+            <div class="menu-button"><a href="{:U('Login/login')}">登录</a></div>
     </if>
 </div>
 <script type="text/javascript">
