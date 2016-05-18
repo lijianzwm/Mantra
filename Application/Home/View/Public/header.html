@@ -3,11 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>{:C('WEBSITE_TITLE')}</title>
+    <style>
+        .menu-button-wrapper{
+            width:100%;
+            height:100px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        .menu-button{
+            margin-left:10px;
+            margin-right:10px;
+            height:30px;
+            width:120px;
+            padding:5px;
+            border: 1px solid;
+            border-radius:8px;
+            font-size:25px;
+            display:inline-block;
+            zoom: 1;
+            *display: inline;
+            background:#9D804B;
+        }
+
+        .menu-button a{
+            color:#fff;
+        }
+    </style>
 </head>
 <body>
 <div id="top_bar" class="top-bar">
     <div><img src="__PUBLIC__/Image/logo.jpg" onclick="toHomepage()"/></div>
     <div style="color:red;">{:C('DEV_TITLE')}</div>
+</div>
+<div class="menu-button-wrapper">
+    <div class="menu-button"><a href="http://{:C('GX_YIGUI')}">共修仪轨</a></div>
+    <div class="menu-button"><a href="{:U('Countin/addNum')}">共修报数</a></div>
+    <div class="menu-button"><a href="{:U('Countin/counter')}">在线持咒</a></div>
+    <div class="menu-button"><a href="{:U('Ranklist/todayRanklist')}">精进排行</a></div>
+    <if condition="$isLogin eq 0">
+        <div class="menu-button"><a href="{:U('Login/login')}">用户登录</a></div>
+        <else />
+        <div class="menu-button"><a href="{:U('Login/userCenter')}">个人中心</a></div>
+    </if>
 </div>
 <script type="text/javascript">
     function toHomepage(){
