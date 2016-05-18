@@ -11,6 +11,7 @@ namespace Home\Controller;
 
 use Common\Service\CountinService;
 use Common\Service\DateService;
+use Common\Service\DebugService;
 use Think\Controller;
 use Common\Service\RanklistService;
 
@@ -39,6 +40,10 @@ class RanklistController extends Controller{
             $this->error("日期格式错误!");
         }
         $todayDate = DateService::getStrYearMonthDay();
+
+        DebugService::displayLog("monthRanklist():date=" . $date);
+        DebugService::displayLog("monthRanklist():todayDate=" . $todayDate);
+
         if( $date == $todayDate ){
             $ranklist = RanklistService::getTodayRanklist();
         }else{
@@ -56,8 +61,10 @@ class RanklistController extends Controller{
         $year = I("year");
         $month = I("month");
         $yearMonth = $year."-".$month;
-
         $curYearMonth = DateService::getStrYearMonth();
+        DebugService::displayLog("monthRanklist():yearMonth=" . $yearMonth);
+        DebugService::displayLog("monthRanklist():curYearMonth=" . $curYearMonth);
+
         if( $yearMonth == $curYearMonth ){
             $ranklist = RanklistService::getCurMonthRanklist();
         }else{
