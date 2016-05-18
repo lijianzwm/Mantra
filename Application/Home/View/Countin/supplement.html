@@ -5,6 +5,36 @@
     <title>补报数目</title>
     <link rel="stylesheet" href="__PUBLIC__/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
+    <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+    <script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
+    <script src="__PUBLIC__/lib/layer/layer.js"></script>
+    <script src="__PUBLIC__/js/common/dialog.js"></script>
+    <script src="__PUBLIC__/js/common/ajax.js"></script>
+    <script>
+        $(function() {
+            $( "#datepicker" ).datepicker();
+            $("#submit").click(function(){
+                userid = $('#userid').val();
+                num = $('#num').val();
+                date = $('#date').val();
+                url = "{:U('Api/Countin/supplementNum')}";
+                data = {
+                    userid:userid,
+                    num:num,
+                    date:date,
+                    apikey:"{:C('API_ACCESS_KEY')}"
+                };
+                myAjax(url, data, succFunc, errorFunc );
+                function succFunc(data){
+                    dialog.success(data.msg,"{:U('Login/userCenter')}");
+                }
+
+                function errorFunc(data){
+                    dialog.error(data.msg);
+                }
+            });
+        });
+    </script>
     <style>
         .wrapper{
             text-align:center;
@@ -20,38 +50,5 @@
         <div><input type="button" value="提交" id="submit" onclick="supplementNum()"/></div>
     </form>
 </div>
-<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
-<script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
-<script src="__PUBLIC__/lib/layer/layer.js"></script>
-<script src="__PUBLIC__/js/common/dialog.js"></script>
-<script src="__PUBLIC__/js/common/ajax.js"></script>
-<script>
-    $(function() {
-        $( "#datepicker" ).datepicker();
-        $("#submit").click(function(){
-            userid = $('#userid').val();
-            num = $('#num').val();
-            date = $('#date').val();
-            url = "{:U('Api/Countin/supplementNum')}";
-            data = {
-                userid:userid,
-                num:num,
-                date:date,
-                apikey:"{:C('API_ACCESS_KEY')}"
-            };
-            myAjax(url, data, succFunc, errorFunc );
-            function succFunc(data){
-                dialog.success(data.msg,"{:U('Login/userCenter')}");
-            }
-
-            function errorFunc(data){
-                dialog.error(data.msg);
-            }
-        });
-    });
-
-</script>
-
-
 </body>
 </html>
