@@ -5,18 +5,11 @@
     <title>补报数目</title>
     <link rel="stylesheet" href="__PUBLIC__/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
-    <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
-    <script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
     <style>
         .wrapper{
             text-align:center;
         }
     </style>
-    <script>
-        $(function() {
-            $( "#datepicker" ).datepicker();
-        });
-    </script>
 </head>
 <body>
 <div class="wrapper">
@@ -24,15 +17,19 @@
         <input type="hidden" id="userid" name="userid" value="{$userid}"/>
         <div>补报日期</div><div><input type="text" id="date" name="date" id="datepicker"/></div>
         <div>补报数目</div><div><input id="num" name="num"/></div>
-        <div><input type="submit" value="提交"/></div>
+        <div><input type="button" value="提交" onclick="supplementNum()"/></div>
     </form>
 </div>
-
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
 <script src="__PUBLIC__/lib/layer/layer.js"></script>
 <script src="__PUBLIC__/js/common/dialog.js"></script>
 <script src="__PUBLIC__/js/common/ajax.js"></script>
-<script type="text/javascript">
+<script>
+    $(function() {
+        $( "#datepicker" ).datepicker();
+    });
+
     function supplementNum(){
         userid = $('#userid').val();
         num = $('#num').val();
@@ -56,6 +53,7 @@
     }
 
 </script>
+
 
 </body>
 </html>
