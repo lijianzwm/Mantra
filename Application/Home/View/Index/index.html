@@ -155,18 +155,6 @@
         <div>距共修开始还有&nbsp;<div id="remain_seconds" class="remain-seconds"></div>&nbsp;秒</div>
     </div>
 </div>
-
-<div class="menu-button-wrapper">
-    <div class="menu-button"><a href="http://{:C('GX_YIGUI')}">共修仪轨</a></div>
-    <div class="menu-button"><a href="{:U('Countin/addNum')}">共修报数</a></div>
-    <div class="menu-button"><a href="{:U('Countin/counter')}">在线持咒</a></div>
-    <div class="menu-button"><a href="{:U('Ranklist/todayRanklist')}">精进排行</a></div>
-    <if condition="$isLogin eq 0">
-        <div class="menu-button"><a href="{:U('Login/login')}">用户登录</a></div>
-    <else />
-        <div class="menu-button"><a href="{:U('Login/userCenter')}">个人中心</a></div>
-    </if>
-</div>
 <div>
     <div>使用手机QQ扫码下载共修APP</div>
     <img src="__PUBLIC__/Image/download_app.png">
