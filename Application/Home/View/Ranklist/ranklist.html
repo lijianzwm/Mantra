@@ -101,18 +101,18 @@
             <option value ="2016" selected = "selected">2016年</option>
         </select>
         <select name="month">
-            <option value ="01" selected = "selected">一月</option>
-            <option value ="02">二月</option>
-            <option value="03">三月</option>
-            <option value="04">四月</option>
-            <option value="05">五月</option>
-            <option value="06">六月</option>
-            <option value="07">七月</option>
-            <option value="08">八月</option>
-            <option value="09">九月</option>
-            <option value="10">十月</option>
-            <option value="11">十一月</option>
-            <option value="12">十二月</option>
+            <option id="month01" value ="01">一月</option>
+            <option id="month02" value ="02">二月</option>
+            <option id="month03" value="03">三月</option>
+            <option id="month04" value="04">四月</option>
+            <option id="month05" value="05">五月</option>
+            <option id="month06" value="06">六月</option>
+            <option id="month07" value="07">七月</option>
+            <option id="month08" value="08">八月</option>
+            <option id="month09" value="09">九月</option>
+            <option id="month10" value="10">十月</option>
+            <option id="month11" value="11">十一月</option>
+            <option id="month12" value="12">十二月</option>
         </select>
         <input type="submit" class="month-button" value="查询月榜"/>
     </form>
@@ -153,11 +153,14 @@
         var day = myDate.getDate();        //获取当前日(1-31)
         if( month < 10 ){
             month =  "0"+month;
+        }else{
+            month = ""+month;
         }
         if( day < 10 ){
             day = "0" + day;
         }
         var yearMonthDay = year + "-" + month + "-" + day;
+        $("#month").val(month);
         $( "#datepicker" ).val(yearMonthDay);
         $( "#datepicker" ).datepicker();
     });
