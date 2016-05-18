@@ -11,6 +11,7 @@ namespace Api\Controller;
 
 use Think\Controller;
 use Common\Service\CountinService;
+use Common\Service\DateService;
 
 class CountinController extends CommonController{
 
@@ -78,6 +79,9 @@ class CountinController extends CommonController{
         }
         if( !$date ){
             echoJson(1, "请选择日期!");
+        }
+        if( !DateService::checkYearMonthDay($date) ){
+            echoJson(1, "补报失败,日期格式须为yyyy-mm-dd");
         }
         if( !$num ){
             echoJson(1, "请填写数目!");
