@@ -58,8 +58,8 @@ class CountinController extends CommonController{
     }
 
     public function supplement(){
-        $phone = session("phone");
-        $this->assign("phone", $phone);
+        $userid = session("userid");
+        $this->assign("userid", $userid);
         $this->display();
     }
 

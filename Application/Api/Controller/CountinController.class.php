@@ -74,12 +74,10 @@ class CountinController extends CommonController{
         $date = I("date");
         $num = I("num");
         if( CountinService::supplementNumByUserid($userid, $date, $num) ){
-            $ret['error_code'] = 0;
+            echoJson(0, "补报成功!");
         }else{
-            $ret['error_code'] = 1;
-            $ret['msg'] = "补报失败!";
+            echoJson(1, "补报失败!");
         }
-        echo json_encode($ret);
     }
 
 }
