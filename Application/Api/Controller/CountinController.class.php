@@ -31,7 +31,7 @@ class CountinController extends CommonController{
                 echoJson(1, "用户不存在!");
             }
         }else{
-            echoJson(0, "请输入正确的数字！");
+            echoJson(1, "请输入正确的数字！");
         }
     }
 
