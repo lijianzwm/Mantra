@@ -115,12 +115,24 @@ class UserService{
     }
 
     public static function checkPasswordFormat($password){
-        //TODO 检查密码格式是否合法
-        return true;
+        $patrn = '/^(\w){6,20}$/';
+        if (preg_match($patrn, $password)) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static function checkUsername( $username ){
-        
+        $patrn = '/^[\u4E00-\u9FA5A-Za-z0-9_]+$/';
+        if( strlen( $username ) > 10 || strlen( $username < 2 ) ){
+            return false;
+        }
+        if( preg_match($patrn, $username) ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

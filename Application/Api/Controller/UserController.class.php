@@ -102,11 +102,11 @@ class UserController extends CommonController{
      */
     public function regist(){
         $username = I("username");
+        if( !UserService::checkUsername($username)){
+            echoJson(1, "用户名非法!");
+        }
         if( UserService::isUsernameUsed( $username )){
             echoJson(1, "该用户名已经被注册过");
-        }
-        if( !UserService::checkUsername($username)){
-
         }
 
 
