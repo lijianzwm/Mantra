@@ -33,9 +33,7 @@
         var username = $('#username').val();
         var password = $('#password').val();
         var comfirmPassword = $('#confirm_password').val();
-//        var patrn= /^[a-zA-Z1-9\u2E80-\u9FFF]{1}([a-zA-Z0-9]{4,19}|[\u2E80-\u9FFF]{1,10})$/;
         var patrn= /^[\u4E00-\u9FA5A-Za-z0-9_]+$/;
-        alert(username.length);
         if( username.length > 10 ){
             dialog.error("用户名过长!");
             return;
