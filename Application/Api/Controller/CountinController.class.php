@@ -82,6 +82,9 @@ class CountinController extends CommonController{
         if( !$num ){
             echoJson(1, "请填写数目!");
         }
+        if( !CountinService::isCountNumLegal($num)){
+            echoJson(1, "请填写合法数字!");
+        }
         if( CountinService::supplementNumByUserid($userid, $date, $num) ){
             echoJson(0, "补报成功!");
         }else{
