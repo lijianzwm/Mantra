@@ -87,6 +87,9 @@ class UserController extends CommonController{
             echoJson(2, "该用户未注册!");
         }else{
             if( $user['password'] == md5($password) ){
+                session("userid", $user['id']);
+                session("username", $user['username']);
+                session("showname", $user['showname']);
                 echoJson(0, "登录成功!", $user);
             }else{
                 echoJson(3, "密码错误!");
