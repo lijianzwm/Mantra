@@ -147,10 +147,16 @@ class UserController extends CommonController{
 
     public function checkUsername(){
         $username = I("username");
-        if ( !UserService::checkUsernameFormat($username)) {
-            echoJson( 1, "用户名非法!");
+
+
+        $patrn = '/^[\u4E00-\u9FA5A-Za-z0-9_]+$/';
+        if( strlen($username) > 10 || strlen($username)< 2 ){
+            echoJson(1, "用户名长度非法!");
+        }
+        if( preg_match($patrn, $username) ){
+            echoJson(0, "用户名合法!");
         }else{
-            echoJson( 0, "用户名合法!" );
+            echoJson(1, "用户名非法!");
         }
     }
 
