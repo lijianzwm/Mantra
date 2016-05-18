@@ -83,6 +83,9 @@ class CountinController extends CommonController{
         if( !DateService::checkYearMonthDay($date) ){
             echoJson(1, "补报失败,日期格式须为yyyy-mm-dd");
         }
+        if (!CountinService::isSupplementDateLegeal($date)) {
+            echoJson(1, "补报失败,补报日期须为今天之前!");
+        }
         if( !$num ){
             echoJson(1, "请填写数目!");
         }
