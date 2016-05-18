@@ -20,6 +20,7 @@ class UserController extends CommonController{
      * /Api/User/updateUserInfo?
      */
     public function updateUserInfo(){
+        $user['id'] = I("id");
         $username = I("username");
         $goal = I("goal");
         $dayGoal = I("day_goal");
@@ -44,8 +45,6 @@ class UserController extends CommonController{
         }else{
             $user['dharma'] = "";
         }
-        dump($user['realname']);
-        dump($user['dharma']);
         if( $goal ){
             if (CountinService::isCountNumLegal($goal)) {
                 $user['goal'] = $goal;
