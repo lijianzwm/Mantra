@@ -97,6 +97,13 @@ class UserController extends CommonController{
         }
     }
 
+    public function logout(){
+        session("userid", null);
+        session("username", null);
+        session("showname", null);
+        echoJson(0, "注销成功!");
+    }
+
     /**
      * 用户注册接口,注册成功时,返回的json中,data字段值为用户id
      */

@@ -89,6 +89,7 @@
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
 <script src="__PUBLIC__/lib/layer/layer.js"></script>
 <script src="__PUBLIC__/js/common/dialog.js"></script>
+<script src="__PUBLIC__/js/common/ajax.js"></script>
 <script type="text/javascript">
 
     function modifyPassword(){
@@ -96,7 +97,16 @@
     }
 
     function logout(){
-        dialog.success("注销成功!", "{:U('Login/logout')}");
+        url = "{:U('Api/User/logout')}";
+        data = {
+            apikey:"{:C('API_ACCESS_KEY')}"
+        };
+        myAjax(url, data, function(data){
+            dialog.success(data.msg, "{:U('Index/index')}");
+        },function(data){
+            dialog.error(data.msg);
+        });
+
     }
 
     function updateUserInfo(){
