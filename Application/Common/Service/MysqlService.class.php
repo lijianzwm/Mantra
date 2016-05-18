@@ -328,6 +328,9 @@ class MysqlService{
         $result = M("day_count")->where("today_date >= '$begDate' and today_date <= '$endDate'")->field("sum(num) as num")->select();
         if( $result ){
             $totalNum = $result[0]['num'];
+            if( $totalNum == null ){
+                $totalNum = 0;
+            }
         }
         return $totalNum;
     }
