@@ -77,10 +77,10 @@ class CountinController extends CommonController{
             echoJson(1, "userid为空!");
         }
         if( !$date ){
-            echoJson(1, "date为空!");
+            echoJson(1, "请选择日期!");
         }
         if( !$num ){
-            echoJson(1, "num为空!");
+            echoJson(1, "请填写数目!");
         }
         if( CountinService::supplementNumByUserid($userid, $date, $num) ){
             echoJson(0, "补报成功!");
