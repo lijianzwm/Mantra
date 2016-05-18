@@ -44,7 +44,7 @@ class RanklistController extends Controller{
         DebugService::displayLog("monthRanklist():date=" . $date);
         DebugService::displayLog("monthRanklist():todayDate=" . $todayDate);
 
-        if( strval($date) == strval($todayDate) ){
+        if( $date == $todayDate ){
             $ranklist = RanklistService::getTodayRanklist();
         }else{
             $ranklist = RanklistService::getSomedayRanklist($date);
