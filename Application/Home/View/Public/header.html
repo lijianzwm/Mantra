@@ -28,7 +28,16 @@
             color:#fff;
         }
 
+        .website-title-img{
+            display:inline-block;
+            zoom: 1;
+            *display: inline;
+        }
+
         .website-title{
+            display:inline-block;
+            zoom: 1;
+            *display: inline;
             font-size:40px;
             color:#9D804B;
         }
@@ -37,7 +46,7 @@
 </head>
 <body>
 <div id="top_bar" class="top-bar">
-    <div><img src="__PUBLIC__/Image/logo.jpg" onclick="toHomepage()"/></div>
+    <div class="website-title-img"><img src="__PUBLIC__/Image/logo.jpg" onclick="toHomepage()"/></div>
     <div class="website-title">摩利支天共修</div>
     <div style="color:red;">{:C('DEV_TITLE')}</div>
 </div>
