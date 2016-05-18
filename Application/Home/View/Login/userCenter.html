@@ -100,19 +100,22 @@
     }
 
     function updateUserInfo(){
-        username = $('#username').val();;
+        id = '{$user.id}';
+        username = $('#username').val();
         realname = $('#realname').val();
         dharma = $('#dharma').val();
+        goal = $('#goal').val();
+        day_goal = $('#day_goal').val();
         var aj = $.ajax({
             url: "{:U('Api/User/updateUserInfo')}",
             data: {
                 apikey:"{:C('API_ACCESS_KEY')}",
-                id:'{$user.id}',
+                id:id,
                 username:username,
-                realname:$('#realname').val(),
-                dharma:$('#dharma').val(),
-                goal:$('#goal').val(),
-                day_goal:$('#day_goal').val()
+                realname:realname,
+                dharma:dharma,
+                goal:goal,
+                day_goal:day_goal
             },
             type: 'post',
             cache: false,
