@@ -9,6 +9,7 @@
 namespace Api\Controller;
 
 
+use Common\Service\RedisService;
 use Think\Controller;
 use Common\Service\CountinService;
 use Common\Service\DateService;
@@ -30,6 +31,8 @@ class CountinController extends CommonController{
         }
 
         if( CountinService::addTodayNum($id,$num) ){
+            RedisService::cachingCurMonthRanklist();
+            RedisService::cachingTodayRanklist();
             echoSuccess("报数成功!");
         }else{
             echoError("用户不存在!");

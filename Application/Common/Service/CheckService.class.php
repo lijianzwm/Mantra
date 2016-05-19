@@ -229,7 +229,7 @@ class CheckService{
             }
             return self::success("法名格式正确!");
         }else{
-            return self::error("法名须为中文!");
+            return self::error("师兄,咱的法名啥时候改成外文了?!");
         }
     }
 
