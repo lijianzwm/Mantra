@@ -39,6 +39,10 @@ class StageGXService{
         return $stageGX;
     }
 
+    public static function getStageGX($stageGXId){
+        return M("stage_gx")->where("id='$stageGXId'")->find();
+    }
+
     public static function addCurStageGXCompletionNum($num){
         $curStageGX = self::getCurStageGX();
         $curStageGX['completion_num'] += $num;
@@ -56,6 +60,14 @@ class StageGXService{
             $stageTotalNum = RedisService::cachingStageGXTotalNum($stageGX);
         }
         return $stageTotalNum;
+    }
+
+    public static function refreshStageGxCompletionNum($stageGXId){
+        $stageGX = self::getStageGX($stageGXId);
+        $stageGX['completion_num'] = MysqlService::generateStageGXCompletionNum($stageGX);
+        RedisService::cachingCurStageGXCompletionNum($stageGX['completion_num']);
+        M("stage_gx")->save($stageGX);
+        return true;
     }
 
 }

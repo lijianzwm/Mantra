@@ -7,6 +7,7 @@
  */
 
 namespace Admin\Controller;
+use Common\Service\StageGXService;
 
 
 /**
@@ -48,6 +49,16 @@ class StageGXController extends CommonController{
             }
         }
         $this->success("成功!");
+    }
+
+    public function refrestStageGxCompletionNum(){
+        $stageGXId = I("id");
+        if( StageGXService::refreshStageGxCompletionNum($stageGXId) ){
+            echoSuccess("刷新成功!");
+        }else{
+            echoError("刷新失败!");
+        }
+
     }
 
 }
