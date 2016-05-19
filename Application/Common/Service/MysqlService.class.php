@@ -321,7 +321,7 @@ class MysqlService{
         return $totalNum;
     }
 
-    public static function getStageGXTotalNum($stageGX){
+    public static function generateStageGXCompletionNum($stageGX){
         $totalNum = 0;
         $begDate = $stageGX['beg_date'];
         $endDate = $stageGX['end_date'];
@@ -335,6 +335,13 @@ class MysqlService{
         return $totalNum;
     }
 
+    public static function getCurStageGXCompletionNum(){
+        $stageGX = StageGXService::getCurStageGX();
+        return $stageGX['completion_num'];
+    }
+
+
+
     public static function refreshUserTableTotal($userid){
         $result = M("day_count")->where("userid='$userid'")->field("sum(num) as total")->find();
         if( $result ){
@@ -346,5 +353,5 @@ class MysqlService{
         $user['total'] = $total;
         M("user")->save($user);
     }
-    
+
 }

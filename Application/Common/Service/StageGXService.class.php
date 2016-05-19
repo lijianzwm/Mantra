@@ -31,12 +31,23 @@ class StageGXService{
         }
     }
 
-    public static function getStageGX(){
+    public static function getCurStageGX(){
         $todayDate = DateService::getCurrentYearMonthDay();
         DebugService::displayLog("getStageGX()\ttodayDate=".$todayDate);
         $stageGX = M("stage_gx")->where("beg_date <= '$todayDate' and end_date >= '$todayDate'")->find();
         DebugService::displayLog("getStageGX()\tstageGX=".$stageGX);
         return $stageGX;
+    }
+
+    public static function addCurStageGXCompletionNum($num){
+        $curStageGX = self::getCurStageGX();
+        $curStageGX['completion_num'] += $num;
+        if (M("stage_gx")->save($curStageGX)) {
+            RedisService::cachingCurStageGXCompletionNum($num);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static function getStageGXTotalNum($stageGX){

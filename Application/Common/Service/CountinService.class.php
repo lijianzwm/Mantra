@@ -52,7 +52,7 @@ class CountinService{
             DebugService::displayLog("当前报数不是当天第一次报数");
             MysqlService::addMysqlTodayNum($userid, $num);
         }
-        self::addTotalNum($num);
+        self::updateTotalNum($num);
         self::addStageTotalNum($num);
         RedisService::addRedisTodayNum($userid, $num);
         RedisService::addRedisUserTotalNum($userid,$num);
@@ -60,17 +60,27 @@ class CountinService{
         return true;
     }
 
-    public static function addTotalNum($num){
-        $totalNum = self::getAllUserTotalNum();
-        RedisService::updateTotalNum($totalNum + $num);
+    public static function updateTotalNum($num){
+        $totalNum = RedisService::getRedisTotalNum();
+        if( $totalNum == false ){
+            RedisService::cachingTotalNum();//这里直接缓存不+$num目是因为mysql中数目已经更新完毕了
+        }else{
+            RedisService::updateTotalNum($totalNum + $num);
+        }
+
     }
+
+
+
 
     public static function addStageTotalNum($num){
         $totalNum = RedisService::getRedisStageGXTotalNum();
         if( $totalNum == false ){
-            $totalNum = 0;
+            RedisService::cachingStageGXTotalNum();
+        }else{
+            RedisService::updateStageTotalNum($totalNum + $num);
         }
-        RedisService::updateStageTotalNum($totalNum + $num);
+
     }
 
     /**
@@ -167,7 +177,7 @@ class CountinService{
             }
         }
 
-        CountinService::addTotalNum($num);
+        CountinService::updateTotalNum($num);
 
         //如果补报日期属于阶段性共修,更新阶段性共修数目
         if( StageGXService::isInStage($date) ){

@@ -66,10 +66,10 @@ class CountinController extends CommonController{
         RedisService::cachingUserTodayNum($userid);
         RedisService::cachingUserTotalNum($userid);
 
-        CountinService::addTotalNum($num);
+        CountinService::updateTotalNum($num);
 
         if (StageGXService::isInStage()) {
-            CountinService::addStageTotalNum($num);
+            StageGXService::addCurStageGXCompletionNum($num);
         }
 
         RedisService::cachingCurMonthRanklist();
@@ -112,7 +112,7 @@ class CountinController extends CommonController{
             }
         }
 
-        CountinService::addTotalNum($num);//这里最好用redisservice
+        CountinService::updateTotalNum($num);//这里最好用redisservice
 
         if( StageGXService::isInStage($date) ){
             CountinService::addStageTotalNum($num);

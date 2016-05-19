@@ -37,7 +37,7 @@ class IndexController extends Controller {
             }
         }
 
-        $stageGX = StageGXService::getStageGX();
+        $stageGX = StageGXService::getCurStageGX();
         if( $stageGX ){
             $stageGXTotalNum = StageGXService::getStageGXTotalNum($stageGX);
             $stageGXPercent = $stageGXTotalNum / floatval($stageGX['num']) * 100;

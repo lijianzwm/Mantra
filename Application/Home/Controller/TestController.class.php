@@ -21,7 +21,7 @@ class TestController extends Controller{
     public function handler(){
         $userid = I("username");
 //        dump(CheckService::checkUsernameFormat($username));
-        MysqlService::refreshUserTableTotal($userid);
+        dump( MysqlService::generateMysqlTotalNum() );
 //        dump(CheckService::checkNumFormat($username));
     }
 }

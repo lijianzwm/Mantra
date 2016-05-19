@@ -110,7 +110,7 @@ class RedisService{
     }
 
     public static function cachingStageGXTotalNum($stageGX){
-        $stageGXTotalNum = MysqlService::getStageGXTotalNum($stageGX);
+        $stageGXTotalNum = MysqlService::generateStageGXTotalNum($stageGX);
         DebugService::displayLog("cachingStageGXTotalNum()\tstageGXTotalNum=" . $stageGXTotalNum);
         if( !$stageGX ){
             $stageGXTotalNum = 0;
@@ -275,7 +275,12 @@ class RedisService{
     public static function addRedisMonthTotalNum(){
 
     }
-    
+
+
+    public static function cachingCurStageGXCompletionNum($num){
+        $stageGXKey = RedisKeyService::getStageGXKey();
+        self::set($stageGXKey, $num, C("STAGE_GX_TOTAL_NUM_EXPIRE"));
+    }
     
 
 
