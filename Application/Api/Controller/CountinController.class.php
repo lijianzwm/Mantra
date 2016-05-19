@@ -8,11 +8,10 @@
 
 namespace Api\Controller;
 
-
+use Think\Controller;
 use Common\Service\RedisService;
 use Common\Service\StageGXService;
 use Common\Service\UserService;
-use Think\Controller;
 use Common\Service\CountinService;
 use Common\Service\CheckService;
 use Common\Service\DebugService;

@@ -56,6 +56,9 @@ class CheckService{
             case "date":
                 $checkResult =  self::checkDateFormat($value, $tpl);
                 break;
+            case "num":
+                $checkResult =  self::checkNumFormat($value);
+                break;
             case "goal":
                 $checkResult =  self::checkGoalNum($value);
                 break;
