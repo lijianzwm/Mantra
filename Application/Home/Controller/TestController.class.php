@@ -8,14 +8,17 @@
 
 namespace Home\Controller;
 
-use Common\Service\UserService;
+use Common\Service\CheckService;
+use Think\Controller;
 
-class TestController{
+class TestController extends Controller{
     public function index(){
-        if( UserService::checkChineseName("123123123") ){
-            dump("is Chinese");
-        }else{
-            dump("not Chinese");
-        }
+        $this->display();
+    }
+
+    public function handler(){
+        $username = I("username");
+//        dump(CheckService::checkUsernameFormat($username));
+        dump(CheckService::checkNumFormat($username));
     }
 }

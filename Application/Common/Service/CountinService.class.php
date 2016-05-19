@@ -17,7 +17,7 @@ class CountinService{
      * @return mixed|null
      */
     public static function getUserTotalNumById($userid){
-        $num = RedisService::getRedisTotalNumById($userid);
+        $num = RedisService::getRedisUserTotalNumById($userid);
         if( $num == false ){//这里不用!$num，因为缓存的数据有可能是0
             $num = RedisService::cachingUserTotalNum($userid);
         }
@@ -25,7 +25,7 @@ class CountinService{
     }
 
     /**
-     * 获取用户当日的数目，若用户不存在，返回null
+     * 获取用户当日的数目,若用户不存在或没有进行过报数,返回null
      * @param $userid
      * @return mixed
      */
@@ -68,6 +68,8 @@ class CountinService{
         MysqlService::addMysqlUserTotalNum($userid,$num);
         return true;
     }
+    
+    
 
     private static function addTotalNum($num){
         $totalNum = self::getAllUserTotalNum();
@@ -77,42 +79,6 @@ class CountinService{
     private static function addStageTotalNum($num){
         $totalNum = RedisService::getRedisStageGXTotalNum();
         RedisService::updateStageTotalNum($totalNum + $num);
-    }
-
-    /**
-     * 获取某一天的共修总数（可以是今天），如果日期非法，返回null
-     * @param $date : 2016-04-18
-     * @return int|mixed|null
-     */
-    public static function getDayTotalNum($date){
-        $today = DateService::getCurrentYearMonthDay();
-        if( $date > $today ){
-            return null;
-        }
-        $num = RedisService::getRedisDayTotalNum($date);
-        if( $num == false ){
-            DebugService::displayLog("total num $date: not cached");
-            $num = RedisService::cachingDayTotalNum($date);
-        }
-        return $num;
-    }
-
-    /**
-     * 获取某月共修总数（可以是本月），日期非法，返回null
-     * @param $yearMonth
-     * @return int|mixed|null
-     */
-    public static function getMonthTotalNum($yearMonth){
-        $curYearMonth = DateService::getCurrentYearMonth();
-        if ($curYearMonth < $yearMonth) {
-            return null;
-        }
-        $num = RedisService::getRedisMonthTotalNum($yearMonth);
-        if( $num == false ){
-            DebugService::displayLog("month total num $yearMonth : not cached!");
-            $num = RedisService::cachingMonthTotalNum($yearMonth);
-        }
-        return $num;
     }
 
     /**

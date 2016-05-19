@@ -70,63 +70,7 @@ class UserController extends CommonController{
             echoJson(1,"师兄别闹,您并没有修改您的信息!");
         }
     }
-
-    /**
-     * /Api/User/loginVolidate?phone=&password=
-     */
-    public function loginVolidate(){
-
-        $username = I("username");
-        $password = I("password");
-
-        if( !trim($username) ){
-            echoJson(1, "用户名为空!");
-        }
-        $user = UserService::getUserByUsername($username);
-        if( !$user ){
-            echoJson(2, "该用户未注册!");
-        }else{
-            if( $user['password'] == md5($password) ){
-                session("userid", $user['id']);
-                session("username", $user['username']);
-                session("showname", $user['showname']);
-                echoJson(0, "登录成功!", $user);
-            }else{
-                echoJson(3, "密码错误!");
-            }
-        }
-    }
-
-    /**
-     * 用户注册接口,注册成功时,返回的json中,data字段值为用户id
-     */
-    public function regist(){
-        $username = I("username");
-        $password = I("password");
-        if( !UserService::checkUsernameFormat($username)){
-            echoJson(1, "用户名非法!");
-        }
-        if( UserService::isUsernameUsed( $username )){
-            echoJson(1, "该用户名已经被注册过");
-        }
-        if( !UserService::checkPasswordFormat($password)) {
-            echoJson(1, "密码须由6-20个字母、数字、下划线组成");
-        }
-
-        $user['username'] = $username;
-        $user['password'] = md5($password);
-        $user['showname'] = $username;
-        $id = UserService::addNewUser($user);
-        if( $id ){
-            session("userid", $id);
-            session("username", $username);
-            session("showname", $user['showname']);
-            echoJson(0, "注册成功!", $id);
-        }else{
-            echoJson(1, "无法写入数据库,注册失败!", $id);
-        }
-    }
-
+    
     public function getUserInfo(){
         $userid = I("userid");
         if( $userid ){

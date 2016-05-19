@@ -62,8 +62,7 @@
         url = "{:U('Api/Countin/addNum')}";
         data = {
             userid:userid,
-            num:num,
-            apikey:"{:C('API_ACCESS_KEY')}"
+            num:num
         };
         myAjax(url, data, succFunc, errorFunc );
     }
