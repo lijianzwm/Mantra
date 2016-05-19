@@ -22,18 +22,17 @@ class CountinController extends CommonController{
     public function addNum(){
         $num = I("num");
         $id = I("userid");
-        if( !$id ){
-            echoJson(1, "没有传入用户id!");
+
+        self::checkParams($id, $num);
+
+        if( session("userid") && $id != session("userid")){
+            echoError("师兄别闹,不要乱传入别人的userid,如果不是故意捣乱的就请重新登录后再进行报数!");
         }
-        
-        if (CountinService::isCountNumLegal($num)) {
-            if( CountinService::addTodayNum($id,$num) ){
-                echoJson(0, "报数成功!");
-            }else{
-                echoJson(1, "用户不存在!");
-            }
+
+        if( CountinService::addTodayNum($id,$num) ){
+            echoSuccess("报数成功!");
         }else{
-            echoJson(1, "请输入正确的数字！");
+            echoError("用户不存在!");
         }
     }
 
@@ -44,28 +43,17 @@ class CountinController extends CommonController{
         $userid = I("userid");
         $date = I("date");
         $num = I("num");
-        if( !$userid ){
-            echoJson(1, "userid为空!");
-        }
-        if( !$date ){
-            echoJson(1, "请选择日期!");
-        }
-        if( !DateService::checkYearMonthDay($date) ){
-            echoJson(1, "补报失败,日期格式须为yyyy-mm-dd");
-        }
+
+        self::checkParams($userid, $num, $date);
+
         if (!CountinService::isSupplementDateLegeal($date)) {
-            echoJson(1, "补报失败,补报日期须为今天之前!");
+            echoError("补报失败,补报日期须为今天之前!");
         }
-        if( !$num ){
-            echoJson(1, "请填写数目!");
-        }
-        if( !CountinService::isCountNumLegal($num)){
-            echoJson(1, "请填写合法数字!");
-        }
+
         if( CountinService::supplementNumByUserid($userid, $date, $num) ){
-            echoJson(0, "补报成功!");
+            echoSuccess("补报成功!");
         }else{
-            echoJson(1, "补报失败!");
+            echoError("补报失败!");
         }
     }
 
@@ -74,14 +62,42 @@ class CountinController extends CommonController{
      */
     public function getUserCurNums(){
         $id = I("userid");
+        self::checkParams($id);
         $data['totalNum'] = CountinService::getUserTotalNumById($id);
         $data['todayNum'] = CountinService::getUserTodayNumById($id);
         if(  $data['totalNum'] == null ){
-            echoJson(1, "用户不存在!");
+            echoError("用户不存在!");
         }else{
             if( $data['todayNum'] == null ){
                 $data['todayNum'] = 0;
-                echoJson(0, "获取今日数目和总数成功!", $data);
+                echoSuccess("获取今日数目和总数成功!", $data);
+            }
+        }
+    }
+
+    /**
+     * 检查传过来的参数是否合法
+     * @param $userid
+     * @param $num
+     * @param $date
+     */
+    private function checkParams($userid, $num=null, $date=null){
+        $checkUserid = CheckService::checkUseridFormat($userid);
+        if( $checkUserid['status'] ){
+            echoError($checkUserid['msg']);
+        }
+
+        if( $num != null ){
+            $checkNum = CheckService::checkNumFormat($num);
+            if( $checkNum['status'] ){
+                echoError($checkNum['msg']);
+            }
+        }
+
+        if( $date != null ){
+            $checkDate = CheckService::checkDateFormat($date, "yyyy-mm-dd");
+            if( $checkDate['status'] ){
+                echoError($checkDate['msg']);
             }
         }
     }

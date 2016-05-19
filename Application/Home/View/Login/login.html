@@ -65,8 +65,7 @@
             url = "{:U('Api/Login/loginVolidate')}";
             data = {
                 username:username,
-                password:password,
-                apikey:"{:C('API_ACCESS_KEY')}"
+                password:password
             };
             myAjax(url, data, succFunc, errorFunc );
         }

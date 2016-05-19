@@ -20,3 +20,21 @@ function echoJson( $status, $msg, $data=null ){
     }
     exit(json_encode($ret));
 }
+
+/**
+ * 返回成功json
+ * @param $msg
+ * @param null $data
+ */
+function echoSuccess( $msg, $data=null ){
+    echoJson(0,$msg,$data);
+}
+
+/**
+ * 返回失败json
+ * @param $msg
+ * @param null $data
+ */
+function echoError( $msg, $data=null ){
+    echoJson(1,$msg,$data);
+}

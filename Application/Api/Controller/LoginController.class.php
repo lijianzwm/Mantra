@@ -27,7 +27,8 @@ class LoginController extends Controller{
         $username = I("username");
         $password = I("password");
 
-        self::checkUsernamePassword($username,$password);
+        CheckService::checkParam("username", $username);
+        CheckService::checkParam("password", $password);
 
         $user = UserService::getUserByUsername($username);
         if( !$user ){
@@ -51,7 +52,8 @@ class LoginController extends Controller{
         $username = I("username");
         $password = I("password");
 
-        self::checkUsernamePassword($username,$password);
+        CheckService::checkParam("username", $username);
+        CheckService::checkParam("password", $password);
 
         if( UserService::isUsernameUsed( $username ) ){
             echoJson(1, "该用户名已经被注册过");
@@ -68,19 +70,6 @@ class LoginController extends Controller{
             echoJson(0, "注册成功!", $id);
         }else{
             echoJson(1, "无法写入数据库,注册失败!");
-        }
-    }
-
-    private function checkUsernamePassword($username, $password){
-        $checkUsername = CheckService::checkUsernameFormat($username);
-        $checkPassword = CheckService::checkPasswordFormat($password);
-
-        if( $checkUsername['status'] ){
-            echoJson(1, $checkUsername['msg']);
-        }
-
-        if( $checkPassword['status'] ){
-            echoJson(1, $checkPassword['msg']);
         }
     }
 

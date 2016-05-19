@@ -121,32 +121,6 @@ class RedisService{
         return $ranklist;
     }
 
-    /**
-     * 缓存某一天（包括今天）的共修总数
-     * @param $date
-     * @return int
-     */
-    public static function cachingDayTotalNum($date){
-        $num = MysqlService::getMysqlDayTotalNum($date);
-        if( $num == -1 ){
-            $num = MysqlService::generateMysqlDayTotalNum($date);
-        }
-        DebugService::displayLog("$num");
-        $key = RedisKeyService::getDayTotalNumKey($date);
-        self::set($key, $num, C("DAY_TOTAL_NUM_EXPIRE"));
-        return $num;
-    }
-
-    public static function cachingMonthTotalNum($yearMonth){
-        $num = MysqlService::getMysqlMonthTotalNum($yearMonth);
-        if( $num == -1 ){
-            $num = MysqlService::generateMysqlMonthTotalNum($yearMonth);
-        }
-        $key = RedisKeyService::getMonthTotalNumKey($yearMonth);
-        self::set($key, $num, C("MONTH_TOTAL_NUM_EXPIRE"));
-        return $num;
-    }
-
     public static function cachingTotalNum(){
         $num = MysqlService::generateMysqlTotalNum();
         $key = RedisKeyService::getTotalNumKey();
@@ -203,7 +177,7 @@ class RedisService{
         return self::get($todayKey);
     }
 
-    public static function getRedisTotalNumById($userid){
+    public static function getRedisUserTotalNumById($userid){
         $totalKey = RedisKeyService::getUserTotalNumKey($userid);
         return self::get($totalKey);
     }
@@ -233,23 +207,22 @@ class RedisService{
      */
     public static function addRedisUserTotalNum($userid, $num ){
         $totalKey = RedisKeyService::getUserTotalNumKey($userid);
-        $currentNum = self::getRedisTotalNumById($userid);
+        $currentNum = self::getRedisUserTotalNumById($userid);
         if( $currentNum == false ){//如果redis中没有存total的数据
             $currentNum = self::cachingUserTotalNum($userid);
         }
         self::set($totalKey,$currentNum+$num, C("TODAY_KEY_EXPIRE"));
     }
 
-    public static function getRedisDayTotalNum($date){
-        $key = RedisKeyService::getDayTotalNumKey($date);
-        return self::get($key);
+    public static function addRedisUserTodayNum(){
+
     }
 
-    public static function getRedisMonthTotalNum($yearMonth){
-        $key = RedisKeyService::getMonthTotalNumKey($yearMonth);
-        return self::get($key);
-    }
+    public static function addRedisMonthTotalNum(){
 
+    }
+    
+    
     /**
      * 获取全部数目
      * @return mixed
@@ -272,6 +245,19 @@ class RedisService{
     public static function updateStageTotalNum($num){
         $key = RedisKeyService::getStageGXKey();
         self::set($key,$num,C("STAGE_GX_TOTAL_NUM_EXPIRE"));
+    }
+
+    public static function insertNum($userid, $num, $date=null){
+        if( $date == null ){
+            $date = DateService::getCurrentYearMonthDay();
+            self::addRedisTodayNum($userid, $num);
+        }
+        self::addRedisUserTotalNum($userid, $num);
+
+    }
+
+    public static function addNum($userid, $num, $date=null){
+
     }
 
 }
