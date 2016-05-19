@@ -27,8 +27,8 @@ class LoginController extends Controller{
         $username = I("username");
         $password = I("password");
 
-        CheckService::checkParam("username", $username);
-        CheckService::checkParam("password", $password);
+        CheckService::checkApiParam("username", $username);
+        CheckService::checkApiParam("password", $password);
 
         $user = UserService::getUserByUsername($username);
         if( !$user ){
@@ -52,8 +52,8 @@ class LoginController extends Controller{
         $username = I("username");
         $password = I("password");
 
-        CheckService::checkParam("username", $username);
-        CheckService::checkParam("password", $password);
+        CheckService::checkApiParam("username", $username);
+        CheckService::checkApiParam("password", $password);
 
         if( UserService::isUsernameUsed( $username ) ){
             echoJson(1, "该用户名已经被注册过");

@@ -29,31 +29,31 @@ class UserController extends CommonController{
         $dayGoal = I("day_goal");
         $user['showname'] = $username;
 
-        CheckService::checkParam("userid", $user['id']);
-        CheckService::checkParam("username", $username);
+        CheckService::checkApiParam("userid", $user['id']);
+        CheckService::checkApiParam("username", $username);
 
         if( $realname ){
-            CheckService::checkParam("realname", $realname);
+            CheckService::checkApiParam("realname", $realname);
             $user['realname'] = $realname;
             $user['showname'] = $realname;//如果有真实姓名的话，显示真实姓名
         }else{
             $user['realname'] = null;
         }
         if( $dharma ){
-            CheckService::checkParam("dharma", $dharma);
+            CheckService::checkApiParam("dharma", $dharma);
             $user['dharma'] = $dharma;
             $user['showname'] = $dharma;//如果有法名的话，最优先显示法名，然后是真实姓名
         }else{
             $user['dharma'] = null;
         }
         if( $goal ){
-            CheckService::checkParam("goal", $goal);
+            CheckService::checkApiParam("goal", $goal);
             $user['goal'] = $goal;
         }else{
             $user['goal'] = 0;
         }
         if( $dayGoal ){
-            CheckService::checkParam("goal", $dayGoal);
+            CheckService::checkApiParam("goal", $dayGoal);
             $user['day_goal'] = $dayGoal;
         }else{
             $user['day_goal'] = 0;
@@ -69,7 +69,7 @@ class UserController extends CommonController{
     public function getUserInfo(){
         $userid = I("userid");
 
-        CheckService::checkParam("userid", $userid);
+        CheckService::checkApiParam("userid", $userid);
 
         $user = UserService::getUserById($userid);
 
@@ -86,9 +86,9 @@ class UserController extends CommonController{
         $oldPassword = I("oldPassword");
         $newPassword = I("newPassword");
 
-        CheckService::checkParam("username", $username);
-        CheckService::checkParam("password", $oldPassword);
-        CheckService::checkParam("password", $newPassword);
+        CheckService::checkApiParam("username", $username);
+        CheckService::checkApiParam("password", $oldPassword);
+        CheckService::checkApiParam("password", $newPassword);
 
         $user = UserService::getUserByUsername($username);
         if( !$user ){

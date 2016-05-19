@@ -15,7 +15,6 @@ namespace Common\Service;
  */
 class CheckService{
 
-
     /**
      * 返回校验结果
      * @param $status 0:成功; 1:失败
@@ -36,24 +35,42 @@ class CheckService{
         return self::returnResult(1, $msg);
     }
 
-    public static function checkParam($paramName, $value, $tpl=null ){
+    /**
+     * 校验各种传过来的参数,如果未通过校验,停止执行程序,直接返回错误信息!
+     * @param $paramName
+     * @param $value
+     * @param null $tpl
+     */
+    public static function checkApiParam($paramName, $value, $tpl=null ){
+        $checkResult = null;
         switch($paramName){
             case "userid":
-                return self::checkUseridFormat($value);
+                $checkResult = self::checkUseridFormat($value);
+                break;
             case "username":
-                return self::checkUsernameFormat($value);
+                $checkResult =  self::checkUsernameFormat($value);
+                break;
             case "password":
-                return self::checkPasswordFormat($value);
+                $checkResult =  self::checkPasswordFormat($value);
+                break;
             case "date":
-                return self::checkDateFormat($value, $tpl);
+                $checkResult =  self::checkDateFormat($value, $tpl);
+                break;
             case "goal":
-                return self::checkGoalNum($value);
+                $checkResult =  self::checkGoalNum($value);
+                break;
             case "realname":
-                return self::checkRealname($value);
+                $checkResult =  self::checkRealname($value);
+                break;
             case "dharma":
-                return self::checkDharma($value);
+                $checkResult =  self::checkDharma($value);
+                break;
             default:
-                return self::error("代码中不存在校验" . $paramName . "的功能!");
+                $checkResult =  self::error("代码中不存在校验" . $paramName . "的功能!");
+                break;
+        }
+        if( $checkResult['status'] ){
+            echoError($checkResult['msg']);
         }
     }
 
