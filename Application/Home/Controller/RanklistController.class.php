@@ -35,7 +35,6 @@ class RanklistController extends Controller{
 
     public function dayRanklist(){
         $date = I("date");
-        //TODO 校验一下传过来的数据是否合法
         if( !DateService::checkYearMonthDay($date) ){
             $this->error("日期格式错误!");
         }
@@ -61,6 +60,10 @@ class RanklistController extends Controller{
         $year = I("year");
         $month = I("month");
         $yearMonth = $year."-".$month;
+        if( !DateService::checkYearMonth($yearMonth)){
+            $this->error("日期格式错误!");
+        }
+
         $curYearMonth = DateService::getStrYearMonth();
         DebugService::displayLog("monthRanklist():yearMonth=" . $yearMonth);
         DebugService::displayLog("monthRanklist():curYearMonth=" . $curYearMonth);

@@ -174,7 +174,7 @@ class MysqlService{
 
     public static function addMysqlTodayNum( $userid, $num ){
         $todayDate = DateService::getStrDate();
-        self::addMysqlDayNum($userid, $num, $todayDate);
+        return self::addMysqlDayNum($userid, $num, $todayDate);
     }
 
     /**
@@ -335,4 +335,16 @@ class MysqlService{
         return $totalNum;
     }
 
+    public static function refreshUserTableTotal($userid){
+        $result = M("day_count")->where("userid='$userid'")->field("sum(num) as total")->find();
+        if( $result ){
+            $total = $result['total'];
+        }else{
+            $total = 0;
+        }
+        $user = M("user")->where("id='$userid'")->find();
+        $user['total'] = $total;
+        M("user")->save($user);
+    }
+    
 }

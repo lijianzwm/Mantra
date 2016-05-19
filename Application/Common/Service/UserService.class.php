@@ -114,22 +114,8 @@ class UserService{
         }
     }
 
-    public static function checkPasswordFormat($password){
-        $patrn = '/^(\w){6,20}$/';
-        if (preg_match($patrn, $password)) {
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    /**
-     * 校验用户名长度,注意,此处并没有校验格式
-     * @param $username
-     * @return bool
-     */
-    public static function checkUsernameFormat($username ){
-        if( strlen($username) > 10 || strlen($username)< 2 ){
+    public static function isUserExist($userid){
+        if ( !MysqlService::isUserExist($userid)) {
             return false;
         }else{
             return true;

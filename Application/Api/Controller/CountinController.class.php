@@ -10,10 +10,14 @@ namespace Api\Controller;
 
 
 use Common\Service\RedisService;
+use Common\Service\StageGXService;
+use Common\Service\UserService;
 use Think\Controller;
 use Common\Service\CountinService;
-use Common\Service\DateService;
 use Common\Service\CheckService;
+use Common\Service\DebugService;
+use Common\Service\MysqlService;
+use Common\Service\DateService;
 
 class CountinController extends CommonController{
 
@@ -22,22 +26,58 @@ class CountinController extends CommonController{
      */
     public function addNum(){
         $num = I("num");
-        $id = I("userid");
+        $userid = I("userid");
 
-        self::checkParams($id, $num);
-
-        if( session("userid") && $id != session("userid")){
-            echoError("师兄别闹,不要乱传入别人的userid,如果不是故意捣乱的就请重新登录后再进行报数!");
+        //校验
+        CheckService::checkApiParam("userid", $userid);
+        CheckService::checkApiParam("num", $num);
+        if( session("userid") && $userid != session("userid")){
+            echoError("师兄别闹,不要乱传入别人的userid,如果不是故意来捣乱的就请重新登录后再进行报数!");
         }
-
-        if( CountinService::addTodayNum($id,$num) ){
-            RedisService::cachingCurMonthRanklist();
-            RedisService::cachingTodayRanklist();
-            RedisService::cachingTotalRanklist();
-            echoSuccess("报数成功!");
-        }else{
+        if (!UserService::isUserExist($userid)) {
             echoError("用户不存在!");
         }
+        $todayNum = CountinService::getUserTodayNumById($userid);
+        if( $todayNum + $num < 0 ){
+            echoError("总数小于0!");
+        }
+        if (0 == intval($num)) {
+            echoError("数目为0!");
+        }
+
+        //更新mysql
+        if( CountinService::isTodayFirstCommit($userid)){//如果是当天第一次报数
+            DebugService::displayLog("当前报数是当天第一次报数");
+            if( !MysqlService::insertMysqlTodayNum($userid, $num) ){
+                echoError("日计数表插入数据失败!");
+            }
+        }else{
+            DebugService::displayLog("当前报数不是当天第一次报数");
+            if( !MysqlService::addMysqlTodayNum($userid, $num) ){
+                echoError("日计数表更新数据失败!");
+            }
+        }
+
+        //如果更新user表失败,重新统计total
+        if( !MysqlService::addMysqlUserTotalNum($userid,$num) ){
+            MysqlService::refreshUserTableTotal($userid);
+        }
+
+        //刷新Redis
+        RedisService::cachingUserTodayNum($userid);
+        RedisService::cachingUserTotalNum($userid);
+
+        CountinService::addTotalNum($num);
+
+        if (StageGXService::isInStage()) {
+            CountinService::addStageTotalNum($num);
+        }
+
+        RedisService::cachingCurMonthRanklist();
+        RedisService::cachingTodayRanklist();
+        RedisService::cachingTotalRanklist();
+
+        echoSuccess("报数成功!");
     }
 
     /**
@@ -48,17 +88,56 @@ class CountinController extends CommonController{
         $date = I("date");
         $num = I("num");
 
-        self::checkParams($userid, $num, $date);
+        CheckService::checkApiParam("userid", $userid);
+        CheckService::checkApiParam("date", $date, "yyyy-mm-dd");
+        CheckService::checkApiParam("num", $num);
+
+        if( 0 == intval($num) ){
+            echoError("补报数目为0!");
+        }
 
         if (!CountinService::isSupplementDateLegeal($date)) {
             echoError("补报失败,补报日期须为今天之前!");
         }
 
-        if( CountinService::supplementNumByUserid($userid, $date, $num) ){
-            echoSuccess("补报成功!");
+        $dayCount = M("day_count")->where("userid='$userid' and today_date='$date'")->find();
+        DebugService::displayLog("dayCount:");
+        DebugService::displayLog($dayCount);
+        if( $dayCount ){//如果当天进行过报数
+            if( !MysqlService::addSupplementMysqlDayNum($userid, $num, $date ) ){
+                echoError("更新日计数表失败!");
+            }
         }else{
-            echoError("补报失败!");
+            if( !MysqlService::insertSupplementMysqlDayNum($userid, $num, $date) ){
+                echoError("插入日计数表失败!");
+            }
         }
+
+        CountinService::addTotalNum($num);//这里最好用redisservice
+
+        if( StageGXService::isInStage($date) ){
+            CountinService::addStageTotalNum($num);
+        }
+
+        //如果更新user表失败,重新统计total
+        if( !MysqlService::addMysqlUserTotalNum($userid,$num) ){
+            MysqlService::refreshUserTableTotal($userid);
+        }
+
+        RedisService::cachingUserTotalNum($userid);
+
+        //如果是过去的月份,更新月排行,并做缓存
+        if( DateService::isYearMonthDayInPassedMonth($date) ){
+            $yearMonth = DateService::yearMonthDay2YearMonth($date);
+            MysqlService::refreshMysqlMonthRanklist($yearMonth);
+            RedisService::cachingMonthRanklist($yearMonth);
+        }
+
+        //更新并缓存日排行
+        MysqlService::refreshMysqlSomeDayRanklist($date);
+        RedisService::cachingSomedayRanklist($date);
+
+        echoSuccess("补报成功!");
     }
 
     /**
@@ -66,7 +145,7 @@ class CountinController extends CommonController{
      */
     public function getUserCurNums(){
         $id = I("userid");
-        self::checkParams($id);
+        CheckService::checkApiParam("userid", $id);
         $data['totalNum'] = CountinService::getUserTotalNumById($id);
         $data['todayNum'] = CountinService::getUserTodayNumById($id);
         if(  $data['totalNum'] == null ){
@@ -75,33 +154,6 @@ class CountinController extends CommonController{
             if( $data['todayNum'] == null ){
                 $data['todayNum'] = 0;
                 echoSuccess("获取今日数目和总数成功!", $data);
-            }
-        }
-    }
-
-    /**
-     * 检查传过来的参数是否合法
-     * @param $userid
-     * @param $num
-     * @param $date
-     */
-    private function checkParams($userid, $num=null, $date=null){
-        $checkUserid = CheckService::checkUseridFormat($userid);
-        if( $checkUserid['status'] ){
-            echoError($checkUserid['msg']);
-        }
-
-        if( $num != null ){
-            $checkNum = CheckService::checkNumFormat($num);
-            if( $checkNum['status'] ){
-                echoError($checkNum['msg']);
-            }
-        }
-
-        if( $date != null ){
-            $checkDate = CheckService::checkDateFormat($date, "yyyy-mm-dd");
-            if( $checkDate['status'] ){
-                echoError($checkDate['msg']);
             }
         }
     }

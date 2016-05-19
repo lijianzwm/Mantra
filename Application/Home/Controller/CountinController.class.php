@@ -30,25 +30,6 @@ class CountinController extends CommonController{
         $this->display();
     }
 
-    public function addNumHandler(){
-        $num = I("num");
-        if( !is_numeric($num)){
-            $this->error("请输入数字！");
-        }
-        $num = intval($num);
-        $id = session("userid");
-        if( $num > 0 ){
-            if( CountinService::addTodayNum($id,$num) ){
-                $this->success("报数成功！", U('Login/userCenter'));
-            }else{
-                $this->error("报数失败！");
-            }
-        }else{
-            $this->error("请输入大于0的正数！");
-        }
-
-    }
-
     public function counter(){
         $total = CountinService::getUserTotalNumById(session("userid"));
         $todayNum = CountinService::getUserTodayNumById(session("userid"));
@@ -61,17 +42,6 @@ class CountinController extends CommonController{
         $userid = session("userid");
         $this->assign("userid", $userid);
         $this->display();
-    }
-
-    public function supplementHandler(){
-        $phone = I("phone");
-        $date = I("date");
-        $num = I("num");
-        if( CountinService::supplementNumByPhone($phone, $date, $num) ){
-            $this->success("补报成功!");
-        }else{
-            $this->error("补报失败!");
-        }
     }
 
 }

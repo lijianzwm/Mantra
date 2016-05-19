@@ -17,29 +17,20 @@ class CountinService{
      * @return mixed|null
      */
     public static function getUserTotalNumById($userid){
-        $num = RedisService::getRedisUserTotalNumById($userid);
-        if( $num == false ){//这里不用!$num，因为缓存的数据有可能是0
-            $num = RedisService::cachingUserTotalNum($userid);
-        }
-        return $num;
+        return RedisService::getRedisUserTotalNum($userid);
     }
 
     /**
-     * 获取用户当日的数目,若用户不存在或没有进行过报数,返回null
+     * 获取用户当日的数目,若用户不存在返回null
      * @param $userid
      * @return mixed
      */
     public static function getUserTodayNumById($userid){
-        $num = RedisService::getRedisUserTodayNumById($userid);
+        $num = RedisService::getRedisUserTodayNum($userid);
         if( $num == false ){
-            DebugService::displayLog("getTodayNumById : not cached");
-            $num = MysqlService::getMysqlTodayNumById($userid);
+            $num = RedisService::cachingUserTodayNum($userid);
         }
-        if( $num == null ){
-            return 0;
-        }else{
-            return $num;
-        }
+        return $num;
     }
 
     /**
@@ -68,16 +59,17 @@ class CountinService{
         MysqlService::addMysqlUserTotalNum($userid,$num);
         return true;
     }
-    
-    
 
-    private static function addTotalNum($num){
+    public static function addTotalNum($num){
         $totalNum = self::getAllUserTotalNum();
         RedisService::updateTotalNum($totalNum + $num);
     }
 
-    private static function addStageTotalNum($num){
+    public static function addStageTotalNum($num){
         $totalNum = RedisService::getRedisStageGXTotalNum();
+        if( $totalNum == false ){
+            $totalNum = 0;
+        }
         RedisService::updateStageTotalNum($totalNum + $num);
     }
 
@@ -94,7 +86,7 @@ class CountinService{
     }
 
     public static function isTodayFirstCommit( $userid ){
-        if( RedisService::getRedisUserTodayNumById($userid) == false){
+        if( RedisService::getRedisUserTodayNum($userid) == false){
             if( MysqlService::getMysqlTodayNumById($userid) == null){
                 return true;
             }else{
@@ -159,19 +151,6 @@ class CountinService{
      * @return bool
      */
     public static function supplementNumByUserid( $userid, $date, $num ){
-        if( !self::isCountNumLegal($num) ){
-            DebugService::displayLog("补报数目num非法".$num);
-            return false;
-        }
-        $date = trim($date);
-        if( !DateService::checkYearMonthDay($date)){
-            DebugService::displayLog("date输入格式不合法!");
-            return false;
-        }
-        if( !self::isSupplementDateLegeal($date) ){
-            DebugService::displayLog("补报数目日期非法!");
-            return false;
-        }
 
         DebugService::displayLog("userid=".$userid);
         DebugService::displayLog("date=" . $date);
@@ -187,6 +166,8 @@ class CountinService{
                 return false;
             }
         }
+
+        CountinService::addTotalNum($num);
 
         //如果补报日期属于阶段性共修,更新阶段性共修数目
         if( StageGXService::isInStage($date) ){
@@ -207,8 +188,6 @@ class CountinService{
         //更新并缓存日排行
         MysqlService::refreshMysqlSomeDayRanklist($date);
         RedisService::cachingSomedayRanklist($date);
-
-        RedisService::cachingTotalNum();
         return true;
     }
 

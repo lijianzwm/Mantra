@@ -9,16 +9,19 @@
 namespace Home\Controller;
 
 use Common\Service\CheckService;
+use Common\Service\MysqlService;
 use Think\Controller;
 
 class TestController extends Controller{
     public function index(){
+
         $this->display();
     }
 
     public function handler(){
-        $username = I("username");
+        $userid = I("username");
 //        dump(CheckService::checkUsernameFormat($username));
-        dump(CheckService::checkNumFormat($username));
+        MysqlService::refreshUserTableTotal($userid);
+//        dump(CheckService::checkNumFormat($username));
     }
 }

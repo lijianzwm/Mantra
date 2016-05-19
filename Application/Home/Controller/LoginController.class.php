@@ -18,45 +18,6 @@ class LoginController extends Controller{
         $this->display();
     }
 
-    public function loginHandler(){
-        $username = I("username");
-        if( !trim($username) ){
-            $this->error("用户名为空");
-        }
-        $user = UserService::getUserByUsername($username);
-        if( !$user ){
-            $this->error("用户名为" . $username . "的用户不存在");
-        }
-
-        if( $user['password'] == md5(I("password")) ){
-            session("userid", $user['id']);
-            session("username", $username);
-            session("showname", $user['showname']);
-            redirect(U("Login/userCenter"));
-        }else{
-            $this->error("密码错误!");
-        }
-    }
-
-    /**
-     * 查询当前手机号的用户是否存在
-     */
-    public function isPhoneExist(){
-        $phone = I("phone");
-        if( UserService::isExistUser($phone) ){
-            $ret['regist_state'] = 1;
-        }else{
-            $ret['regist_state'] = 0;
-        }
-        echo json_encode($ret);
-    }
-
-    public function regist(){
-        $phone = I("phone");
-        $this->assign("phone", $phone);
-        $this->display();
-    }
-
     public function findPassword(){
         $this->display("modifyPassword");
     }
