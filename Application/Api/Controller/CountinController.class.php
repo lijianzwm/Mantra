@@ -33,6 +33,7 @@ class CountinController extends CommonController{
         if( CountinService::addTodayNum($id,$num) ){
             RedisService::cachingCurMonthRanklist();
             RedisService::cachingTodayRanklist();
+            RedisService::cachingTotalRanklist();
             echoSuccess("报数成功!");
         }else{
             echoError("用户不存在!");
