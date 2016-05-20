@@ -141,50 +141,54 @@
 </div>
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
 <script src="__PUBLIC__/lib/videojs.hls.min.js"></script>
+<script src="__PUBLIC__/lib/application.js"></script>
 <script type="text/javascript">
 
-    (function(){
-
-        var state = '{$state}';
-        var player = videojs('live_video');
-        player.play();
-
-        Dom = {
-            video : document.getElementById("video"),
-            countdownBox: $('#countdown_wrapper'),
-            remainSeconds :$('#remain_seconds')
-        };
-
-        if( state == "ready" ){
-            var remainSeconds = parseInt('{$countdownSeconds}');
-            countDown(remainSeconds);
-        }else if( state == "started" ){
-            var begTime = parseInt('{$begTime}');
-            playFromBegTime(begTime);
-        }
-
-        function countDown(remainSeconds){
-            $('#video_wrapper').hide();
-            Dom.countdownBox.show();
-            var i = setInterval(function() {
-                if( remainSeconds <= 0 ){
-                    Dom.video.play();
-                    clearInterval(i);
-                    Dom.countdownBox.hide();
-                    $('#video_wrapper').show();
-                }else{
-                    Dom.remainSeconds.html(remainSeconds);
-                    remainSeconds -= 1;
-                }
-            }, 1000);
-        }
-
-        function playFromBegTime(begTime){
-            video.play();
-            video.currentTime = begTime;
-        }
-
-    })();
+    var player = videojs('example-video');
+    player.play();
+//
+//    (function(){
+//
+//        var state = '{$state}';
+//        var player = videojs('live_video');
+//        player.play();
+//
+//        Dom = {
+//            video : document.getElementById("video"),
+//            countdownBox: $('#countdown_wrapper'),
+//            remainSeconds :$('#remain_seconds')
+//        };
+//
+//        if( state == "ready" ){
+//            var remainSeconds = parseInt('{$countdownSeconds}');
+//            countDown(remainSeconds);
+//        }else if( state == "started" ){
+//            var begTime = parseInt('{$begTime}');
+//            playFromBegTime(begTime);
+//        }
+//
+//        function countDown(remainSeconds){
+//            $('#video_wrapper').hide();
+//            Dom.countdownBox.show();
+//            var i = setInterval(function() {
+//                if( remainSeconds <= 0 ){
+//                    Dom.video.play();
+//                    clearInterval(i);
+//                    Dom.countdownBox.hide();
+//                    $('#video_wrapper').show();
+//                }else{
+//                    Dom.remainSeconds.html(remainSeconds);
+//                    remainSeconds -= 1;
+//                }
+//            }, 1000);
+//        }
+//
+//        function playFromBegTime(begTime){
+//            video.play();
+//            video.currentTime = begTime;
+//        }
+//
+//    })();
 
 </script>
 
