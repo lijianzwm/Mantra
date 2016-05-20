@@ -115,7 +115,7 @@ class CountinController extends CommonController{
         CountinService::updateTotalNum($num);//这里最好用redisservice
 
         if( StageGXService::isInStage($date) ){
-            CountinService::addStageTotalNum($num);
+            StageGXService::addCurStageGXCompletionNum($num);
         }
 
         //如果更新user表失败,重新统计total

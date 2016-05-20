@@ -39,7 +39,7 @@ class IndexController extends Controller {
 
         $stageGX = StageGXService::getCurStageGX();
         if( $stageGX ){
-            $stageGXTotalNum = StageGXService::getStageGXTotalNum($stageGX);
+            $stageGXTotalNum = $stageGX['completion_num'];
             $stageGXPercent = $stageGXTotalNum / floatval($stageGX['num']) * 100;
             $stageGXRequireNum = intval($stageGX['num']) - $stageGXTotalNum;
             $stageGXRequireNum = $stageGXRequireNum < 0 ? 0 : $stageGXRequireNum;

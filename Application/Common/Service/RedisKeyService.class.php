@@ -24,7 +24,7 @@ class RedisKeyService{
     }
 
     public static function getStageGXKey(){
-        return "stage-total-num";
+        return "current-stage-gx";
     }
 
     public static function getTotalNumKey(){

@@ -99,28 +99,6 @@ class RedisService{
 
 //////////////////////////////////////////////////////////////////
 
-    public static function getRedisStageGXTotalNum(){
-        $key = RedisKeyService::getStageGXKey();
-        return self::get($key);
-    }
-
-    public static function setRedisStageGXTotalNum($num){
-        $key = RedisKeyService::getStageGXKey();
-        self::set($key, $num, C("STAGE_GX_TOTAL_NUM_EXPIRE"));
-    }
-
-    public static function cachingStageGXTotalNum($stageGX){
-        $stageGXTotalNum = MysqlService::generateStageGXTotalNum($stageGX);
-        DebugService::displayLog("cachingStageGXTotalNum()\tstageGXTotalNum=" . $stageGXTotalNum);
-        if( !$stageGX ){
-            $stageGXTotalNum = 0;
-        }
-        self::setRedisStageGXTotalNum($stageGXTotalNum);
-        return $stageGXTotalNum;
-    }
-
-//////////////////////////////////////////////////////////////////
-
     /**
      * 获取全部数目
      * @return mixed
@@ -238,75 +216,10 @@ class RedisService{
 
 //////////////////////////////////////////////////////////////////
 
-    /**
-     * 更新redis当日数目缓存，如果当日没有缓存，则新建一个
-     * @param $userid
-     * @param $num
-     */
-    public static function addRedisTodayNum( $userid, $num ){
-        $todayKey = RedisKeyService::getUserTodayNumKey($userid);
-        $currentNum = self::getRedisUserTodayNum($userid);
-        if( $currentNum == false ){
-            $currentNum = self::cachingUserTodayNum($userid);
-            //这里缓存完了不用再加$num了，因为前面sql数据库中已经加过了
-            self::set($todayKey, $currentNum, C("TODAY_KEY_EXPIRE"));
-        }else{
-            $num = $num+$currentNum;
-            self::set($todayKey,$num, C("TODAY_KEY_EXPIRE"));
-        }
-    }
-
-    /**
-     * 更新redis中用户total，输入保证userid有效
-     * @param $userid
-     * @param $num
-     */
-    public static function addRedisUserTotalNum($userid, $num ){
-        $totalKey = RedisKeyService::getUserTotalNumKey($userid);
-        $currentNum = self::getRedisUserTotalNum($userid);
-
-        self::set($totalKey,$currentNum+$num, C("TODAY_KEY_EXPIRE"));
-    }
-
-    public static function addRedisUserTodayNum(){
-
-    }
-
-    public static function addRedisMonthTotalNum(){
-
-    }
-
-
-    public static function cachingCurStageGXCompletionNum($num){
-        $stageGXKey = RedisKeyService::getStageGXKey();
-        self::set($stageGXKey, $num, C("STAGE_GX_TOTAL_NUM_EXPIRE"));
-    }
-    
-
 
     public static function updateTotalNum($num){
         $key = RedisKeyService::getTotalNumKey();
         self::set($key, $num, C("TOTAL_NUM_EXPIRE"));
-    }
-
-
-
-    public static function updateStageTotalNum($num){
-        $key = RedisKeyService::getStageGXKey();
-        self::set($key,$num,C("STAGE_GX_TOTAL_NUM_EXPIRE"));
-    }
-
-    public static function insertNum($userid, $num, $date=null){
-        if( $date == null ){
-            $date = DateService::getCurrentYearMonthDay();
-            self::addRedisTodayNum($userid, $num);
-        }
-        self::addRedisUserTotalNum($userid, $num);
-
-    }
-
-    public static function addNum($userid, $num, $date=null){
-
     }
 
 }
