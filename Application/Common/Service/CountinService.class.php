@@ -69,10 +69,7 @@ class CountinService{
         }
 
     }
-
-
-
-
+    
     public static function addStageTotalNum($num){
         $totalNum = RedisService::getRedisStageGXTotalNum();
         if( $totalNum == false ){
