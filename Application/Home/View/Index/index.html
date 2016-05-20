@@ -119,10 +119,16 @@
 <div id="sub_title" class="sub-title">（当前版本为内部测试版，部分功能正在测试中）</div>
 <div>
     <div id="video_wrapper" class="video-wrapper">
-        <video id="video" width="432" height="240" controls="controls" preload="preload">
-            <source src="{:C('GX_VIDEO_MP4')}" type="video/mp4">
-            <source src="{:C('GX_VIDEO_OGG')}" type="video/ogg">
+        <video id=example-video width=960 height=540  class="video-js" preload="auto" poster="http://designmodo.github.io/Flat-UI/docs/assets/img/video/poster.jpg" >
+            <source
+                    src="http://mlztlivesz.oss-cn-shenzhen.aliyuncs.com/mlztgxtest/mlztgxtest.m3u8"
+                    type="application/x-mpegURL">
         </video>
+
+        <!--<video id="video" width="432" height="240" controls="controls" preload="preload">-->
+            <!--<source src="{:C('GX_VIDEO_MP4')}" type="video/mp4">-->
+            <!--<source src="{:C('GX_VIDEO_OGG')}" type="video/ogg">-->
+        <!--</video>-->
     </div>
     <div id="countdown_wrapper" class="countdown-wrapper hide">
         <div>距共修开始还有&nbsp;<div id="remain_seconds" class="remain-seconds"></div>&nbsp;秒</div>
