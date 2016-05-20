@@ -1,15 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>测试页面</title>
-</head>
-<body>
-<form action="{:U('Test/handler')}" method="post">
-    <div>测试</div>
-    <div><input name="username" /></div>
-    <div><input type="submit" value="提交" /></div>
-</form>
 
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OSS RTMP直播</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="http://www.aliyun.com/favicon.ico" type="image/x-icon" />
+    <script src="__PUBLIC__/lib/video.min.js"></script>
+</head>
+
+<body>
+
+    <div id="my-player" class="abp" style="width:640px; height:360px">
+        <div id="comment-stage" class="abp-container">
+            <input type="hidden" id="video-id" value="aHR0cDovL21senRsaXZlc3oub3NzLWNuLXNoZW56aGVuLmFsaXl1bmNzLmNvbS9tbHp0Z3h0ZXN0L21senRneHRlc3QubTN1OA=="/>
+            <video id=example-video width=960 height=540  class="video-js" preload="auto" poster="http://designmodo.github.io/Flat-UI/docs/assets/img/video/poster.jpg" >
+                <source src="{:C('GX_LIVE_URL')}"
+                        type="application/x-mpegURL">
+            </video>
+        </div>
+    </div>
+
+</div>
+
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/videojs.hls.min.js"></script>
+
+<script>
+    var player = videojs('example-video');
+    player.play();
+
+</script>
 </body>
+
 </html>

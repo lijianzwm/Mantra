@@ -14,7 +14,8 @@ use Think\Controller;
 
 class TestController extends Controller{
     public function index(){
-
+        phpinfo();
+        die();
         $this->display();
     }
 
