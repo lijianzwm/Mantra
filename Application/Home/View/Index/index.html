@@ -109,19 +109,39 @@
     </style>
 </head>
 <body>
-<div id="my-player" class="abp" style="width:640px; height:360px">
-    <div id="comment-stage" class="abp-container">
-        <input type="hidden" id="video-id" value="aHR0cDovL21senRsaXZlc3oub3NzLWNuLXNoZW56aGVuLmFsaXl1bmNzLmNvbS9tbHp0Z3h0ZXN0L21senRneHRlc3QubTN1OA=="/>
-        <video id=example-video width=960 height=540 preload="auto" poster="http://designmodo.github.io/Flat-UI/docs/assets/img/video/poster.jpg" >
-            <source src="{:C('GX_LIVE_URL')}"
-                    type="application/x-mpegURL">
-        </video>
+<if condition="$stageGX neq null">
+    <div class="title">{$stageGX.title}</div>
+    <div class="stage-num-bar">
+        <div class="stage-label">已完成:</div><div class="stage-num">{$stageGXTotalNum}</div>
+        <div class="stage-label">未完成:</div><div class="stage-num">{$stageGXRequireNum}</div>
+        <div class="stage-label">总进度:</div><div class="stage-num">{$stageGXPercent}%</div>
     </div>
+<else/>
+    <div id="title" class="title">{:C('WEBSITE_TITLE')}</div>
+    <div class="total-num-bar">全部共修总数<div class="total-num">{$totalNum}</div></div>
+</if>
+<div id="sub_title" class="sub-title">（当前版本为内部测试版，部分功能正在测试中）</div>
+<div>
+    <div id="video_wrapper" class="video-wrapper">
+        <div id="my-player" class="abp" style="width:640px; height:360px">
+            <div id="comment-stage" class="abp-container">
+                <input type="hidden" id="video-id" value="aHR0cDovL21senRsaXZlc3oub3NzLWNuLXNoZW56aGVuLmFsaXl1bmNzLmNvbS9tbHp0Z3h0ZXN0L21senRneHRlc3QubTN1OA=="/>
+                <video id=example-video width=960 height=540 preload="auto" poster="http://designmodo.github.io/Flat-UI/docs/assets/img/video/poster.jpg" >
+                    <source src="{:C('GX_LIVE_URL')}"
+                            type="application/x-mpegURL">
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div>使用手机QQ扫码下载共修APP</div>
+    <img src="__PUBLIC__/Image/download_app.png">
 </div>
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
 <script src="__PUBLIC__/lib/videojs.hls.min.js"></script>
 <script type="text/javascript">
-    var player = videojs('live_video');
+    var player = videojs('example-video');
     player.play();
 </script>
 
