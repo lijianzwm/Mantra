@@ -35,6 +35,8 @@
             text-align:center;
             margin-top:20px;
             margin-bottom: 20px;
+            margin-left:auto;
+            margin-right:auto;
         }
 
         .sub-title{
@@ -121,12 +123,15 @@
 <div id="sub_title" class="sub-title">（当前版本为内部测试版，部分功能正在测试中）</div>
 <div>
     <div id="video_wrapper" class="video-wrapper">
-        <video id="live_video" width="960" height="540"  class="video-js" preload="auto"
-               poster="http://designmodo.github.io/Flat-UI/docs/assets/img/video/poster.jpg" >
-            <source
-                    src="{:C('GX_LIVE_URL')}"
-                    type="application/x-mpegURL">
-        </video>
+        <div id="my-player" class="abp" style="width:640px; height:360px">
+            <div id="comment-stage" class="abp-container">
+                <input type="hidden" id="video-id" value="aHR0cDovL21senRsaXZlc3oub3NzLWNuLXNoZW56aGVuLmFsaXl1bmNzLmNvbS9tbHp0Z3h0ZXN0L21senRneHRlc3QubTN1OA=="/>
+                <video id=example-video width=960 height=540 preload="auto" poster="http://designmodo.github.io/Flat-UI/docs/assets/img/video/poster.jpg" >
+                    <source src="{:C('GX_LIVE_URL')}"
+                            type="application/x-mpegURL">
+                </video>
+            </div>
+        </div>
     </div>
 </div>
 <div>
