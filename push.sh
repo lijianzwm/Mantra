@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-git commit -am '[lindex $argv 0]'
+git commit -am $1
 git push
 ./update.sh
