@@ -57,7 +57,7 @@ class CountinController extends CommonController{
             }
         }
 
-        //如果更新user表失败,重新统计total
+        //更新User中total字段,如果更新失败,重新统计total
         if( !MysqlService::addMysqlUserTotalNum($userid,$num) ){
             MysqlService::refreshUserTableTotal($userid);
         }
