@@ -41,22 +41,44 @@
 </head>
 <body>
 <div class="user-box-title">用户登陆</div>
-<form action="{:U('Login/loginHandler')}" method="post">
     <div class="login-box">
-        <div class="user-box-item">手机<input name="phone" id="phone"/></div>
+        <div class="user-box-item">账号<input name="username" id="username"/></div>
         <div class="user-box-item">密码<input type="password" name="password" id="password"/></div>
         <div class="user-box-item button-bar">
-            <input class="common-button" type="submit" value="登录"/>
+            <input class="common-button" type="button" value="登录" onclick="login()"/>
             <input class="common-button" type="button" value="注册" onclick="toRegist()"/>
             <a class="find-password" href="{:U('Login/findPassword')}">忘记密码?</a>
         </div>
     </div>
+    <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+    <script src="__PUBLIC__/lib/layer/layer.js"></script>
+    <script src="__PUBLIC__/js/common/dialog.js"></script>
+    <script src="__PUBLIC__/js/common/ajax.js"></script>
     <script type="text/javascript">
         function toRegist(){
             window.location.href="{:U('Login/regist')}";
         }
+
+        function login(){
+            username = $('#username').val();
+            password = $('#password').val();
+            url = "{:U('Api/Login/loginVolidate')}";
+            data = {
+                username:username,
+                password:password
+            };
+            myAjax(url, data, succFunc, errorFunc );
+        }
+
+        function succFunc(data){
+            window.location.href="{:U('Login/userCenter')}";
+        }
+
+        function errorFunc( data ){
+            dialog.error(data.msg);
+        }
+
     </script>
-</form>
 
 </body>
 </html>

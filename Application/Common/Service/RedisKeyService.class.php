@@ -23,6 +23,14 @@ class RedisKeyService{
         return "user-total-num-".$userid;
     }
 
+    public static function getStageGXKey(){
+        return "current-stage-gx";
+    }
+
+    public static function getTotalNumKey(){
+        return "total-num";
+    }
+
     public static function getTodayRanklistKey(){
         return "ranklist-today-".DateService::getStrMonthDay();
     }
@@ -41,22 +49,6 @@ class RedisKeyService{
 
     public static function getMonthRanklistKey($yearMonth){
         return "ranklist-".$yearMonth;
-    }
-
-    public static function getDayTotalNumKey($date){
-        return "total-".$date;
-    }
-
-    public static function getTotalNumKey(){
-        return "total-num";
-    }
-
-    public static function getMonthTotalNumKey($yearMonth){
-        return "total-" . $yearMonth;
-    }
-
-    public static function getStageGXKey(){
-        return "stage-total-num";
     }
 
 }

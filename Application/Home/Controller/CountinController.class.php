@@ -24,28 +24,10 @@ class CountinController extends CommonController{
                 $todayNum = 0;
             }
         }
+        $this->assign("userid", $userid);
         $this->assign("todayNum", $todayNum);
         $this->assign("total", $total);
         $this->display();
-    }
-
-    public function addNumHandler(){
-        $num = I("num");
-        if( !is_numeric($num)){
-            $this->error("请输入数字！");
-        }
-        $num = intval($num);
-        $id = session("userid");
-        if( $num > 0 ){
-            if( CountinService::addTodayNum($id,$num) ){
-                $this->success("报数成功！", U('Ranklist/todayRanklist'));
-            }else{
-                $this->error("报数失败！");
-            }
-        }else{
-            $this->error("请输入大于0的正数！");
-        }
-
     }
 
     public function counter(){
@@ -57,20 +39,9 @@ class CountinController extends CommonController{
     }
 
     public function supplement(){
-        $phone = session("phone");
-        $this->assign("phone", $phone);
+        $userid = session("userid");
+        $this->assign("userid", $userid);
         $this->display();
-    }
-
-    public function supplementHandler(){
-        $phone = I("phone");
-        $date = I("date");
-        $num = I("num");
-        if( CountinService::supplementNumByPhone($phone, $date, $num) ){
-            $this->success("补报成功!");
-        }else{
-            $this->error("补报失败!");
-        }
     }
 
 }

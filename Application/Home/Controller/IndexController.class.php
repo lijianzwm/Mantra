@@ -37,9 +37,9 @@ class IndexController extends Controller {
             }
         }
 
-        $stageGX = StageGXService::getStageGX();
+        $stageGX = StageGXService::getCurStageGX();
         if( $stageGX ){
-            $stageGXTotalNum = StageGXService::getStageGXTotalNum($stageGX);
+            $stageGXTotalNum = $stageGX['completion_num'];
             $stageGXPercent = $stageGXTotalNum / floatval($stageGX['num']) * 100;
             $stageGXRequireNum = intval($stageGX['num']) - $stageGXTotalNum;
             $stageGXRequireNum = $stageGXRequireNum < 0 ? 0 : $stageGXRequireNum;
@@ -55,4 +55,9 @@ class IndexController extends Controller {
         $this->assign("state", $state);
         $this->display();
     }
+
+    public function yigui(){
+        $this->display();
+    }
+
 }

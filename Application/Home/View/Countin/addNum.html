@@ -31,19 +31,50 @@
             width:120px;
         }
 
+        .addnum-button{
+            background:#9D804B;
+            color:#fff;
+            width:50px;
+        }
+
     </style>
 </head>
 <body>
 <div class="title">上报今日持诵数目</div>
-<div class="sub-title">（每次可上报多次，系统自动按日统计数目，建议随修随报）</div>
+<div class="sub-title">（每日可上报多次，系统自动按日统计数目，建议随修随报）</div>
 <div class="num">总数：{$total}</div>
 <div class="num" >今日：{$todayNum}</div>
-<form action="{:U('Countin/addNumHandler')}" method="post">
-    <div class="num-box">
-        <div>数目：<input name="num" id="num" class="num-input"/></div>
-    </div>
-    <div class="user-box-item"><input class="common-button" type="submit" value="报数"/></div>
-</form>
+<div><input type="hidden" id="userid" value="{$userid}"/></div>
+<div class="num-box">
+    <div>数目：<input name="num" id="num" class="num-input"/></div>
+</div>
+<div class="user-box-item"><input class="common-button" type="button" value="报数" onclick="addNum()"/></div>
 <div><a href="{:U('Countin/supplement')}">补报数目</a></div>
+
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/layer/layer.js"></script>
+<script src="__PUBLIC__/js/common/dialog.js"></script>
+<script src="__PUBLIC__/js/common/ajax.js"></script>
+<script type="text/javascript">
+    function addNum(){
+        userid = $('#userid').val();
+        num = $('#num').val();
+        url = "{:U('Api/Countin/addNum')}";
+        data = {
+            userid:userid,
+            num:num
+        };
+        myAjax(url, data, succFunc, errorFunc );
+    }
+
+    function succFunc(data){
+        dialog.success(data.msg,"{:U('Login/userCenter')}");
+    }
+
+    function errorFunc(data){
+        dialog.error(data.msg);
+    }
+
+</script>
 </body>
 </html>

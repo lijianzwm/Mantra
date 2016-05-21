@@ -18,77 +18,13 @@ class LoginController extends Controller{
         $this->display();
     }
 
-    public function loginHandler(){
-        $phone = I("phone");
-        if( !$phone ){
-            $this->error("请填写手机号！");
-        }
-        $user = UserService::getUserByPhone($phone);
-        if( !$user ){
-            $this->error("此手机号未被注册，正在跳转到注册页面！", U('Login/regist', array('phone'=>$phone)));
-        }
-        if( $user['password'] == md5(I("password")) ){
-            session("userid", $user['id']);
-            session("phone", $phone);
-            session("showname", $user['showname']);
-            $this->success("登录成功！",U('Login/userCenter'));
-        }else{
-            $this->error("密码错误！");
-        }
-    }
-
-    /**
-     * 查询当前手机号的用户是否存在
-     */
-    public function isPhoneExist(){
-        $phone = I("phone");
-        if( UserService::isExistUser($phone) ){
-            $ret['regist_state'] = 1;
-        }else{
-            $ret['regist_state'] = 0;
-        }
-        echo json_encode($ret);
-    }
-
-    public function regist(){
-        $phone = I("phone");
-        $this->assign("phone", $phone);
-        $this->display();
-    }
-
-    public function registHandler(){
-        $phone = I("phone");
-        $password = I("password");
-        $realname = I("realname");
-        $user['phone'] = $phone;
-        $user['password'] = md5($password);
-        $user['showname'] = "师兄".substr($phone, -4);
-        if( $realname ){
-            $user['realname'] = $realname;
-            $user['showname'] = $realname;
-        }
-        if( !UserService::checkUserInfo($user) ){
-            $this->error("请将信息填写完整！");
-        }
-
-        $id = M("user")->add($user);
-        if( $id ){
-            session("userid",$id);
-            session("phone", $phone);
-            session("showname", $user['showname']);
-            $this->success("注册成功，快去完善个人信息吧~", U('Login/userCenter'));
-        }else{
-            $this->error("注册失败！");
-        }
-    }
-
     public function findPassword(){
         $this->display("modifyPassword");
     }
 
     public function modifyPassword(){
-        $phone = I("phone");
-        $this->assign("phone", $phone);
+        $username = I("username");
+        $this->assign("username", $username);
         $this->display();
     }
 
@@ -109,10 +45,16 @@ class LoginController extends Controller{
 
     public function userCenter(){
         $id =  session("userid");
-        $phone = session("phone");
+        $username = session("username");
         $todayNum = CountinService::getUserTodayNumById($id);
-        if( $id && $phone ){
-            $user = UserService::getUserByPhone($phone);
+        if( $id && $username ){
+            $user = UserService::getUserByUsername($username);
+            if( !$user ){
+                session("userid", null);
+                session("username", null);
+                session("showname",null);
+                redirect(U('Login/login'));
+            }
             $user['goal'] = $user['goal'] == 0 ? null : $user['goal'];
             $user['day_goal'] = $user['day_goal'] == 0 ? null : $user['day_goal'];
             if( $user['goal'] != null ){
@@ -133,11 +75,10 @@ class LoginController extends Controller{
 
     public function logout(){
         session("userid", null);
-        session("phone", null);
+        session("username", null);
         session("showname", null);
         redirect(U('Index/index'));
     }
-
 
 
 }

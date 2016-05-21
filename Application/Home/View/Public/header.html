@@ -3,15 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>{:C('WEBSITE_TITLE')}</title>
+    <style>
+        .menu-button-wrapper{
+            width:100%;
+            height:40px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom:10px;
+            background:#9D804B;
+        }
+
+        .menu-button{
+            margin-left:10px;
+            margin-right:10px;
+            height:30px;
+            width:120px;
+            font-size:25px;
+            display:inline-block;
+            zoom: 1;
+            *display: inline;
+            background:#9D804B;
+        }
+
+        .menu-button a{
+            color:#fff;
+        }
+
+        .website-title-img{
+            display:inline-block;
+            zoom: 1;
+            *display: inline;
+            margin-top:10px;
+            margin-bottom:5px;
+        }
+
+        .website-title{
+            display:inline-block;
+            zoom: 1;
+            *display: inline;
+            font-size:40px;
+            color:#9D804B;
+        }
+
+    </style>
 </head>
 <body>
 <div id="top_bar" class="top-bar">
-    <div><img src="__PUBLIC__/Image/logo.jpg" onclick="toHomepage()"/></div>
     <div style="color:red;">{:C('DEV_TITLE')}</div>
+    <div class="website-title-img">
+        <!--<img src="__PUBLIC__/Image/famai.jpg" onclick="toHomepage()"/>-->
+        <img src="__PUBLIC__/Image/logo.png" onclick="toHomepage()"/>
+    </div>
+    <div style="margin-bottom:5px;">摩利支天QQ群:&nbsp;221022856,&nbsp;准提心脉QQ群:&nbsp;38597777</div>
+</div>
+<div class="menu-button-wrapper">
+    <div class="menu-button"><a href="{:U('/Home/Index')}">首页</a></div>
+    <div class="menu-button"><a href="{:U('Countin/addNum')}">报数</a></div>
+    <div class="menu-button"><a href="{:U('Ranklist/todayRanklist')}">排行</a></div>
+    <!--<div class="menu-button"><a href="{:U('Countin/counter')}">在线持咒</a></div>-->
+    <div class="menu-button"><a href="{:U('/Home/Index/yigui')}">仪轨</a></div>
+    <if condition="$Think.session.userid gt 0">
+            <div class="menu-button"><a href="{:U('Login/userCenter')}">个人</a></div>
+        <else />
+            <div class="menu-button"><a href="{:U('Login/login')}">登录</a></div>
+    </if>
 </div>
 <script type="text/javascript">
     function toHomepage(){
         window.location.href="{:U('/Home/Index')}";
+    }
+    function toZhunti(){
+        window.location.href="http://www.zhunti.net";
     }
 </script>
 </body>

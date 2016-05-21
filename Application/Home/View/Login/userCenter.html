@@ -46,7 +46,7 @@
 <div class="user-box-title">个人中心</div>
 <div class="count-info-box">
     <div class="today-num">
-        今日数目：
+        今日持咒：
         <div class="num">{$todayNum}</div>
     </div>
     <if condition="$user['day_goal'] neq null">
@@ -73,7 +73,7 @@
 
 
 <input type="hidden" name="id" value="{$user.id}"/>
-<div class="user-box-item">手机号码：<input name="phone" value="{$user.phone}" disabled="disabled"/></div>
+<div class="user-box-item">用户账号：{$user.username}<input type="hidden" name="username" id="username" value="{$user.username}" disabled="disabled"/></div>
 <div class="user-box-item">真实姓名：<input name="realname" id="realname" placeholder="真实姓名" value="{$user.realname}"/></div>
 <div class="user-box-item">你的法名：<input name="dharma" id="dharma" placeholder="法名（灌顶弟子填写）" value="{$user.dharma}"/></div>
 <div class="user-box-item">每日目标：<input name="day_goal" id="day_goal" placeholder="每日计划数目(可不填写）" value="{$user.day_goal}"/></div>
@@ -87,39 +87,44 @@
 </div>
 
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/layer/layer.js"></script>
+<script src="__PUBLIC__/js/common/dialog.js"></script>
+<script src="__PUBLIC__/js/common/ajax.js"></script>
 <script type="text/javascript">
 
     function modifyPassword(){
-        window.location.href="{:U('Login/modifyPassword', array('phone'=>$user['phone']))}";
+        window.location.href="{:U('Login/modifyPassword', array('username'=>$user['username']))}";
     }
 
     function logout(){
-        window.location.href="{:U('Login/logout')}";
+        dialog.confirm("确定要退出登录?","{:U('Login/logout')}");
     }
 
     function updateUserInfo(){
-        phone = '{$user.phone}';
+        id = '{$user.id}';
+        username = $('#username').val();
         realname = $('#realname').val();
         dharma = $('#dharma').val();
+        goal = $('#goal').val();
+        day_goal = $('#day_goal').val();
         var aj = $.ajax({
             url: "{:U('Api/User/updateUserInfo')}",
             data: {
-                apikey:"{:C('API_ACCESS_KEY')}",
-                id:'{$user.id}',
-                phone:'{$user.phone}',
-                realname:$('#realname').val(),
-                dharma:$('#dharma').val(),
-                goal:$('#goal').val(),
-                day_goal:$('#day_goal').val()
+                id:id,
+                username:username,
+                realname:realname,
+                dharma:dharma,
+                goal:goal,
+                day_goal:day_goal
             },
             type: 'post',
             cache: false,
             dataType: 'json',
             success: function (data) {
                 if( data.error_code ){
-                    alert(data.msg);
+                    dialog.error(data.msg);
                 }else{
-                    alert("保存成功！");
+                    dialog.success("保存成功!","{:U('Login/userCenter')}");
                 }
             },
             error: function () {

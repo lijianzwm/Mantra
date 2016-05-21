@@ -31,20 +31,39 @@ class StageGXService{
         }
     }
 
-    public static function getStageGX(){
+    public static function getCurStageGX(){
         $todayDate = DateService::getCurrentYearMonthDay();
-        DebugService::displayLog("getStageGX()\ttodayDate=".$todayDate);
         $stageGX = M("stage_gx")->where("beg_date <= '$todayDate' and end_date >= '$todayDate'")->find();
+        DebugService::displayLog("getStageGX()\ttodayDate=".$todayDate);
         DebugService::displayLog("getStageGX()\tstageGX=".$stageGX);
         return $stageGX;
     }
 
-    public static function getStageGXTotalNum($stageGX){
-        $stageTotalNum = RedisService::getRedisStageGXTotalNum();
-        if( $stageTotalNum == false ){
-            $stageTotalNum = RedisService::cachingStageGXTotalNum($stageGX);
+    public static function getCurStageGXNum(){
+        //TODO
+        $num = RedisService::getCurStageGXNum();
+        return $num;
+    }
+
+    public static function getStageGX($stageGXId){
+        return M("stage_gx")->where("id='$stageGXId'")->find();
+    }
+
+    public static function addCurStageGXCompletionNum($num){
+        $curStageGX = self::getCurStageGX();
+        $curStageGX['completion_num'] += $num;
+        if (M("stage_gx")->save($curStageGX)) {
+            return true;
+        }else{
+            return false;
         }
-        return $stageTotalNum;
+    }
+
+    public static function refreshStageGxCompletionNum($stageGXId){
+        $stageGX = self::getStageGX($stageGXId);
+        $stageGX['completion_num'] = MysqlService::generateStageGXCompletionNum($stageGX);
+        M("stage_gx")->save($stageGX);
+        return true;
     }
 
 }

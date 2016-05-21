@@ -6,10 +6,31 @@
 </head>
 <body>
 <div><a href="{:U('StageGX/addStageGX')}">添加阶段性共修</a></div>
+
 <foreach name="list" item="v">
     <div>{$v.title}</div>
     <div><a href="{:U('StageGX/editStageGX',array('id'=>$v['id']))}">修改</a></div>
-    <div><a href="#">删除</a></div>
+    <div><a href="#" onclick="refershStageGXNum('{$v.id}')" >刷新数目</a></div>
 </foreach>
+
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/layer/layer.js"></script>
+<script src="__PUBLIC__/js/common/dialog.js"></script>
+<script src="__PUBLIC__/js/common/ajax.js"></script>
+<script type="text/javascript">
+    function refershStageGXNum(id){
+        alert(id);
+        url = "{:U('StageGX/refrestStageGxCompletionNum')}";
+        data = {
+            id:id
+        };
+        myAjax(url,data,function(ret){
+            dialog.success(ret.msg, "{:U('StageGX/stageGXList')}");
+        }, function(ret){
+            dialog.error(ret.msg);
+        });
+    }
+</script>
+
 </body>
 </html>

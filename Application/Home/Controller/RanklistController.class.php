@@ -11,6 +11,7 @@ namespace Home\Controller;
 
 use Common\Service\CountinService;
 use Common\Service\DateService;
+use Common\Service\DebugService;
 use Think\Controller;
 use Common\Service\RanklistService;
 
@@ -34,8 +35,19 @@ class RanklistController extends Controller{
 
     public function dayRanklist(){
         $date = I("date");
-        //TODO 校验一下传过来的数据是否合法
-        $ranklist = RanklistService::getSomedayRanklist($date);
+        if( !DateService::checkYearMonthDay($date) ){
+            $this->error("日期格式错误!");
+        }
+        $todayDate = DateService::getStrYearMonthDay();
+
+        DebugService::displayLog("monthRanklist():date=" . $date);
+        DebugService::displayLog("monthRanklist():todayDate=" . $todayDate);
+
+        if( $date == $todayDate ){
+            $ranklist = RanklistService::getTodayRanklist();
+        }else{
+            $ranklist = RanklistService::getSomedayRanklist($date);
+        }
         $total = CountinService::getRanklistTotalNum($ranklist);
         $this->assign("title", $date."排行榜");
         $this->assign("refreshTime", C("SOMEDAY_RANKLIST_EXPIRE"));
@@ -48,7 +60,19 @@ class RanklistController extends Controller{
         $year = I("year");
         $month = I("month");
         $yearMonth = $year."-".$month;
-        $ranklist = RanklistService::getMonthRanklist($yearMonth);
+        if( !DateService::checkYearMonth($yearMonth)){
+            $this->error("日期格式错误!");
+        }
+
+        $curYearMonth = DateService::getStrYearMonth();
+        DebugService::displayLog("monthRanklist():yearMonth=" . $yearMonth);
+        DebugService::displayLog("monthRanklist():curYearMonth=" . $curYearMonth);
+
+        if( $yearMonth == $curYearMonth ){
+            $ranklist = RanklistService::getCurMonthRanklist();
+        }else{
+            $ranklist = RanklistService::getMonthRanklist($yearMonth);
+        }
         $total = CountinService::getRanklistTotalNum($ranklist);
         $this->assign("total", $total);
         $this->assign("title", $yearMonth."排行榜");

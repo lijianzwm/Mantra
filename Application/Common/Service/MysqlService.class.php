@@ -174,7 +174,7 @@ class MysqlService{
 
     public static function addMysqlTodayNum( $userid, $num ){
         $todayDate = DateService::getStrDate();
-        self::addMysqlDayNum($userid, $num, $todayDate);
+        return self::addMysqlDayNum($userid, $num, $todayDate);
     }
 
     /**
@@ -321,15 +321,37 @@ class MysqlService{
         return $totalNum;
     }
 
-    public static function getStageGXTotalNum($stageGX){
+    public static function generateStageGXCompletionNum($stageGX){
         $totalNum = 0;
         $begDate = $stageGX['beg_date'];
         $endDate = $stageGX['end_date'];
         $result = M("day_count")->where("today_date >= '$begDate' and today_date <= '$endDate'")->field("sum(num) as num")->select();
         if( $result ){
             $totalNum = $result[0]['num'];
+            if( $totalNum == null ){
+                $totalNum = 0;
+            }
         }
         return $totalNum;
+    }
+
+    public static function getCurStageGXCompletionNum(){
+        $stageGX = StageGXService::getCurStageGX();
+        return $stageGX['completion_num'];
+    }
+
+
+
+    public static function refreshUserTableTotal($userid){
+        $result = M("day_count")->where("userid='$userid'")->field("sum(num) as total")->find();
+        if( $result ){
+            $total = $result['total'];
+        }else{
+            $total = 0;
+        }
+        $user = M("user")->where("id='$userid'")->find();
+        $user['total'] = $total;
+        M("user")->save($user);
     }
 
 }

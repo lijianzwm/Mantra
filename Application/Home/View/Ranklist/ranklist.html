@@ -54,10 +54,14 @@
 
         .menu{
             font-size:20px;
+            margin-bottom:10px;
+            margin-top:10px;
         }
 
         .query-box{
             font-size:20px;
+            margin-left:10px;
+            margin-right:10px;
         }
 
         .day-button{
@@ -79,45 +83,44 @@
     </style>
 </head>
 <body>
-<div class="title">{$title}</div>
-<div class="title">总数为：{$total}</div>
-<div class="sub-title">(每{$refreshTime}秒刷新一次)</div>
 <div class="menu">
-    <a href="#" onclick="showQueryDayBox()">查询日榜</a>&nbsp;&nbsp;
-    <a href="#" onclick="showQueryMonthBox()">查询月榜</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/totalRanklist')}">查询总榜</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/todayRanklist')}" >今日排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/yesterdayRanklist')}">昨日排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/curMonthRanklist')}">本月排行</a>&nbsp;&nbsp;
+    <a href="{:U('Ranklist/totalRanklist')}">总排行榜</a>&nbsp;&nbsp;
 </div>
-<div id="query_day_box" class="query-box hide">
-    <a href="{:U('Ranklist/yesterdayRanklist')}">查昨日榜</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/todayRanklist')}">查今日榜</a>&nbsp;&nbsp;
+<div id="query_day_box" class="query-box">
     <form action="{:U('Ranklist/dayRanklist')}" method="post">
         <input type="text" name="date" id="datepicker"/>
         <input type="submit" class="day-button" value="查询日榜"/>
     </form>
 </div>
-<div id="query_month_box" class="query-box hide">
-    <a href="{:U('Ranklist/curMonthRanklist')}">查本月榜</a>&nbsp;&nbsp;
+<div id="query_month_box" class="query-box">
     <form action="{:U('Ranklist/monthRanklist')}" method="post">
         <select name="year">
             <option value ="2016" selected = "selected">2016年</option>
         </select>
-        <select name="month">
-            <option value ="01" selected = "selected">一月</option>
-            <option value ="02">二月</option>
-            <option value="03">三月</option>
-            <option value="04">四月</option>
-            <option value="05">五月</option>
-            <option value="06">六月</option>
-            <option value="07">七月</option>
-            <option value="08">八月</option>
-            <option value="09">九月</option>
-            <option value="10">十月</option>
-            <option value="11">十一月</option>
-            <option value="12">十二月</option>
+        <select name="month" id="month">
+            <option id="month01" value ="01">一月</option>
+            <option id="month02" value ="02">二月</option>
+            <option id="month03" value="03">三月</option>
+            <option id="month04" value="04">四月</option>
+            <option id="month05" value="05">五月</option>
+            <option id="month06" value="06">六月</option>
+            <option id="month07" value="07">七月</option>
+            <option id="month08" value="08">八月</option>
+            <option id="month09" value="09">九月</option>
+            <option id="month10" value="10">十月</option>
+            <option id="month11" value="11">十一月</option>
+            <option id="month12" value="12">十二月</option>
         </select>
         <input type="submit" class="month-button" value="查询月榜"/>
     </form>
 </div>
+
+<div class="title">{$title}</div>
+<div class="title">总数为：{$total}</div>
+<div class="sub-title">(每{$refreshTime}秒刷新一次)</div>
 <div class="rank-wrapper">
     <div class="rank-title">
         <div class="rank-title-elem">排名</div>
@@ -144,6 +147,21 @@
 <script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
 <script type="text/javascript">
     $(function() {
+        var myDate = new Date();
+        var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+        var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
+        var day = myDate.getDate();        //获取当前日(1-31)
+        if( month < 10 ){
+            month =  "0"+month;
+        }else{
+            month = ""+month;
+        }
+        if( day < 10 ){
+            day = "0" + day;
+        }
+        var yearMonthDay = year + "-" + month + "-" + day;
+        $("#month").val(month);
+        $( "#datepicker" ).val(yearMonthDay);
         $( "#datepicker" ).datepicker();
     });
     dayBoxDom = $('#query_day_box');

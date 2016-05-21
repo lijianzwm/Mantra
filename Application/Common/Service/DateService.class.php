@@ -67,16 +67,14 @@ class DateService{
             return false;
     }
 
-//    public static function checkYearMonthDay($date){
-//        DebugService::displayLog("checkYearMonthDay(): ".$date);
-//        $matchResult = preg_match('[2000-9999]-[01-12]-[01-31]', $date);
-//        DebugService::displayLog($matchResult);
-//        if( $matchResult ){
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
+    public static function checkYearMonth($date){
+        $p = '/^[0-9]{4}-[0-9]{2}$/';
+        if (preg_match($p, $date)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     /**
      * 输入的$date必须保证格式为"2000-01-01",且为字符串
