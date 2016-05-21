@@ -60,4 +60,9 @@ class IndexController extends Controller {
         $this->display();
     }
 
+    public function guide(){
+        layout(false);
+        $this->diaplay();
+    }
+
 }
