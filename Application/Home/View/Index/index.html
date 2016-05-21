@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>{:C('WEBSITE_TITLE')}</title>
-    <script src="__PUBLIC__/lib/video.min.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/css/style.css" />
     <style>
         body{
             background: #EFE8D8;
@@ -35,8 +33,6 @@
             text-align:center;
             margin-top:20px;
             margin-bottom: 20px;
-            margin-left:auto;
-            margin-right:auto;
         }
 
         .sub-title{
@@ -106,12 +102,6 @@
             margin-right:15px;
         }
 
-        .center{
-            text-align:center;
-            margin-left:auto;
-            margin-right:auto;
-        }
-
     </style>
 </head>
 <body>
@@ -129,15 +119,13 @@
 <div id="sub_title" class="sub-title">（当前版本为内部测试版，部分功能正在测试中）</div>
 <div>
     <div id="video_wrapper" class="video-wrapper">
-        <div id="my-player" class="abp center" style="width:640px; height:360px">
-            <div id="comment-stage" class="abp-container center">
-                <input type="hidden" id="video-id" value="aHR0cDovL21senRsaXZlc3oub3NzLWNuLXNoZW56aGVuLmFsaXl1bmNzLmNvbS9tbHp0Z3h0ZXN0L21senRneHRlc3QubTN1OA=="/>
-                <video id=example-video width=640 height=360 preload="auto" poster="http://designmodo.github.io/Flat-UI/docs/assets/img/video/poster.jpg" >
-                    <source src="{:C('GX_LIVE_URL')}"
-                            type="application/x-mpegURL">
-                </video>
-            </div>
-        </div>
+        <video id="video" width="432" height="240" controls="controls" preload="preload">
+            <source src="{:C('GX_VIDEO_MP4')}" type="video/mp4">
+            <source src="{:C('GX_VIDEO_OGG')}" type="video/ogg">
+        </video>
+    </div>
+    <div id="countdown_wrapper" class="countdown-wrapper hide">
+        <div>距共修开始还有&nbsp;<div id="remain_seconds" class="remain-seconds"></div>&nbsp;秒</div>
     </div>
 </div>
 <div>
@@ -145,10 +133,49 @@
     <img src="__PUBLIC__/Image/download_app.png">
 </div>
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
-<script src="__PUBLIC__/lib/videojs.hls.min.js"></script>
 <script type="text/javascript">
-    var player = videojs('example-video');
-    player.play();
+
+    (function(){
+
+        var state = '{$state}';
+
+        Dom = {
+            video : document.getElementById("video"),
+            countdownBox: $('#countdown_wrapper'),
+            remainSeconds :$('#remain_seconds')
+        };
+
+        if( state == "ready" ){
+            var remainSeconds = parseInt('{$countdownSeconds}');
+            countDown(remainSeconds);
+        }else if( state == "started" ){
+            var begTime = parseInt('{$begTime}');
+            playFromBegTime(begTime);
+        }
+
+        function countDown(remainSeconds){
+            $('#video_wrapper').hide();
+            Dom.countdownBox.show();
+            var i = setInterval(function() {
+                if( remainSeconds <= 0 ){
+                    Dom.video.play();
+                    clearInterval(i);
+                    Dom.countdownBox.hide();
+                    $('#video_wrapper').show();
+                }else{
+                    Dom.remainSeconds.html(remainSeconds);
+                    remainSeconds -= 1;
+                }
+            }, 1000);
+        }
+
+        function playFromBegTime(begTime){
+            video.play();
+            video.currentTime = begTime;
+        }
+
+    })();
+
 </script>
 
 </body>
