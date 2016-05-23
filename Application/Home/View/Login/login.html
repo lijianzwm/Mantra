@@ -40,16 +40,75 @@
     </style>
 </head>
 <body>
-<div class="user-box-title">用户登陆</div>
-    <div class="login-box">
-        <div class="user-box-item">账号<input name="username" id="username"/></div>
-        <div class="user-box-item">密码<input type="password" name="password" id="password"/></div>
-        <div class="user-box-item button-bar">
-            <input class="common-button" type="button" value="登录" onclick="login()"/>
-            <input class="common-button" type="button" value="注册" onclick="toRegist()"/>
-            <a class="find-password" href="{:U('Login/findPassword')}">忘记密码?</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
         </div>
+        <div class="col-md-6 lead">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title lead">用户登录</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">昵称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="昵称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="form-group text-right">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-danger">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+
+                    <!--<form>-->
+                        <!--<div class="form-group">-->
+                            <!--<label>昵称</label>-->
+                            <!--<input type="text" class="form-control" id="username" name="username" placeholder="昵称">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label>密码</label>-->
+                            <!--<input type="password" class="form-control" id="password" name="password" placeholder="密码">-->
+                        <!--</div>-->
+                        <!--<div>-->
+                            <!--<button type="submit" class="btn btn-danger">-->
+                                <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                <!--登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录-->
+                                <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                            <!--</button>-->
+                            <!--<a >忘记密码?</a>-->
+                        <!--</div>-->
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+
     </div>
+
+</div>
+
+
+
     <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
     <script src="__PUBLIC__/lib/layer/layer.js"></script>
     <script src="__PUBLIC__/js/common/dialog.js"></script>
@@ -79,6 +138,5 @@
         }
 
     </script>
-
 </body>
 </html>
