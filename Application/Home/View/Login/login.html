@@ -65,19 +65,21 @@
                                 <input type="password" class="form-control" id="password" name="password" placeholder="密码">
                             </div>
                         </div>
-                        <div class="form-group text-right">
-                            <div class="col-sm-offset-2 col-sm-10">
+                        <div class="form-group text-center">
+                            <div>
                                 <button type="submit" class="btn btn-danger">
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </button>
+                                <button type="button" class="btn btn-default" onclick="toRegist()">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
                             </div>
                         </div>
                     </form>
-
-
-
 
                     <!--<form>-->
                         <!--<div class="form-group">-->
@@ -102,41 +104,37 @@
         </div>
         <div class="col-md-3">
         </div>
-
     </div>
-
 </div>
 
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/layer/layer.js"></script>
+<script src="__PUBLIC__/js/common/dialog.js"></script>
+<script src="__PUBLIC__/js/common/ajax.js"></script>
+<script type="text/javascript">
+    function toRegist(){
+        window.location.href="{:U('Login/regist')}";
+    }
 
+    function login(){
+        username = $('#username').val();
+        password = $('#password').val();
+        url = "{:U('Api/Login/loginVolidate')}";
+        data = {
+            username:username,
+            password:password
+        };
+        myAjax(url, data, succFunc, errorFunc );
+    }
 
-    <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
-    <script src="__PUBLIC__/lib/layer/layer.js"></script>
-    <script src="__PUBLIC__/js/common/dialog.js"></script>
-    <script src="__PUBLIC__/js/common/ajax.js"></script>
-    <script type="text/javascript">
-        function toRegist(){
-            window.location.href="{:U('Login/regist')}";
-        }
+    function succFunc(data){
+        window.location.href="{:U('Login/userCenter')}";
+    }
 
-        function login(){
-            username = $('#username').val();
-            password = $('#password').val();
-            url = "{:U('Api/Login/loginVolidate')}";
-            data = {
-                username:username,
-                password:password
-            };
-            myAjax(url, data, succFunc, errorFunc );
-        }
+    function errorFunc( data ){
+        dialog.error(data.msg);
+    }
 
-        function succFunc(data){
-            window.location.href="{:U('Login/userCenter')}";
-        }
-
-        function errorFunc( data ){
-            dialog.error(data.msg);
-        }
-
-    </script>
+</script>
 </body>
 </html>
