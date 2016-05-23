@@ -60,3 +60,11 @@ CREATE TABLE `gx_stage_gx` (
   `end_date` date NOT NULL COMMENT '结束日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `gx_commit_record` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id，唯一自增',
+  `userid` bigint(20) NOT NULL COMMENT '用户id',
+  `num` bigint(30) NOT NULL DEFAULT '0' COMMENT '数目',
+  `huixiang` varchar(500) NOT NULL DEFAULT '0' COMMENT '回向词',
+  `commit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '报数时间',
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
