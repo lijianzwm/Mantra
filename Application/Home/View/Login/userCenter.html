@@ -17,24 +17,24 @@
                 </div>
                 <div class="panel-body">
                     <div class="well text-center">
-                        <div class="today-num">
+                        <div>
                             今日持咒：
                             <strong class="text-success">{$todayNum}</strong>
                         </div>
                         <if condition="$user['day_goal'] neq null">
-                            <div class="goal-num">
+                            <div>
                                 今日目标：
                                 <strong class="text-danger">{$user.day_goal}&nbsp;&nbsp;</strong>
                                 完成度：
                                 <strong class="text-primary">{$dayGoalPercent}</strong>
                             </div>
                         </if>
-                        <div class="total-num">
+                        <div>
                             持咒总数：
                             <strong class="text-success">{$user.total}</strong>
                         </div>
                         <if condition="$user['goal'] neq null">
-                            <div class="goal-num">
+                            <div>
                                 发愿目标：
                                 <strong class="text-danger">{$user.goal}&nbsp;&nbsp;</strong>
                                 完成度：
