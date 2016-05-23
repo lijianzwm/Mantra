@@ -61,7 +61,6 @@ class IndexController extends Controller {
     }
 
     public function guide(){
-        layout(false);
         $this->display();
     }
 

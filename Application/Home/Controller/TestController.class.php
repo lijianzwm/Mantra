@@ -14,6 +14,7 @@ use Think\Controller;
 
 class TestController extends Controller{
     public function index(){
+        layout(false);
         $this->display();
     }
 
