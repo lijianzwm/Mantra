@@ -3,7 +3,7 @@
 spawn  ssh root@139.129.22.123
 send "./update.sh\r"
 expect "#"
-exec sleep 60
+exec sleep 20
 #send "git pull\r"
 #expect "#"
 send "exit\r"
