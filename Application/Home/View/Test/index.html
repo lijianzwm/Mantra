@@ -47,19 +47,19 @@
 
 <div class="container marketing">
     <div class="row align-center">
-        <div class="col-md-3">
+        <div class="col-md-3" onclick="toGuide()">
             <img class="img-circle" src="__PUBLIC__/Image/index/guide-icon.png" alt="" width="140" height="140">
             <h2>入门导引</h2>
         </div><!-- /.col-lg-4 -->
-        <div class="col-md-3">
+        <div class="col-md-3" onclick="toAddNum()">
             <img class="img-circle" src="__PUBLIC__/Image/index/add-icon.png" alt="Generic placeholder image" width="140" height="140">
             <h2>每日报数</h2>
         </div><!-- /.col-lg-4 -->
-        <div class="col-md-3">
+        <div class="col-md-3" onclick="toYigui()">
             <img class="img-circle" src="__PUBLIC__/Image/index/yigui-icon.png" alt="Generic placeholder image" width="140" height="140">
             <h2>共修仪轨</h2>
         </div><!-- /.col-lg-4 -->
-        <div class="col-md-3">
+        <div class="col-md-3" onclick="toRanklist()">
             <img class="img-circle" src="__PUBLIC__/Image/index/rank-icon.png" alt="Generic placeholder image" width="140" height="140">
             <h2>精进排行</h2>
         </div><!-- /.col-lg-4 -->
@@ -136,5 +136,19 @@
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="__PUBLIC__/bootstrap/lib/js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript">
+    function toGuide(){
+        window.location.href = "{:U('Home/Index/guide')}";
+    }
+    function toAddNum(){
+        window.location.href = "{:U('Countin/addNum')}";
+    }
+    function toYigui(){
+        window.location.href = "{:U('/Home/Index/yigui')}";
+    }
+    function toRanklist(){
+        window.location.href = "{:U('Ranklist/todayRanklist')}";
+    }
+</script>
 </body>
 </html>
