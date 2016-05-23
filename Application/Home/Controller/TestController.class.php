@@ -15,7 +15,7 @@ use Think\Controller;
 class TestController extends Controller{
     public function index(){
 //        layout(false);
-        $this->display("index");
+        $this->display("addNum");
     }
 
     public function handler(){
