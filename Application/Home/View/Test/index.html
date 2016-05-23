@@ -1,175 +1,167 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>Template &middot; Bootstrap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
-    <link href="__PUBLIC__/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            padding-top: 20px;
-            padding-bottom: 60px;
-        }
+    <title>摩利支天共修</title>
 
-        /* Custom container */
-        .container {
-            margin: 0 auto;
-            max-width: 1000px;
-        }
-        .container > hr {
-            margin: 60px 0;
-        }
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
-        /* Main marketing message and sign up button */
-        .jumbotron {
-            margin: 80px 0;
-            text-align: center;
-        }
-        .jumbotron h1 {
-            font-size: 100px;
-            line-height: 1;
-        }
-        .jumbotron .lead {
-            font-size: 24px;
-            line-height: 1.25;
-        }
-        .jumbotron .btn {
-            font-size: 21px;
-            padding: 14px 24px;
-        }
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="__PUBLIC__lib/bootsrap/js/ie-emulation-modes-warning.js"></script>
 
-        /* Supporting marketing content */
-        .marketing {
-            margin: 60px 0;
-        }
-        .marketing p + h4 {
-            margin-top: 28px;
-        }
-
-
-        /* Customize the navbar links to be fill the entire space of the .navbar */
-        .navbar .navbar-inner {
-            padding: 0;
-        }
-        .navbar .nav {
-            margin: 0;
-            display: table;
-            width: 100%;
-        }
-        .navbar .nav li {
-            display: table-cell;
-            width: 1%;
-            float: none;
-        }
-        .navbar .nav li a {
-            font-weight: bold;
-            text-align: center;
-            border-left: 1px solid rgba(255,255,255,.75);
-            border-right: 1px solid rgba(0,0,0,.1);
-        }
-        .navbar .nav li:first-child a {
-            border-left: 0;
-            border-radius: 3px 0 0 3px;
-        }
-        .navbar .nav li:last-child a {
-            border-right: 0;
-            border-radius: 0 3px 3px 0;
-        }
-    </style>
-    <link href="__PUBLIC__/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="__PUBLIC__/lib/bootstrap/js/html5shiv.js"></script>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="__PUBLIC__/lib/bootstrap/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="__PUBLIC__/lib/bootstrap/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="__PUBLIC__/lib/bootstrap/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="__PUBLIC__/lib/bootstrap/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="__PUBLIC__/lib/bootstrap/ico/favicon.png">
+    <!-- Custom styles for this template -->
+    <link href="__PUBLIC__/lib/bootstrap/css/carousel.css" rel="stylesheet">
+    <style>
+        .align-center{
+            text-align:center;
+        }
+    </style>
 </head>
-
+<!-- NAVBAR
+================================================== -->
 <body>
-
-<div class="container">
-
-    <div class="masthead">
-        <h3 class="muted">Project name</h3>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Downloads</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!-- /.navbar -->
+<div class="navbar-wrapper">
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">主页</a></li>
+                    <li role="presentation"><a href="#">报数</a></li>
+                    <li role="presentation"><a href="#">排行</a></li>
+                    <li role="presentation"><a href="#">仪轨</a></li>
+                    <li role="presentation"><a href="#">登录</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">摩利支天共修</h3>
+        </div>
     </div>
-
-    <!-- Jumbotron -->
+</div>
+<div class="container theme-showcase" role="main">
     <div class="jumbotron">
-        <h1>Marketing stuff!</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <a class="btn btn-large btn-success" href="#">Get started today</a>
+        <h1>丙申年亿遍摩利支天身咒护国共修</h1>
+        <p>
+            随着5月12日摩利支天护摩法会圆满结束,经吉祥寺僧团商议，阿阇梨欣然首肯,吉祥寺邀请四众弟子再次举行摩利支天亿遍身咒大共修。将佛法利人利国等慈悲的根本精神深入的贯彻落实下去。
+            名是护国，实是利己。佛法和我们自身的发展永远离不开家国的兴衰。护国息灾也不是一场法会和一句口号，而是伴随着我们菩提心的发起将永远为之努力的信念！
+        </p>
+    </div>
+</div>
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+    <div class="row align-center">
+        <div class="col-md-3">
+            <img class="img-circle" src="__PUBLIC__/Image/index/guide-icon.png" alt="" width="140" height="140">
+            <h2>入门导引</h2>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-3">
+            <img class="img-circle" src="__PUBLIC__/Image/index/add-icon.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>每日报数</h2>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-3">
+            <img class="img-circle" src="__PUBLIC__/Image/index/yigui-icon.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>共修仪轨</h2>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-md-3">
+            <img class="img-circle" src="__PUBLIC__/Image/index/rank-icon.png" alt="Generic placeholder image" width="140" height="140">
+            <h2>精进排行</h2>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+    <!-- 3个图标 -->
+
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">为什么要修摩利支天?<span class="text-muted"></span></h2>
+            <p class="lead">
+                修持摩利支天菩萨法门具足息灾、增益、怀爱及降伏四法之功德，能满足行者所求种种正确及善性之心愿。譬如修持者不会被别人诈骗其财物，亦不会被人捉縳囚禁，
+                亦或被与行者有仇怨之人加害。其它如治病（肉体上四大不调之病及灵界病）、护身（防止一切毒丸虫恶兽及人与非人之侵害）、求聪明长寿、求辩论得胜、求降雨、
+                求福、求子女等等，莫不一一灵验应心，具如经中所说，功德赞不能尽。
+            </p>
+            <p class="lead">
+                摩利支天法在中国汉地的痕迹最早可以追溯到南北朝时期，后来经过唐宋时代，随着来汉地的梵僧大德翻译的摩利支天经典越来越多，而对他的信仰也就越广泛，被皇家列为护国护民的最胜信仰的代表，当时汉地寺院大都供奉她，其信仰之广、威德灵感之迅速甚至融入到道教之中，位尊诸星之母的“斗姆元君”。</p>
+            <p class="lead">
+                依密教所传，摩利支天为准提王如来的根本大护法。修习摩利支天法，如果得到成就，其最大功能是消灾与隐身。依《大摩里支菩萨经》所载，此尊‘能令有情在道路中隐身、众人中隐身。水、火、盗贼一切诸难皆能隐身。’如能赤诚依法修持，则一切天魔恶鬼外道，都无法觅得修法者的行踪。除此之外，还有息灾、增益、降伏等作用，各法均有不可思议之感应。
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="__PUBLIC__/Image/marici.jpg" alt="Generic placeholder image">
+        </div>
     </div>
 
-    <hr>
+    <hr class="featurette-divider">
 
-    <!-- Example row of columns -->
-    <div class="row-fluid">
-        <div class="span4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
+    <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading">为什么要修准提心脉的传承?<span class="text-muted"></span></h2>
+            <p class="lead">
+                正本清源,汉传密教本土隐传,非唐密回传
+            </p>
         </div>
-        <div class="span4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
-        <div class="span4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
+        <div class="col-md-5 col-md-pull-7">
+            <img class="featurette-image img-responsive center-block" src="__PUBLIC__/Image/asheli.jpg" alt="Generic placeholder image">
         </div>
     </div>
 
-    <hr>
+    <hr class="featurette-divider">
 
-    <div class="footer">
-        <p>&copy; Company 2013</p>
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">为什么要共修?<span class="text-muted"></span></h2>
+            <p class="lead">
+                按照经论记载，尤其据《俱舍论》中教证指示，如有三人一起造了杀人的恶业，这三人都得到同等的杀人业果；或如有三人一起建造一座佛塔，
+                每人最后都得到建造一座佛塔的功德。众志成城，业山可移，千万人同心熏修，其修力必为千万人共修之力，纵然日可冷、月可热、山可崩、海可竭，
+                此共修缘起之力决无空耗之理。诸位佛子应发信解，决定信此大众共修之力过于凡夫一人独修之力百千万倍。因此参加共修活动者，每个人都将获得共修总数的功德，
+                这是一人独修多生累世中都很难获得的殊胜善根。
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="__PUBLIC__/Image/gongxiu.jpg" alt="Generic placeholder image">
+        </div>
     </div>
 
-</div> <!-- /container -->
+    <hr class="featurette-divider">
 
-<!-- Le javascript
+    <!-- /END THE FEATURETTES -->
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">返回顶部</a></p>
+        <p>&copy; 准提心脉·金顶毗卢</p>
+    </footer>
+
+</div><!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="__PUBLIC__/lib/bootstrap/js/jquery.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-transition.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-alert.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-modal.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-dropdown.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-scrollspy.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-tab.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-tooltip.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-popover.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-button.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-collapse.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-carousel.js"></script>
-<script src="__PUBLIC__/lib/bootstrap/js/bootstrap-typeahead.js"></script>
-
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="__PUBLIC__/bootstrap/lib/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

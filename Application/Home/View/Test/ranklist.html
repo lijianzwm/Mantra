@@ -1,11 +1,27 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>精进排行</title>
-    <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>摩利支天共修</title>
+    <!-- Bootstrap core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -73,79 +89,50 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div><h2>{$title}<small class="pull-right">总数:{$total}</small></h2></div>
+            <div><h2>排行榜<small class="pull-right">总数:1111</small></h2></div>
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>名次</th>
-                        <th>姓名</th>
-                        <th>数目</th>
-                    </tr>
+                <tr>
+                    <th>名次</th>
+                    <th>姓名</th>
+                    <th>数目</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <for start="0" end="count($ranklist)">
-                        <if condition="$ranklist[$i]['userid'] eq $yourUserid">
-                            <tr class="text-success">
-                                <td>{$i+1}</td>
-                                <td>{$ranklist.$i.name}</td>
-                                <td>{$ranklist.$i.num}</td>
-                            </tr>
-                        <else />
-                            <tr>
-                                <td>{$i+1}</td>
-                                <td>{$ranklist.$i.name}</td>
-                                <td>{$ranklist.$i.num}</td>
-                            </tr>
-                        </if>
-                    </for>
+                <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div><!-- /.container -->
 
-<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
-<script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
-<script type="text/javascript">
-    $(function() {
-        var myDate = new Date();
-        var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
-        var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
-        var day = myDate.getDate();        //获取当前日(1-31)
-        if( month < 10 ){
-            month =  "0"+month;
-        }else{
-            month = ""+month;
-        }
-        if( day < 10 ){
-            day = "0" + day;
-        }
-        var yearMonthDay = year + "-" + month + "-" + day;
-        $("#month").val(month);
-        $( "#datepicker" ).val(yearMonthDay);
-        $( "#datepicker" ).datepicker();
-    });
-    dayBoxDom = $('#query_day_box');
-    monthBoxDom = $('#query_month_box');
-    function showQueryDayBox(){
-        if( dayBoxDom.css('display') == 'none'){
-            dayBoxDom.show();
-            monthBoxDom.hide();
-        }else{
-            dayBoxDom.hide();
-        }
-    }
 
-    function showQueryMonthBox(){
-        if( monthBoxDom.css('display') == 'none' ){
-            monthBoxDom.show();
-            dayBoxDom.hide();
-        }else{
-            monthBoxDom.hide();
-        }
-    }
-
-
-</script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="__PUBLIC__/bootstrap/lib/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
+
+
+
+
+
+
