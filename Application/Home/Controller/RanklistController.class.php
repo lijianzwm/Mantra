@@ -49,7 +49,7 @@ class RanklistController extends Controller{
             $ranklist = RanklistService::getSomedayRanklist($date);
         }
         $total = CountinService::getRanklistTotalNum($ranklist);
-        $this->assign("title", $date."排行榜");
+        $this->assign("title", $date);
         $this->assign("refreshTime", C("SOMEDAY_RANKLIST_EXPIRE"));
         $this->assign("total", $total);
         $this->assign("ranklist", $ranklist);
@@ -75,7 +75,7 @@ class RanklistController extends Controller{
         }
         $total = CountinService::getRanklistTotalNum($ranklist);
         $this->assign("total", $total);
-        $this->assign("title", $yearMonth."排行榜");
+        $this->assign("title", $yearMonth);
         $this->assign("refreshTime", C("MONTH_RANKLIST_EXPIRE"));
         $this->assign("ranklist", $ranklist);
         $this->display("ranklist");
