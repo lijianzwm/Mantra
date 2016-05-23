@@ -19,26 +19,26 @@
                     <div class="well text-center">
                         <div class="today-num">
                             今日持咒：
-                            <div class="text-success">{$todayNum}</div>
+                            <strong class="text-success">{$todayNum}</strong>
                         </div>
                         <if condition="$user['day_goal'] neq null">
                             <div class="goal-num">
                                 今日目标：
-                                <div class="text-danger">{$user.day_goal}&nbsp;&nbsp;</div>
+                                <strong class="text-danger">{$user.day_goal}&nbsp;&nbsp;</strong>
                                 完成度：
-                                <div class="text-primary">{$dayGoalPercent}</div>
+                                <strong class="text-primary">{$dayGoalPercent}</strong>
                             </div>
                         </if>
                         <div class="total-num">
                             持咒总数：
-                            <div class="text-success">{$user.total}</div>
+                            <strong class="text-success">{$user.total}</strong>
                         </div>
                         <if condition="$user['goal'] neq null">
                             <div class="goal-num">
                                 发愿目标：
-                                <div class="text-danger">{$user.goal}&nbsp;&nbsp;</div>
+                                <strong class="text-danger">{$user.goal}&nbsp;&nbsp;</strong>
                                 完成度：
-                                <div class="text-primary">{$totalGoalPercent}</div>
+                                <strong class="text-primary">{$totalGoalPercent}</strong>
                             </div>
                         </if>
                     </div>
