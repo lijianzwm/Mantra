@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>聖摩利支天护国息灾共修仪轨</title>
+    <link href="__PUBLIC__/css/common.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-    <div class="content lead text-center">
-        <h2>聖摩利支天护国息灾共修仪轨</h2>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active" id="text_tab"><a href="#" onclick="showText()">文字</a></li>
+        <li role="presentation" id="video_tab"><a href="#" onclick="showVideo()">视频</a></li>
+    </ul>
+    <div class="content lead text-center" id="text_page">
+        <br>
+        <h2 class="text-center">聖摩利支天护国息灾共修仪轨</h2>
         <br>
         <p>纳谟外嘉佑 玛哈德哇 玛类斯诶吖雅</p>
         <h3 class="text-left">皈依：</h3>
@@ -45,10 +51,10 @@
         <p class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;将此共修功德回向&nbsp;中华人民共和国&nbsp;&nbsp;国运昌盛&nbsp;国界安宁&nbsp;边疆稳固&nbsp;现前滋扰&nbsp;宿敌怨障&nbsp;悉皆摧碎&nbsp;无敢再犯&nbsp;。回向一切众生离苦得乐&nbsp;佛法久住，法轮常转；祈愿大恩上师吉祥金刚阿阇梨及所有高僧大德、法体康健、长久住世。</p>
         <p class="text-right">吉祥圆满</p>
     </div>
-    <hr class="featurette-divider">
-    <h2 class="text-center">共修视频</h2>
-    <div class="text-center">
-        <div id="video_wrapper" class="video-wrapper text-center">
+
+    <div class="text-center hide" id="video_page">
+        <br><h2 class="text-center">聖摩利支天护国息灾共修仪轨视频</h2><br>
+        <div id="video_wrapper" class="text-center">
             <video id="video" width="432" height="240" controls="controls">
                 <source src="{:C('GX_VIDEO_MP4')}" type="video/mp4">
                 <source src="{:C('GX_VIDEO_OGG')}" type="video/ogg">
@@ -56,6 +62,22 @@
         </div>
     </div>
 </div>
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    function showVideo(){
+        $('#video_page').removeClass('hide');
+        $('#text_page').addClass('hide');
+        $('#video_tab').addClass('active');
+        $('#text_tab').removeClass('active');
+    }
+    function showText(){
+        $('#text_page').removeClass('hide');
+        $('#video_page').addClass('hide');
+        $('#text_tab').addClass('active');
+        $('#video_tab').removeClass('active');
+    }
+</script>
+
 </body>
 </html>
 
