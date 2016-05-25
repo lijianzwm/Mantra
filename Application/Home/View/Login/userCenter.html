@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>个人中心</title>
+    <link href="__PUBLIC__/css/common.css" rel="stylesheet">
 </head>
 <body>
 
@@ -13,7 +14,12 @@
             <input type="hidden" name="username" id="username" value="{$user.username}"/>
         </div>
         <div class="col-md-4 lead">
-            <div class="panel panel-default">
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="active" id="mantra_sum_tab"><a href="#" onclick="toSum()">持咒统计</a></li>
+                <li role="presentation" id="user_info_tab"><a href="#" onclick="toUser()">个人信息</a></li>
+            </ul>
+
+            <div class="panel panel-default" id="mantra_sum">
                 <div class="panel-heading">
                     <h3 class="panel-title lead">持咒统计</h3>
                 </div>
@@ -75,13 +81,12 @@
                             </if>
                         </tr>
                         <!-- 发愿总数和进度END -->
+
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
+            <div class="panel panel-default hide" id="user_info">
                 <div class="panel-heading">
                     <h3 class="panel-title lead">{$user.username}</h3>
                 </div>
@@ -148,6 +153,17 @@
 <script src="__PUBLIC__/js/common/dialog.js"></script>
 <script src="__PUBLIC__/js/common/ajax.js"></script>
 <script type="text/javascript">
+
+    function toSum(){
+        $('#mantra_sum').removeClass('hide');
+        $('#mantra_sum_tab').addClass('active');
+        $('#user_info').addClass('hide');
+        $('#user_info_tab').removeClass('active');
+    }
+
+    function toUser(){
+
+    }
 
     function modifyPassword(){
         window.location.href="{:U('Login/modifyPassword', array('username'=>$user['username']))}";
