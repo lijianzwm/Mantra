@@ -9,7 +9,7 @@
 
 <div class="container">
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active" id="text_tab"><a href="#" onclick="showText()">文字</a></li>
+        <li role="presentation" class="active dark-background" id="text_tab"><a href="#" onclick="showText()">文字</a></li>
         <li role="presentation" id="video_tab"><a href="#" onclick="showVideo()">视频</a></li>
     </ul>
     <div class="content lead text-center" id="text_page">
@@ -68,12 +68,14 @@
         $('#video_page').removeClass('hide');
         $('#text_page').addClass('hide');
         $('#video_tab').addClass('active');
+        $('#video_tab').addClass('dark-background');
         $('#text_tab').removeClass('active');
     }
     function showText(){
         $('#text_page').removeClass('hide');
         $('#video_page').addClass('hide');
         $('#text_tab').addClass('active');
+        $('#text_tab').addClass('dark-background');
         $('#video_tab').removeClass('active');
     }
 </script>
