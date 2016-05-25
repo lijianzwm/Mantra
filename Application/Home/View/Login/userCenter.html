@@ -26,19 +26,24 @@
                             <td class="text-left"><strong class="text-success">{$todayNum}</strong></td>
                         </tr>
                         <!-- 每日目标和完成度 -->
-                        <if condition="$user['day_goal'] neq null">
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">今日目标</td>
+                        <tr>
+                            <td class="text-right">·</td>
+                            <td class="text-left">今日目标</td>
+                            <if condition="$user['day_goal'] neq null">
                                 <td class="text-left"><strong class="text-danger">{$user.day_goal}</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">今日进度</td>
+                            <else/>
+                                <td class="text-left"><strong class="text-danger">-</strong></td>
+                            </if>
+                        </tr>
+                        <tr>
+                            <td class="text-right">·</td>
+                            <td class="text-left">今日进度</td>
+                            <if condition="$user['day_goal'] neq null">
                                 <td class="text-left"><strong class="text-info">{$dayGoalPercent}</strong></td>
-                            </tr>
-
-                        </if>
+                            <else/>
+                                <td class="text-left"><strong class="text-info">-</strong></td>
+                            </if>
+                        </tr>
                         <!-- 每日目标和完成度END -->
 
                         <!-- 持咒总数 -->
@@ -50,18 +55,25 @@
                         <!-- 持咒总数END -->
 
                         <!-- 发愿总数和进度 -->
-                        <if condition="$user['goal'] neq null">
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">发愿总数</td>
+                        <tr>
+                            <td class="text-right">·</td>
+                            <td class="text-left">发愿总数</td>
+                            <if condition="$user['goal'] neq null">
                                 <td class="text-left"><strong class="text-danger">{$user.goal}</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">总体进度</td>
+                            <else/>
+                                <td class="text-left"><strong class="text-danger">{$user.goal}</strong></td>
+                            </if>
+                        </tr>
+
+                        <tr>
+                            <td class="text-right">·</td>
+                            <td class="text-left">总体进度</td>
+                            <if condition="$user['goal'] neq null">
                                 <td class="text-left"><strong class="text-info">{$totalGoalPercent}</strong></td>
-                            </tr>
-                        </if>
+                                <else/>
+                                <td class="text-left"><strong class="text-info">-</strong></td>
+                            </if>
+                        </tr>
                         <!-- 发愿总数和进度END -->
                         </tbody>
                     </table>
