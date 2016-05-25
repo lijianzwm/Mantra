@@ -8,14 +8,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <input type="hidden" name="id" value="{$user.id}"/>
             <input type="hidden" name="username" id="username" value="{$user.username}"/>
         </div>
         <div class="col-md-4 lead">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title lead">{$user.username}</h3>
+                    <h3 class="panel-title lead">持咒统计</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table table-condensed">
@@ -77,6 +77,15 @@
                         <!-- 发愿总数和进度END -->
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title lead">{$user.username}</h3>
+                </div>
+                <div class="panel-body">
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-4 control-label">真实姓名</label>
@@ -133,7 +142,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
         </div>
     </div>
 </div>
