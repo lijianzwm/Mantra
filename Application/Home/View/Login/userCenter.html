@@ -13,48 +13,57 @@
         <div class="col-md-4 lead">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title lead">个人中心</h3>
+                    <h3 class="panel-title lead">{$user.username}</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="well text-center">
-                        <div>
-                            今日持咒：
-                            <strong class="text-danger">{$todayNum}</strong>
-                        </div>
+                    <table class="table table-condensed">
+                        <tbody>
+                        <tr>
+                            <td class="text-right">·</td>
+                            <td class="text-left">今日持咒</td>
+                            <td class="text-left"><strong class="text-success">{$todayNum}</strong></td>
+                        </tr>
+                        <!-- 每日目标和完成度 -->
                         <if condition="$user['day_goal'] neq null">
-                            <div>
-                                今日目标：
-                                <strong class="text-primary">{$user.day_goal}&nbsp;&nbsp;</strong>
-                            </div>
-                            <div>
-                                完成度：
-                                <strong class="text-success">{$dayGoalPercent}</strong>
-                            </div>
+                            <tr>
+                                <td class="text-right">·</td>
+                                <td class="text-left">今日目标</td>
+                                <td class="text-left"><strong class="text-danger">{$user.day_goal}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">·</td>
+                                <td class="text-left">今日进度</td>
+                                <td class="text-left"><strong class="text-info">{$dayGoalPercent}</strong></td>
+                            </tr>
+
                         </if>
-                        <div>
-                            持咒总数：
-                            <strong class="text-danger">{$user.total}</strong>
-                        </div>
+                        <!-- 每日目标和完成度END -->
+
+                        <!-- 持咒总数 -->
+                        <tr>
+                            <td class="text-right">·</td>
+                            <td class="text-left">持咒总数</td>
+                            <td class="text-left"><strong class="text-success">{$user.total}</strong></td>
+                        </tr>
+                        <!-- 持咒总数END -->
+
+                        <!-- 发愿总数和进度 -->
                         <if condition="$user['goal'] neq null">
-                            <div>
-                                发愿目标：
-                                <strong class="text-primary">{$user.goal}&nbsp;&nbsp;</strong>
-                            </div>
-                            <div>
-                                完成度：
-                                <strong class="text-success">{$totalGoalPercent}</strong>
-                            </div>
+                            <tr>
+                                <td class="text-right">·</td>
+                                <td class="text-left">发愿总数</td>
+                                <td class="text-left"><strong class="text-success">{$user.goal}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">·</td>
+                                <td class="text-left">总体进度</td>
+                                <td class="text-left"><strong class="text-success">{$totalGoalPercent}</strong></td>
+                            </tr>
                         </if>
-                    </div>
+                        <!-- 发愿总数和进度END -->
+                        </tbody>
+                    </table>
                     <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">用户昵称</label>
-                            <div class="col-sm-8">
-                                <label>{$user.username}</label>
-                                <input type="hidden" name="id" value="{$user.id}"/>
-                                <input type="hidden" name="username" id="username" value="{$user.username}"/>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">真实姓名</label>
                             <div class="col-sm-8">
