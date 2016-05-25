@@ -3,117 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>个人中心</title>
+    <link href="__PUBLIC__/css/common.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
     <div class="row">
         <div class="col-md-4">
+            <input type="hidden" name="id" value="{$user.id}"/>
+            <input type="hidden" name="username" id="username" value="{$user.username}"/>
         </div>
         <div class="col-md-4 lead">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title lead">{$user.username}</h3>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active" id="mantra_sum_tab"><a href="#" onclick="toSum()">持咒统计</a></li>
+                <li role="presentation" id="user_info_tab"><a href="#" onclick="toUser()">个人信息</a></li>
+            </ul>
+            <br>
+            <table class="table table-condensed" id="mantra_sum">
+                <tbody>
+                <tr>
+                    <td class="text-right">·</td>
+                    <td class="text-left">今日持咒</td>
+                    <td class="text-left"><strong class="text-success">{$todayNum}</strong></td>
+                </tr>
+                <!-- 每日目标和完成度 -->
+                <tr>
+                    <td class="text-right">·</td>
+                    <td class="text-left">今日目标</td>
+                    <if condition="$user['day_goal'] neq null">
+                        <td class="text-left"><strong class="text-danger">{$user.day_goal}</strong></td>
+                        <else/>
+                        <td class="text-left"><strong class="text-danger">-</strong></td>
+                    </if>
+                </tr>
+                <tr>
+                    <td class="text-right">·</td>
+                    <td class="text-left">今日进度</td>
+                    <if condition="$user['day_goal'] neq null">
+                        <td class="text-left"><strong class="text-info">{$dayGoalPercent}</strong></td>
+                        <else/>
+                        <td class="text-left"><strong class="text-info">-</strong></td>
+                    </if>
+                </tr>
+                <!-- 每日目标和完成度END -->
+
+                <!-- 持咒总数 -->
+                <tr>
+                    <td class="text-right">·</td>
+                    <td class="text-left">持咒总数</td>
+                    <td class="text-left"><strong class="text-success">{$user.total}</strong></td>
+                </tr>
+                <!-- 持咒总数END -->
+
+                <!-- 发愿总数和进度 -->
+                <tr>
+                    <td class="text-right">·</td>
+                    <td class="text-left">发愿总数</td>
+                    <if condition="$user['goal'] neq null">
+                        <td class="text-left"><strong class="text-danger">{$user.goal}</strong></td>
+                        <else/>
+                        <td class="text-left"><strong class="text-danger">-</strong></td>
+                    </if>
+                </tr>
+
+                <tr>
+                    <td class="text-right">·</td>
+                    <td class="text-left">总体进度</td>
+                    <if condition="$user['goal'] neq null">
+                        <td class="text-left"><strong class="text-info">{$totalGoalPercent}</strong></td>
+                        <else/>
+                        <td class="text-left"><strong class="text-info">-</strong></td>
+                    </if>
+                </tr>
+                <!-- 发愿总数和进度END -->
+                </tbody>
+            </table>
+            <form class="form-horizontal hide" id="user_info">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">真实姓名</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="realname" id="realname" placeholder="真实姓名" value="{$user.realname}"/>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tbody>
-                        <tr>
-                            <td class="text-right">·</td>
-                            <td class="text-left">今日持咒</td>
-                            <td class="text-left"><strong class="text-success">{$todayNum}</strong></td>
-                        </tr>
-                        <!-- 每日目标和完成度 -->
-                        <if condition="$user['day_goal'] neq null">
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">今日目标</td>
-                                <td class="text-left"><strong class="text-danger">{$user.day_goal}</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">今日进度</td>
-                                <td class="text-left"><strong class="text-info">{$dayGoalPercent}</strong></td>
-                            </tr>
-
-                        </if>
-                        <!-- 每日目标和完成度END -->
-
-                        <!-- 持咒总数 -->
-                        <tr>
-                            <td class="text-right">·</td>
-                            <td class="text-left">持咒总数</td>
-                            <td class="text-left"><strong class="text-success">{$user.total}</strong></td>
-                        </tr>
-                        <!-- 持咒总数END -->
-
-                        <!-- 发愿总数和进度 -->
-                        <if condition="$user['goal'] neq null">
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">发愿总数</td>
-                                <td class="text-left"><strong class="text-success">{$user.goal}</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="text-right">·</td>
-                                <td class="text-left">总体进度</td>
-                                <td class="text-left"><strong class="text-success">{$totalGoalPercent}</strong></td>
-                            </tr>
-                        </if>
-                        <!-- 发愿总数和进度END -->
-                        </tbody>
-                    </table>
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">真实姓名</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="realname" id="realname" placeholder="真实姓名" value="{$user.realname}"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">你的法名</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="dharma" id="dharma" placeholder="法名（限灌顶弟子填写）" value="{$user.dharma}"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">每日目标</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="day_goal" id="day_goal" placeholder="每日计划数目(可不填写）" value="{$user.day_goal}"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">发愿目标</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="goal" id="goal" placeholder="发愿完成总数(可不填写）" value="{$user.goal}"/>
-                            </div>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="button" class="btn btn-danger" onclick="updateUserInfo()">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;保存信息&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </button>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="button" class="btn btn-default" onclick="modifyPassword()">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                修改密码
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </button>
-                            <button type="button" class="btn btn-default" onclick="logout()">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                退出登录
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </button>
-                        </div>
-                    </form>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">你的法名</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="dharma" id="dharma" placeholder="法名（限灌顶弟子填写）" value="{$user.dharma}"/>
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">每日目标</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="day_goal" id="day_goal" placeholder="每日计划数目(可不填写）" value="{$user.day_goal}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">发愿目标</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="goal" id="goal" placeholder="发愿完成总数(可不填写）" value="{$user.goal}"/>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="button" class="btn btn-danger" onclick="updateUserInfo()">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;保存信息&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
+                <div class="form-group text-center">
+                    <button type="button" class="btn btn-default" onclick="modifyPassword()">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        修改密码
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="logout()">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        退出登录
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
+            </form>
+
         </div>
         <div class="col-md-4">
         </div>
@@ -125,6 +139,20 @@
 <script src="__PUBLIC__/js/common/dialog.js"></script>
 <script src="__PUBLIC__/js/common/ajax.js"></script>
 <script type="text/javascript">
+
+    function toSum(){
+        $('#mantra_sum').removeClass('hide');
+        $('#mantra_sum_tab').addClass('active');
+        $('#user_info').addClass('hide');
+        $('#user_info_tab').removeClass('active');
+    }
+
+    function toUser(){
+        $('#user_info').removeClass('hide');
+        $('#user_info_tab').addClass('active');
+        $('#mantra_sum').addClass('hide');
+        $('#mantra_sum_tab').removeClass('active');
+    }
 
     function modifyPassword(){
         window.location.href="{:U('Login/modifyPassword', array('username'=>$user['username']))}";
