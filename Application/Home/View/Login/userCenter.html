@@ -14,8 +14,8 @@
             <input type="hidden" name="username" id="username" value="{$user.username}"/>
         </div>
         <div class="col-md-4 lead">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active" id="mantra_sum_tab"><a href="#" onclick="toSum()">持咒统计</a></li>
+            <ul class="nav nav-tabs common-background" role="tablist">
+                <li role="presentation" class="dark-background" id="mantra_sum_tab"><a href="#" onclick="toSum()">持咒统计</a></li>
                 <li role="presentation" id="user_info_tab"><a href="#" onclick="toUser()">个人信息</a></li>
             </ul>
             <br>
@@ -142,16 +142,16 @@
 
     function toSum(){
         $('#mantra_sum').removeClass('hide');
-        $('#mantra_sum_tab').addClass('active');
+        $('#mantra_sum_tab').addClass('dark-background');
         $('#user_info').addClass('hide');
-        $('#user_info_tab').removeClass('active');
+        $('#user_info_tab').removeClass('dark-background');
     }
 
     function toUser(){
         $('#user_info').removeClass('hide');
-        $('#user_info_tab').addClass('active');
+        $('#user_info_tab').addClass('dark-background');
         $('#mantra_sum').addClass('hide');
-        $('#mantra_sum_tab').removeClass('active');
+        $('#mantra_sum_tab').removeClass('dark-background');
     }
 
     function modifyPassword(){

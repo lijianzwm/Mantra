@@ -15,7 +15,7 @@ use Think\Controller;
 class TestController extends Controller{
     public function index(){
 //        layout(false);
-        $this->display("userCenter");
+        $this->display("ranklist");
     }
 
     public function handler(){
