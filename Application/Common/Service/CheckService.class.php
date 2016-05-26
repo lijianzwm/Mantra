@@ -209,10 +209,10 @@ class CheckService{
     private static function checkRealname( $realname ){
         $chinese = '/^[\x{4e00}-\x{9fa5}]+$/u';
         if( preg_match($chinese, $realname)){
-            if( mb_strlen($realname) < 1 ){
+            if( mb_strlen($realname,'UTF8') < 1 ){
                 return self::error("真实姓名过短!");
             }
-            if( mb_strlen($realname) > 6 ){
+            if( mb_strlen($realname, 'UTF8') > 6 ){
                 return self::error("真实姓名过长!");
             }
             return self::success("真实姓名格式合法!");
@@ -224,11 +224,10 @@ class CheckService{
     private static function checkDharma( $dharma ){
         $chinese = '/^[\x{4e00}-\x{9fa5}]+$/u';
         if( preg_match($chinese, $dharma)){
-            dump(mb_strlen($dharma));
-            if( mb_strlen($dharma) < 1 ){
+            if( mb_strlen($dharma, 'UTF8') < 1 ){
                 return self::error("法名过短!");
             }
-            if( mb_strlen($dharma) > 8 ){
+            if( mb_strlen($dharma, 'UTF8') > 8 ){
                 return self::error("师兄...这么长的法名真的是师父给你起的吗?");
             }
             return self::success("法名格式正确!");
