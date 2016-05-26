@@ -130,6 +130,8 @@ class CountinController extends CommonController{
             $yearMonth = DateService::yearMonthDay2YearMonth($date);
             MysqlService::refreshMysqlMonthRanklist($yearMonth);
             RedisService::cachingMonthRanklist($yearMonth);
+        }else{//如果是本月
+            RedisService::cachingCurMonthRanklist();
         }
 
         //更新并缓存日排行
