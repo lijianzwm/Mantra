@@ -83,6 +83,7 @@ class RanklistController extends Controller{
 
     public function totalRanklist(){
         $ranklist = RanklistService::getTotalRanklist();
+//        $total = CountinService::getRanklistTotalNum($ranklist);
         $total = CountinService::getAllUserTotalNum();
         $this->assign("total", $total);
         $this->assign("title","总排行榜");

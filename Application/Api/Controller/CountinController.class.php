@@ -136,6 +136,9 @@ class CountinController extends CommonController{
         MysqlService::refreshMysqlSomeDayRanklist($date);
         RedisService::cachingSomedayRanklist($date);
 
+        //缓存总排行
+        RedisService::cachingTotalRanklist();
+
         echoSuccess("补报成功!");
     }
 
