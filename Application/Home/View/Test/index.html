@@ -1,41 +1,26 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>摩利支天共修</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Custom styles for this template -->
-    <link href="__PUBLIC__/lib/bootstrap/css/carousel.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>{:C('WEBSITE_TITLE')}</title>
+    <link href="__PUBLIC__/css/common.css" rel="stylesheet">
     <style>
         .align-center{
             text-align:center;
         }
     </style>
 </head>
-<!-- NAVBAR
-================================================== -->
 <body>
 <div class="container theme-showcase" role="main">
-    <div class="jumbotron">
-        <h1>丙申年亿遍摩利支天身咒护国共修</h1>
+    <div class="jumbotron dark-background">
+        <h1 class="text-center">丙申年亿遍摩利支天身咒护国共修</h1>
+        <div class="row lead text-center">
+            <div class="col-md-4">已完成&nbsp;<strong class="text-success">{$stageGXTotalNum}</strong></div>
+            <div class="col-md-4">未完成&nbsp;<strong class="text-danger">{$stageGXRequireNum}</strong></div>
+            <div class="col-md-4">总进度&nbsp;<strong class="text-info">{$stageGXPercent}%</strong></div>
+        </div>
         <p>
-            随着5月12日摩利支天护摩法会圆满结束,经吉祥寺僧团商议，阿阇梨欣然首肯,吉祥寺邀请四众弟子再次举行摩利支天亿遍身咒大共修。将佛法利人利国等慈悲的根本精神深入的贯彻落实下去。
+            随着5月12日摩利支天护摩法会圆满结束，经吉祥寺僧团商议，阿阇梨欣然首肯，吉祥寺邀请四众弟子再次举行摩利支天亿遍身咒大共修。将佛法利人利国等慈悲的根本精神深入的贯彻落实下去。
             名是护国，实是利己。佛法和我们自身的发展永远离不开家国的兴衰。护国息灾也不是一场法会和一句口号，而是伴随着我们菩提心的发起将永远为之努力的信念！
         </p>
     </div>
@@ -97,7 +82,10 @@
         <div class="col-md-7 col-md-push-5">
             <h2 class="featurette-heading">为什么要修准提心脉的传承?<span class="text-muted"></span></h2>
             <p class="lead">
-                正本清源,汉传密教本土隐传,非唐密回传
+                上传下藏法师(吉祥金刚阿阇黎)身兼准提心脉和金顶毗卢两支殊胜法脉，传承正本清源,是汉传密教本土隐传,非唐密回传。摩利支天在本传承是原始第一佛准提王如来的大护法，
+                上师吉祥金刚有不共的极密手印和极密观想窍诀及诸事业法，极为殊胜，然此珍贵密法堪称金法，历代祖师从未外传，师言此法非常稀有难得，然不可滥传非器之人，
+                否则对行者本身和上师的事业及寿命有很大的影响，修持者必要修持得本尊之验象，才能求后续法要密印，越轨护法空行不容。
+                得法师兄们修持倍感加持之迅猛及种种殊胜修法感应，信心坚定。祝愿师兄们早日得证验象，求得后续法要，修持成就，利益众生！护持圣教法脉!
             </p>
         </div>
         <div class="col-md-5 col-md-pull-7">
@@ -121,22 +109,54 @@
             <img class="featurette-image img-responsive center-block" src="__PUBLIC__/Image/gongxiu.jpg" alt="Generic placeholder image">
         </div>
     </div>
-
-
-
     <!-- /END THE FEATURETTES -->
 
 </div><!-- /.container -->
 
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="__PUBLIC__/bootstrap/lib/js/ie10-viewport-bug-workaround.js"></script>
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
+
+    (function(){
+
+        var state = '{$state}';
+
+        Dom = {
+            video : document.getElementById("video"),
+            countdownBox: $('#countdown_wrapper'),
+            remainSeconds :$('#remain_seconds')
+        };
+
+        if( state == "ready" ){
+            var remainSeconds = parseInt('{$countdownSeconds}');
+            countDown(remainSeconds);
+        }else if( state == "started" ){
+            var begTime = parseInt('{$begTime}');
+            playFromBegTime(begTime);
+        }
+
+        function countDown(remainSeconds){
+            $('#video_wrapper').hide();
+            Dom.countdownBox.show();
+            var i = setInterval(function() {
+                if( remainSeconds <= 0 ){
+                    Dom.video.play();
+                    clearInterval(i);
+                    Dom.countdownBox.hide();
+                    $('#video_wrapper').show();
+                }else{
+                    Dom.remainSeconds.html(remainSeconds);
+                    remainSeconds -= 1;
+                }
+            }, 1000);
+        }
+
+        function playFromBegTime(begTime){
+            video.play();
+            video.currentTime = begTime;
+        }
+
+    })();
+
     function toGuide(){
         window.location.href = "{:U('Home/Index/guide')}";
     }
@@ -149,6 +169,8 @@
     function toRanklist(){
         window.location.href = "{:U('Ranklist/todayRanklist')}";
     }
+
 </script>
+
 </body>
 </html>
