@@ -99,6 +99,14 @@ class CountinController extends CommonController{
             echoError("补报失败,补报日期须为今天之前!");
         }
 
+        if( DateService::isYearMonthDayInPassedMonth($date) ){
+            echoError("这是过去的月份!");
+        }else{//如果是本月
+            echoError("这是本月");
+        }
+
+
+
         $dayCount = M("day_count")->where("userid='$userid' and today_date='$date'")->find();
         DebugService::displayLog("dayCount:");
         DebugService::displayLog($dayCount);
@@ -130,7 +138,6 @@ class CountinController extends CommonController{
             $yearMonth = DateService::yearMonthDay2YearMonth($date);
             MysqlService::refreshMysqlMonthRanklist($yearMonth);
             RedisService::cachingMonthRanklist($yearMonth);
-            echoError("这是过去的月份!");
         }else{//如果是本月
             RedisService::cachingCurMonthRanklist();
         }
