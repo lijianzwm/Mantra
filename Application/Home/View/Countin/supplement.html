@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>补报数目</title>
-    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
     <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
     <script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
@@ -44,12 +43,40 @@
     </script>
 </head>
 <body>
-<div class="wrapper">
-    <input type="hidden" name="userid" id="userid" value="{$userid}"/>
-    <div>补报日期</div><div><input type="text" name="date" id="datepicker"/></div>
-    <div>补报数目</div><div><input id="num" name="num"/></div>
-    <div><input type="button" value="提交" onclick="supplementNum()"/></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 lead">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">补报数目</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>补报日期:</label>
+                        <input type="text" class="form-control" name="date" id="datepicker" placeholder="请选择日期">
+                    </div>
+                    <div class="form-group">
+                        <label>补报数目:</label>
+                        <input type="text" class="form-control" id="num" name="num" placeholder="请填写数目">
+                        <input type="hidden" name="userid" id="userid" value="{$userid}"/>
+                    </div>
+                    <div class="form-group text-center">
+                        <div>
+                            <button type="button" class="btn btn-danger" onclick="supplementNum()">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                补&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;报
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
 </div>
-
 </body>
 </html>

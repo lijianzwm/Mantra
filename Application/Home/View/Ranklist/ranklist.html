@@ -3,146 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <title>精进排行</title>
-    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
-    <style>
-
-        .title{
-            text-align:center;
-            font-size:30px;
-        }
-
-        .sub-title{
-            text-align:center;
-            font-size:14px;
-            margin-bottom:10px;
-        }
-
-        .rank-wrapper{
-            text-align:center;
-        }
-
-        .rank-title{
-            font-size:20px;
-            margin-bottom:10px;
-        }
-
-        .rank-title-elem{
-            display:inline-block;
-            zoom: 1;
-            *display: inline;
-            width:100px;
-            text-align:center;
-        }
-
-        .rank-item{
-            margin-bottom:5px;
-        }
-
-        .your-position{
-            color:#ff0000;
-        }
-
-        .rank-item-elem{
-            font-size:20px;
-            display:inline-block;
-            zoom: 1;
-            *display: inline;
-            width:100px;
-            text-align:center;
-        }
-
-        .menu{
-            font-size:20px;
-            margin-bottom:10px;
-            margin-top:10px;
-        }
-
-        .query-box{
-            font-size:20px;
-            margin-left:10px;
-            margin-right:10px;
-        }
-
-        .day-button{
-            display:inline-block;
-            zoom: 1;
-            *display: inline;
-        }
-
-        .month-button{
-            display:inline-block;
-            zoom: 1;
-            *display: inline;
-        }
-
-        .hide{
-            display:none;
-        }
-
-    </style>
 </head>
 <body>
-<div class="menu">
-    <a href="{:U('Ranklist/todayRanklist')}" >今日排行</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/yesterdayRanklist')}">昨日排行</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/curMonthRanklist')}">本月排行</a>&nbsp;&nbsp;
-    <a href="{:U('Ranklist/totalRanklist')}">总排行榜</a>&nbsp;&nbsp;
-</div>
-<div id="query_day_box" class="query-box">
-    <form action="{:U('Ranklist/dayRanklist')}" method="post">
-        <input type="text" name="date" id="datepicker"/>
-        <input type="submit" class="day-button" value="查询日榜"/>
-    </form>
-</div>
-<div id="query_month_box" class="query-box">
-    <form action="{:U('Ranklist/monthRanklist')}" method="post">
-        <select name="year">
-            <option value ="2016" selected = "selected">2016年</option>
-        </select>
-        <select name="month" id="month">
-            <option id="month01" value ="01">一月</option>
-            <option id="month02" value ="02">二月</option>
-            <option id="month03" value="03">三月</option>
-            <option id="month04" value="04">四月</option>
-            <option id="month05" value="05">五月</option>
-            <option id="month06" value="06">六月</option>
-            <option id="month07" value="07">七月</option>
-            <option id="month08" value="08">八月</option>
-            <option id="month09" value="09">九月</option>
-            <option id="month10" value="10">十月</option>
-            <option id="month11" value="11">十一月</option>
-            <option id="month12" value="12">十二月</option>
-        </select>
-        <input type="submit" class="month-button" value="查询月榜"/>
-    </form>
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 lead">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">精进排行</h3>
+                </div>
+                <div>
+                    <div class="list-group">
+                        <a href="{:U('Ranklist/todayRanklist')}" class="list-group-item">今日排行</a>
+                        <a href="{:U('Ranklist/yesterdayRanklist')}" class="list-group-item">昨日排行</a>
+                        <a href="{:U('Ranklist/curMonthRanklist')}" class="list-group-item">本月排行</a>
+                        <a href="{:U('Ranklist/totalRanklist')}" class="list-group-item">总排行榜</a>
+                    </div>
+                </div>
+            </div>
 
-<div class="title">{$title}</div>
-<div class="title">总数为：{$total}</div>
-<div class="sub-title">(每{$refreshTime}秒刷新一次)</div>
-<div class="rank-wrapper">
-    <div class="rank-title">
-        <div class="rank-title-elem">排名</div>
-        <div class="rank-title-elem">姓名</div>
-        <div class="rank-title-elem">数目</div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">查询日榜</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('Ranklist/dayRanklist')}" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="date" id="datepicker"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default pull-right">查询日榜</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">查询月榜</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('Ranklist/monthRanklist')}" method="post">
+                        <div class="form-group">
+                            <select name="year" class="form-control">
+                                <option value ="2016" selected = "selected">2016年</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="month" id="month" class="form-control">
+                                <option id="month01" value ="01">一月</option>
+                                <option id="month02" value ="02">二月</option>
+                                <option id="month03" value="03">三月</option>
+                                <option id="month04" value="04">四月</option>
+                                <option id="month05" value="05">五月</option>
+                                <option id="month06" value="06">六月</option>
+                                <option id="month07" value="07">七月</option>
+                                <option id="month08" value="08">八月</option>
+                                <option id="month09" value="09">九月</option>
+                                <option id="month10" value="10">十月</option>
+                                <option id="month11" value="11">十一月</option>
+                                <option id="month12" value="12">十二月</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default pull-right">查询月榜</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 lead">
+            <div><h2>{$title}<small class="pull-right">总数:{$total}</small></h2></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>名次</th>
+                        <th>姓名</th>
+                        <th>数目</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <for start="0" end="count($ranklist)">
+                        <if condition="$ranklist[$i]['userid'] eq $yourUserid">
+                            <tr class="text-danger">
+                                <td>{$i+1}</td>
+                                <td>{$ranklist.$i.name}</td>
+                                <td>{$ranklist.$i.num}</td>
+                            </tr>
+                        <else />
+                            <tr>
+                                <td>{$i+1}</td>
+                                <td>{$ranklist.$i.name}</td>
+                                <td>{$ranklist.$i.num}</td>
+                            </tr>
+                        </if>
+                    </for>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <for start="0" end="count($ranklist)">
-        <if condition="$ranklist[$i]['userid'] eq $yourUserid">
-            <div class="your-position">
-                <div class="rank-item-elem">{$i+1}</div>
-                <div class="rank-item-elem">{$ranklist.$i.name}</div>
-                <div class="rank-item-elem">{$ranklist.$i.num}</div>
-            </div>
-        <else />
-            <div class="rank-item">
-                <div class="rank-item-elem">{$i+1}</div>
-                <div class="rank-item-elem">{$ranklist.$i.name}</div>
-                <div class="rank-item-elem">{$ranklist.$i.num}</div>
-            </div>
-        </if>
-    </for>
-</div>
+</div><!-- /.container -->
+
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
 <script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
 <script type="text/javascript">

@@ -3,82 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>用户登陆</title>
-    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
-    <style>
-        .login-title{
-            font-size:40px;
-            margin-bottom:20px;
-        }
-        .login-item{
-            font-size:22px;
-            padding-left: auto;
-            padding-right: auto;
-            margin-bottom: 5px;
-        }
-
-        .login-item input{
-            height:25px;
-            margin-left:5px;
-        }
-
-        .common-button{
-            background:#9D804B;
-            color:#fff;
-        }
-
-        .button-bar{
-            display:inline-block;
-            zoom: 1;
-            *display: inline;
-        }
-
-        .find-password{
-            font-size:15px;
-            color:#9D804B;
-        }
-
-    </style>
 </head>
 <body>
-<div class="user-box-title">用户登陆</div>
-    <div class="login-box">
-        <div class="user-box-item">账号<input name="username" id="username"/></div>
-        <div class="user-box-item">密码<input type="password" name="password" id="password"/></div>
-        <div class="user-box-item button-bar">
-            <input class="common-button" type="button" value="登录" onclick="login()"/>
-            <input class="common-button" type="button" value="注册" onclick="toRegist()"/>
-            <a class="find-password" href="{:U('Login/findPassword')}">忘记密码?</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6 lead">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title lead">用户登录</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">昵称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="昵称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <div>
+                                <button type="button" class="btn btn-danger" onclick="login()">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
+                                <button type="button" class="btn btn-default" onclick="toRegist()">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
         </div>
     </div>
-    <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
-    <script src="__PUBLIC__/lib/layer/layer.js"></script>
-    <script src="__PUBLIC__/js/common/dialog.js"></script>
-    <script src="__PUBLIC__/js/common/ajax.js"></script>
-    <script type="text/javascript">
-        function toRegist(){
-            window.location.href="{:U('Login/regist')}";
-        }
+</div>
 
-        function login(){
-            username = $('#username').val();
-            password = $('#password').val();
-            url = "{:U('Api/Login/loginVolidate')}";
-            data = {
-                username:username,
-                password:password
-            };
-            myAjax(url, data, succFunc, errorFunc );
-        }
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/layer/layer.js"></script>
+<script src="__PUBLIC__/js/common/dialog.js"></script>
+<script src="__PUBLIC__/js/common/ajax.js"></script>
+<script type="text/javascript">
+    function toRegist(){
+        window.location.href="{:U('Login/regist')}";
+    }
 
-        function succFunc(data){
-            window.location.href="{:U('Login/userCenter')}";
-        }
+    function login(){
+        username = $('#username').val();
+        password = $('#password').val();
+        url = "{:U('Api/Login/loginVolidate')}";
+        data = {
+            username:username,
+            password:password
+        };
+        myAjax(url, data, succFunc, errorFunc );
+    }
 
-        function errorFunc( data ){
-            dialog.error(data.msg);
-        }
+    function succFunc(data){
+        window.location.href="{:U('Login/userCenter')}";
+    }
 
-    </script>
+    function errorFunc( data ){
+        dialog.error(data.msg);
+    }
 
+</script>
 </body>
 </html>

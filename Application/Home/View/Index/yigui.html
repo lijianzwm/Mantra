@@ -3,71 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>聖摩利支天护国息灾共修仪轨</title>
-    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
-    <style>
-        .wrapper{
-            font-size:20px;
-            text-align:center;
-            width:700px;
-            margin-left:auto;
-            margin-right:auto;
-            color:#000000;
-        }
-
-        .title{
-            margin-top:20px;
-            font-size:30px;
-            font-weight: bold;
-            color:#9D804B;
-        }
-        .hint {
-            text-align: left;
-            font-weight: bold;
-            color:#9D804B;
-        }
-
-        .text{
-            text-align:left;
-        }
-
-        .video-wrapper{
-            margin-top:20px;
-            margin-bottom:20px;
-        }
-
-    </style>
+    <link href="__PUBLIC__/css/common.css" rel="stylesheet">
 </head>
 <body>
-<div class="wrapper">
-    <div class="title">聖摩利支天护国息灾共修仪轨</div>
-    <div id="video_wrapper" class="video-wrapper">
-        <video id="video" width="432" height="240" controls="controls">
-            <source src="{:C('GX_VIDEO_MP4')}" type="video/mp4">
-            <source src="{:C('GX_VIDEO_OGG')}" type="video/ogg">
-        </video>
-    </div>
-    <div class="content">
+
+<div class="container">
+    <ul class="nav nav-tabs common-background" role="tablist">
+        <li role="presentation" class="dark-background" id="text_tab"><a href="#" onclick="showText()">文字</a></li>
+        <li role="presentation" id="video_tab"><a href="#" onclick="showVideo()">视频</a></li>
+    </ul>
+    <div class="content lead text-center" id="text_page">
+        <br>
+        <h2 class="text-center">聖摩利支天护国息灾共修仪轨</h2>
+        <br>
         <p>纳谟外嘉佑 玛哈德哇 玛类斯诶吖雅</p>
-        <p class="hint">皈依：</p>
+        <h3 class="text-left">皈依：</h3>
         <p>稽首皈命佛&nbsp;&nbsp;&nbsp;说法度群迷</p>
         <p>稽首皈命法&nbsp;&nbsp;&nbsp;解脱三有苦</p>
         <p>稽首皈命僧&nbsp;&nbsp;&nbsp;无漏胜福田</p>
         <p>如是圣三宝&nbsp;&nbsp;&nbsp;尽形寿皈依</p>
         <p>纳谟布达雅 纳谟达玛雅 纳谟桑噶雅&nbsp;【真言三遍】</p>
-        <p class="text">&nbsp;&nbsp;&nbsp;&nbsp;弟子众等&nbsp;一心皈命本尊&nbsp;大圣摩利支天&nbsp;北辰妙见菩萨&nbsp;及北斗七星诸圣眷属&nbsp;惟愿诸尊圣众&nbsp;统帅无量眷众&nbsp;显大威神&nbsp;加护国体&nbsp;&nbsp;恃凭尊等威德&nbsp;令我中华人民共和国&nbsp;国界安宁&nbsp;边疆稳固&nbsp;现前滋扰&nbsp;宿敌怨障&nbsp;悉皆摧碎&nbsp;无敢再犯&nbsp;</p>
-        <p class="hint">本尊赞 ：</p>
+        <p class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;弟子众等&nbsp;一心皈命本尊&nbsp;大圣摩利支天&nbsp;北辰妙见菩萨&nbsp;及北斗七星诸圣眷属&nbsp;惟愿诸尊圣众&nbsp;统帅无量眷众&nbsp;显大威神&nbsp;加护国体&nbsp;&nbsp;恃凭尊等威德&nbsp;令我中华人民共和国&nbsp;国界安宁&nbsp;边疆稳固&nbsp;现前滋扰&nbsp;宿敌怨障&nbsp;悉皆摧碎&nbsp;无敢再犯&nbsp;</p>
+        <h3 class="text-left">本尊赞 ：</h3>
         <p>稽首摩利支&nbsp;&nbsp;&nbsp;大圣神通力</p>
         <p>统帅北斗众&nbsp;&nbsp;&nbsp;诸天星宿聚</p>
         <p>能灭一切害&nbsp;&nbsp;&nbsp;护国胜无敌</p>
         <p>最胜阳焰天&nbsp;&nbsp;&nbsp;我今皈命礼</p>
-        <p>噢木 阿帝塔雅 玛类斯诶 萨巴哈&nbsp;【尽力持诵】</p>
-        <p class="hint">祈愿：</p>
+        <p>噢<small>木</small> 阿帝塔雅 玛类斯<small>诶</small> 萨<small>巴</small>哈&nbsp;【尽力持诵】</p>
+        <h3 class="text-left">祈愿：</h3>
         <p>恳祈胜加持&nbsp;&nbsp;&nbsp;愿尊我一心</p>
         <p>赐大胜威权&nbsp;&nbsp;&nbsp;护国息灾疫</p>
-        <p class="hint">圣眷赞：</p>
+        <h3 class="text-left">圣眷赞：</h3>
         <p>稽首妙见士&nbsp;&nbsp;&nbsp;北斗星宿尊</p>
         <p>大威德息灾&nbsp;&nbsp;&nbsp;皈命我赞礼</p>
-        <p class="hint">回向：</p>
+        <h3 class="text-left">回向：</h3>
         <p>皈命摩利支&nbsp;&nbsp;&nbsp;三密速加持</p>
         <p>如尊大自在&nbsp;&nbsp;&nbsp;我亦具如是</p>
         <p>祈尊敕眷众&nbsp;&nbsp;&nbsp;显圣护国威</p>
@@ -78,13 +47,37 @@
         <p>民众悉归心&nbsp;&nbsp;&nbsp;和合无歧意</p>
         <p>善哉摩利支&nbsp;&nbsp;&nbsp;赐国运昌盛</p>
         <p>唯于我等愿&nbsp;&nbsp;&nbsp;祈垂胜悉地</p>
-        <p class="hint">回向词：</p>
-        <p class="text">&nbsp;&nbsp;&nbsp;&nbsp;将此共修功德回向&nbsp;中华人民共和国&nbsp;&nbsp;国运昌盛&nbsp;国界安宁&nbsp;边疆稳固&nbsp;现前滋扰&nbsp;宿敌怨障&nbsp;悉皆摧碎&nbsp;无敢再犯&nbsp;。回向一切众生离苦得乐&nbsp;佛法久住，法轮常转；祈愿大恩上师吉祥金刚阿阇梨及所有高僧大德、法体康健、长久住世。</p>
-        <br>
-        <br>
-        <br>
+        <h3 class="text-left">回向词：</h3>
+        <p class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;将此共修功德回向&nbsp;中华人民共和国&nbsp;&nbsp;国运昌盛&nbsp;国界安宁&nbsp;边疆稳固&nbsp;现前滋扰&nbsp;宿敌怨障&nbsp;悉皆摧碎&nbsp;无敢再犯&nbsp;。回向一切众生离苦得乐&nbsp;佛法久住，法轮常转；祈愿大恩上师吉祥金刚阿阇梨及所有高僧大德、法体康健、长久住世。</p>
+        <p class="text-right">吉祥圆满</p>
+    </div>
+
+    <div class="text-center hide" id="video_page">
+        <br><h2 class="text-center">聖摩利支天护国息灾共修仪轨视频</h2><br>
+        <div id="video_wrapper" class="text-center">
+            <video id="video" width="432" height="240" controls="controls">
+                <source src="{:C('GX_VIDEO_MP4')}" type="video/mp4">
+                <source src="{:C('GX_VIDEO_OGG')}" type="video/ogg">
+            </video>
+        </div>
     </div>
 </div>
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    function showVideo(){
+        $('#video_page').removeClass('hide');
+        $('#text_page').addClass('hide');
+        $('#video_tab').addClass('dark-background');
+        $('#text_tab').removeClass('dark-background');
+    }
+    function showText(){
+        $('#text_page').removeClass('hide');
+        $('#video_page').addClass('hide');
+        $('#text_tab').addClass('dark-background');
+        $('#video_tab').removeClass('dark-background');
+    }
+</script>
+
 </body>
 </html>
 

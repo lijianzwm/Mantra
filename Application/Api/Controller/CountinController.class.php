@@ -98,6 +98,7 @@ class CountinController extends CommonController{
         if (!CountinService::isSupplementDateLegeal($date)) {
             echoError("补报失败,补报日期须为今天之前!");
         }
+        //校验结束!
 
         $dayCount = M("day_count")->where("userid='$userid' and today_date='$date'")->find();
         DebugService::displayLog("dayCount:");
@@ -130,13 +131,18 @@ class CountinController extends CommonController{
             $yearMonth = DateService::yearMonthDay2YearMonth($date);
             MysqlService::refreshMysqlMonthRanklist($yearMonth);
             RedisService::cachingMonthRanklist($yearMonth);
+        }else{//如果是本月
+            RedisService::cachingCurMonthRanklist();
         }
 
         //更新并缓存日排行
         MysqlService::refreshMysqlSomeDayRanklist($date);
         RedisService::cachingSomedayRanklist($date);
 
-        echoSuccess("补报成功!");
+        //缓存总排行
+        RedisService::cachingTotalRanklist();
+
+        echoSuccess("补报成功!",$data);
     }
 
     /**

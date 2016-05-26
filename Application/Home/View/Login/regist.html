@@ -3,26 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
 </head>
 <body>
-<div class="user-box-title">用户注册</div>
-
-    <div class="user-box-item">
-        用户账号
-        <input name="username" id="username"/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 lead">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title lead">注册新用户</h3>
+                </div>
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label>用户昵称</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="中文,英文,数字均可">
+                        </div>
+                        <div class="form-group">
+                            <label>设置密码</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="字母、数字、下划线">
+                        </div>
+                        <div class="form-group">
+                            <label>确认密码</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirmPassword" placeholder="再次输入密码"/>
+                        </div>
+                        <div class="form-group text-center">
+                            <div>
+                                <button type="button" class="btn btn-danger" onclick="regist()">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
     </div>
-    <div class="user-box-item">
-        登录密码
-        <input type="password" id="password" name="password"/>
-    </div>
-    <div class="user-box-item">
-        确认密码
-        <input type="password" id="confirm_password" name="confirmPassword"/>
-    </div>
-    <div class="user-box-item">
-        <input type="button" id="regist_button" class="common-button" onclick="regist()" value="注册"/>
-    </div>
+</div>
 
 <script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
 <script src="__PUBLIC__/lib/layer/layer.js"></script>

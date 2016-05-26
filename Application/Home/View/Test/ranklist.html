@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>精进排行</title>
+    <link rel="stylesheet" href="__PUBLIC__/lib/date/jquery-ui.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 lead">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">精进排行</h3>
+                </div>
+                <div>
+                    <div class="list-group common-background">
+                        <a href="{:U('Ranklist/todayRanklist')}" class="list-group-item">今日排行</a>
+                        <a href="{:U('Ranklist/yesterdayRanklist')}" class="list-group-item">昨日排行</a>
+                        <a href="{:U('Ranklist/curMonthRanklist')}" class="list-group-item">本月排行</a>
+                        <a href="{:U('Ranklist/totalRanklist')}" class="list-group-item">总排行榜</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">查询日榜</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('Ranklist/dayRanklist')}" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="date" id="datepicker"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default pull-right">查询日榜</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">查询月榜</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('Ranklist/monthRanklist')}" method="post">
+                        <div class="form-group">
+                            <select name="year" class="form-control">
+                                <option value ="2016" selected = "selected">2016年</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="month" id="month" class="form-control">
+                                <option id="month01" value ="01">一月</option>
+                                <option id="month02" value ="02">二月</option>
+                                <option id="month03" value="03">三月</option>
+                                <option id="month04" value="04">四月</option>
+                                <option id="month05" value="05">五月</option>
+                                <option id="month06" value="06">六月</option>
+                                <option id="month07" value="07">七月</option>
+                                <option id="month08" value="08">八月</option>
+                                <option id="month09" value="09">九月</option>
+                                <option id="month10" value="10">十月</option>
+                                <option id="month11" value="11">十一月</option>
+                                <option id="month12" value="12">十二月</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default pull-right">查询月榜</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 lead">
+            <div><h2>{$title}<small class="pull-right">总数:{$total}</small></h2></div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>名次</th>
+                    <th>姓名</th>
+                    <th>数目</th>
+                </tr>
+                </thead>
+                <tbody>
+                <for start="0" end="count($ranklist)">
+                    <if condition="$ranklist[$i]['userid'] eq $yourUserid">
+                        <tr class="text-danger">
+                            <td>{$i+1}</td>
+                            <td>{$ranklist.$i.name}</td>
+                            <td>{$ranklist.$i.num}</td>
+                        </tr>
+                        <else />
+                        <tr>
+                            <td>{$i+1}</td>
+                            <td>{$ranklist.$i.name}</td>
+                            <td>{$ranklist.$i.num}</td>
+                        </tr>
+                    </if>
+                </for>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div><!-- /.container -->
+
+<script src="__PUBLIC__/lib/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/lib/date/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var myDate = new Date();
+        var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+        var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
+        var day = myDate.getDate();        //获取当前日(1-31)
+        if( month < 10 ){
+            month =  "0"+month;
+        }else{
+            month = ""+month;
+        }
+        if( day < 10 ){
+            day = "0" + day;
+        }
+        var yearMonthDay = year + "-" + month + "-" + day;
+        $("#month").val(month);
+        $( "#datepicker" ).val(yearMonthDay);
+        $( "#datepicker" ).datepicker();
+    });
+    dayBoxDom = $('#query_day_box');
+    monthBoxDom = $('#query_month_box');
+    function showQueryDayBox(){
+        if( dayBoxDom.css('display') == 'none'){
+            dayBoxDom.show();
+            monthBoxDom.hide();
+        }else{
+            dayBoxDom.hide();
+        }
+    }
+
+    function showQueryMonthBox(){
+        if( monthBoxDom.css('display') == 'none' ){
+            monthBoxDom.show();
+            dayBoxDom.hide();
+        }else{
+            monthBoxDom.hide();
+        }
+    }
+
+
+</script>
+</body>
+</html>
