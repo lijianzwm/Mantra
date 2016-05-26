@@ -68,9 +68,6 @@ class RanklistController extends Controller{
         DebugService::displayLog("monthRanklist():yearMonth=" . $yearMonth);
         DebugService::displayLog("monthRanklist():curYearMonth=" . $curYearMonth);
 
-        dump("curYearMonth=" . $curYearMonth . "\t yearMonth=" . $yearMonth);
-        die();
-
         if( $yearMonth == $curYearMonth ){
             $ranklist = RanklistService::getCurMonthRanklist();
         }else{
