@@ -86,7 +86,6 @@ class CountinController extends CommonController{
         $userid = I("userid");
         $date = I("date");
         $num = I("num");
-        $data = null;
 
         CheckService::checkApiParam("userid", $userid);
         CheckService::checkApiParam("date", $date, "yyyy-mm-dd");
@@ -129,7 +128,6 @@ class CountinController extends CommonController{
 
         //如果是过去的月份,更新月排行,并做缓存
         if( DateService::isYearMonthDayInPassedMonth($date) ){
-            $data = "是过去的月份";
             $yearMonth = DateService::yearMonthDay2YearMonth($date);
             MysqlService::refreshMysqlMonthRanklist($yearMonth);
             RedisService::cachingMonthRanklist($yearMonth);
