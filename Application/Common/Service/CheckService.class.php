@@ -224,6 +224,7 @@ class CheckService{
     private static function checkDharma( $dharma ){
         $chinese = '/^[\x{4e00}-\x{9fa5}]+$/u';
         if( preg_match($chinese, $dharma)){
+            dump(mb_strlen($dharma));
             if( mb_strlen($dharma) < 1 ){
                 return self::error("法名过短!");
             }

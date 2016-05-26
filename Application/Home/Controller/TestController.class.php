@@ -18,17 +18,19 @@ class TestController extends Controller{
     public function index(){
 //        layout(false);
 
-        if( StageGXService::isInStage() ){
-            dump("in stage");
-        }else{
-            dump("not in stage");
-        }
+        CheckService::checkApiParam("dharma", "决定幢");
 
-        if( DateService::isYearMonthDayInPassedMonth("2016-05-21") ){
-            dump("yes!");
-        }else{
-            dump("no!");
-        }
+//        if( StageGXService::isInStage() ){
+//            dump("in stage");
+//        }else{
+//            dump("not in stage");
+//        }
+//
+//        if( DateService::isYearMonthDayInPassedMonth("2016-05-21") ){
+//            dump("yes!");
+//        }else{
+//            dump("no!");
+//        }
 
         $this->display("index");
     }
