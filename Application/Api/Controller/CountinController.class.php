@@ -100,12 +100,11 @@ class CountinController extends CommonController{
         }
 
         if( DateService::isYearMonthDayInPassedMonth($date) ){
-            echoError("这是过去的月份!");
+            echoError($date."这是过去的月份!");
         }else{//如果是本月
             echoError("这是本月");
         }
-
-
+        //校验结束!
 
         $dayCount = M("day_count")->where("userid='$userid' and today_date='$date'")->find();
         DebugService::displayLog("dayCount:");
