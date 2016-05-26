@@ -84,7 +84,7 @@ class DateService{
     public static function isYearMonthDayInPassedMonth($date){
         $yearMonth = substr($date, 7);
         $curYearMonth = self::getStrYearMonth();
-        if( $yearMonth <= $curYearMonth ){
+        if( $yearMonth < $curYearMonth ){
             return true;
         }else{
             return false;
