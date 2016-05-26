@@ -29,9 +29,10 @@
             <nav>
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation"><a href="{:U('/Home/Index')}">主页</a></li>
+                    <li role="presentation"><a href="{:U('Home/Index/guide')}">入门</a></li>
                     <li role="presentation"><a href="{:U('Countin/addNum')}">报数</a></li>
-                    <li role="presentation"><a href="{:U('Ranklist/todayRanklist')}">排行</a></li>
                     <li role="presentation"><a href="{:U('/Home/Index/yigui')}">仪轨</a></li>
+                    <li role="presentation"><a href="{:U('Ranklist/todayRanklist')}">排行</a></li>
                     <if condition="$Think.session.userid gt 0">
                         <li role="presentation"><a href="{:U('Login/userCenter')}">个人</a></li>
                         <else />
