@@ -129,7 +129,6 @@ class CheckService{
 
         //如果是中文和字符混合
         if( preg_match($mixed, $username) ){
-            dump("混合!");
             if( mb_strlen($username, 'UTF8') > 9 ){
                 return self::error("用户名过长!");
             }else if( mb_strlen($username, 'UTF8') < 2 ){
