@@ -71,9 +71,12 @@
             password:password
         };
         myAjax(url, data, succFunc, errorFunc );
+
     }
 
     function succFunc(data){
+        localStorage.ztxm_mlztgx_user = data.data;
+        alert(JSON.stringify(localStorage.ztxm_mlztgx_user));
         window.location.href="{:U('Login/userCenter')}";
     }
 

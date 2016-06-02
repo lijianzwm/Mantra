@@ -73,4 +73,22 @@ class LoginController extends Controller{
         }
     }
 
+
+    public function autoLogin(){
+
+        $userid = I("userid");
+        $username = I("username");
+
+        $user = M("user")->where("id='$userid' and username='$username'")->find();
+
+        if( $user ){
+            session("userid", $user['id']);
+            session("username", $user['username']);
+            session("showname", $user['showname']);
+            echoSuccess("自动登录成功!", $user);
+        }else{
+            echoError("本地保存信息错误,需要重新登录!");
+        }
+    }
+
 }

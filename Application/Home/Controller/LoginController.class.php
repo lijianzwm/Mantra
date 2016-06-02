@@ -79,6 +79,4 @@ class LoginController extends Controller{
         session("showname", null);
         redirect(U('Index/index'));
     }
-
-
 }

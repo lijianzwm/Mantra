@@ -164,7 +164,16 @@
     }
 
     function logout(){
-        dialog.confirm("确定要退出登录?","{:U('Login/logout')}");
+
+        layer.open({
+            content : "确定要退出登录?",
+            icon:3,
+            btn : ['是','否'],
+            yes : function(){
+                localStorage.ztxm_mlztgx_user = null;
+                location.href="{:U('Login/logout')}";
+            },
+        });
     }
 
     function updateUserInfo(){
