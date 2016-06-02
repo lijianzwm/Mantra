@@ -53,7 +53,7 @@
     function autoLogin(){
         session = $("#session_userid").val();
         user = localStorage.ztxm_mlztgx_user;
-
+        alert(JSON.stringify(user));
         if( !session && user ){
             $.ajax({
                 url: "{:U('Login/autoLogin')}",
