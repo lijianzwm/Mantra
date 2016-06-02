@@ -121,7 +121,7 @@
 
     (function(){
         session = $("#session_userid").val();
-        user = localStorage.ztxm_mlztgx_user;
+        user = localStorage.getItem("ztxm_mlztgx_user");
 
         if( session == "" && user ){
             alert("无session有localstorage");
@@ -140,7 +140,7 @@
                         alert("自动登录!");
                         location.reload();
                     }else{
-                        localStorage.ztxm_mlztgx_user = 0;
+                        localStorage.clear();
                     }
                 },
                 error: function () {

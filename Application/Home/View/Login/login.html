@@ -75,8 +75,7 @@
     }
 
     function succFunc(data){
-        localStorage.ztxm_mlztgx_user = data.data;
-        alert(JSON.stringify(localStorage.ztxm_mlztgx_user));
+        localStorage.setItem("ztxm_mlztgx_user", data.data);
         window.location.href="{:U('Login/userCenter')}";
     }
 
