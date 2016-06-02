@@ -49,9 +49,10 @@
 </div>
 
 <script type="text/javascript">
-    window.onload = autoLogin();
-    function autoLogin(){
+
+    $(function(){
         session = $("#session_userid").val();
+        alert("sessionid=" + session);
         user = localStorage.ztxm_mlztgx_user;
         alert(JSON.stringify(user));
         if( !session && user ){
@@ -77,7 +78,8 @@
                 }
             });
         }
-    }
+    });
+
 </script>
 
 </body>
