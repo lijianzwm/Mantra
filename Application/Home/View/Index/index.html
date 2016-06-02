@@ -123,7 +123,7 @@
         session = $("#session_userid").val();
         user = localStorage.ztxm_mlztgx_user;
 
-        if( !session && user ){
+        if( session == "" && user ){
             alert("无session有localstorage");
             $.ajax({
                 url: "{:U('Login/autoLogin')}",
