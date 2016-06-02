@@ -122,7 +122,8 @@
     (function(){
         session = $("#session_userid").val();
         user = localStorage.ztxm_mlztgx_user;
-        if( !session && user != null ){
+
+        if( !session && user != 0 ){
             alert("无session有localstorage");
             $.ajax({
                 url: "{:U('Login/autoLogin')}",
@@ -139,7 +140,7 @@
                         alert("自动登录!");
                         location.reload();
                     }else{
-                        localStorage.ztxm_mlztgx_user = null;
+                        localStorage.ztxm_mlztgx_user = 0;
                     }
                 },
                 error: function () {
