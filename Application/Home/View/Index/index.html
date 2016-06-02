@@ -126,7 +126,7 @@
         if( session == "" && user ){
             alert("无session有localstorage");
             $.ajax({
-                url: "{:U('Login/autoLogin')}",
+                url: "{:U('Api/Login/autoLogin')}",
                 data: {
                     userid : user.id,
                     username : user.username,
