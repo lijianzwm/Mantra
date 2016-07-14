@@ -23,6 +23,7 @@
     <div class="jumbotron" id="hint_wrapper" style="background-color:#EFE8D8;">
         <h1 class="text-center">丙申年亿遍摩利支天身咒护国共修</h1>
         <p class="text-center">每天&nbsp;&nbsp;{$everyDayStartTime}&nbsp;&nbsp;开始共修,请提前5分钟入场</p>
+        <p class="text-center" id="play_position"></p>
     </div>
     <div class="jumbotron" id="countdown_wrapper" style="background-color:#EFE8D8;">
         <h1 class="text-center">距共修开始:<strong id="remain_seconds"></strong></h1>
@@ -103,7 +104,7 @@
         } else if (state == "started") {
             var begTime = parseInt('{$begTime}');
             Dom.audio.oncanplay = playFromBegTime(begTime);
-//                playBar();
+            playBar();
         }
 
         function countDown(remainSeconds) {
@@ -124,6 +125,9 @@
         function playFromBegTime(begTime) {
             Dom.audio.play();
             Dom.audio.currentTime = begTime;
+            Dom.audio.ontimeupdate = function(){
+                $("#play_position").html( Dom.audio.currentTime );
+            }
         }
 
         function playBar() {
