@@ -84,6 +84,8 @@
 </div>
 
 <script type="text/javascript">
+    firstPlay = true;
+
     (function () {
         Dom = {
             audio: document.getElementById("audio"),
@@ -95,17 +97,20 @@
         document.addEventListener("DOMContentLoaded", function () {
             var audio = document.getElementById("audio");
             audio.addEventListener('canplay', function (evt) {
-                Dom.countdownBox.hide();
-                Dom.playBar.hide();
-                var state = '{$state}';
-                alert("123123");
-                if (state == "ready") {
-                    var remainSeconds = parseInt('{$countdownSeconds}');
-                    countDown(remainSeconds);
-                } else if (state == "started") {
-                    var begTime = parseInt('{$begTime}');
-                    playFromBegTime(begTime);
+                if( firstPlay ){
+                    Dom.countdownBox.hide();
+                    Dom.playBar.hide();
+                    var state = '{$state}';
+                    alert("123123");
+                    if (state == "ready") {
+                        var remainSeconds = parseInt('{$countdownSeconds}');
+                        countDown(remainSeconds);
+                    } else if (state == "started") {
+                        var begTime = parseInt('{$begTime}');
+                        playFromBegTime(begTime);
 //                playBar();
+                    }
+                    firstPlay = false;
                 }
             });
         });
