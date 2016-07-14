@@ -76,33 +76,26 @@
 </div>
 
 <script type="text/javascript">
-    (function () {
 
-        var state = '{$state}';
-
-        Dom = {
-            audio: document.getElementById("audio"),
-            countdownBox: $('#countdown_wrapper'),
-            remainSeconds: $('#remain_seconds'),
-            playBar: $('#play_bar_wrapper')
-        };
+    document.addEventListener("DOMContentLoaded", function() {
+        var audio = document.getElementById("audio");
+        audio.addEventListener('canplay', function (evt) {
+            Dom.countdownBox.hide();
+            Dom.playBar.hide();
+            var state = '{$state}';
+            if (state == "ready") {
+                var remainSeconds = parseInt('{$countdownSeconds}');
+                countDown(remainSeconds);
+            } else if (state == "started") {
+                var begTime = parseInt('{$begTime}');
+                playFromBegTime(begTime);
+//                playBar();
+            }
+        } );
+    });
 
         Dom.countdownBox.hide();
         Dom.playBar.hide();
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var audio = document.getElementById("audio");
-            audio.addEventListener('canplay', function (evt) {
-                if (state == "ready") {
-                    var remainSeconds = parseInt('{$countdownSeconds}');
-                    countDown(remainSeconds);
-                } else if (state == "started") {
-                    var begTime = parseInt('{$begTime}');
-                    playFromBegTime(begTime);
-                    playBar();
-                }
-            } );
-        });
 
         function countDown(remainSeconds) {
             Dom.countdownBox.show();
@@ -145,8 +138,6 @@
                 }
             }, 1000);
         }
-
-    })();
 </script>
 </body>
 </html>
