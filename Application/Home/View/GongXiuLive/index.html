@@ -94,69 +94,64 @@
             playBar: $('#play_bar_wrapper')
         };
 
-        document.addEventListener("DOMContentLoaded", function () {
-            var audio = document.getElementById("audio");
-            audio.addEventListener('canplay', function (evt) {
-                if( firstPlay ){
-                    Dom.countdownBox.hide();
-                    Dom.playBar.hide();
-                    var state = '{$state}';
-                    if (state == "ready") {
-                        var remainSeconds = parseInt('{$countdownSeconds}');
-                        countDown(remainSeconds);
-                    } else if (state == "started") {
-                        var begTime = parseInt('{$begTime}');
-                        playFromBegTime(begTime);
+        Dom.countdownBox.hide();
+        Dom.playBar.hide();
+        var state = '{$state}';
+        if (state == "ready") {
+            var remainSeconds = parseInt('{$countdownSeconds}');
+            countDown(remainSeconds);
+        } else if (state == "started") {
+            var begTime = parseInt('{$begTime}');
+            Dom.audio.oncanplay = playFromBegTime(begTime);
 //                playBar();
-                    }
-                    firstPlay = false;
+        }
+
+        function countDown(remainSeconds) {
+            Dom.countdownBox.show();
+            var i = setInterval(function () {
+                if (remainSeconds <= 0) {
+                    Dom.audio.play();
+                    clearInterval(i);
+                    Dom.countdownBox.hide();
+                    $('#video_wrapper').show();
+                } else {
+                    Dom.remainSeconds.html(remainSeconds);
+                    remainSeconds -= 1;
                 }
-            });
-        });
+            }, 1000);
+        }
+
+        function playFromBegTime(begTime) {
+            Dom.audio.play();
+            Dom.audio.currentTime = begTime;
+            alert(begTime);
+            alert(Dom.audio.currentTime);
+        }
+
+        function playBar() {
+
+            var totalTime = parseInt('{$totalTime}');
+            var curTime;
+            var progress;
+            Dom.playBar.show();
+
+            //1秒钟更新1次进度条
+            var itv = setInterval(function () {
+                curTime = parseInt(Dom.audio.currentTime);
+                progress = parseFloat(curTime / totalTime * 100);
+                if (progress > 99.9) {
+                    clearInterval(itv);
+                    alert("共修吉祥圆满,去报个数吧~");
+                    window.location.href = "{:U('Countin/addNum')}";
+                } else {
+                    $("#play_bar").css("width", progress + "%");
+                }
+            }, 1000);
+        }
+
     })();
 
-    function countDown(remainSeconds) {
-        Dom.countdownBox.show();
-        var i = setInterval(function () {
-            if (remainSeconds <= 0) {
-                Dom.audio.play();
-                clearInterval(i);
-                Dom.countdownBox.hide();
-                $('#video_wrapper').show();
-            } else {
-                Dom.remainSeconds.html(remainSeconds);
-                remainSeconds -= 1;
-            }
-        }, 1000);
-    }
 
-    function playFromBegTime(begTime) {
-        Dom.audio.play();
-        Dom.audio.currentTime = begTime;
-        alert(begTime);
-        alert(Dom.audio.currentTime);
-    }
-
-    function playBar() {
-
-        var totalTime = parseInt('{$totalTime}');
-        var curTime;
-        var progress;
-        Dom.playBar.show();
-
-        //1秒钟更新1次进度条
-        var itv = setInterval(function () {
-            curTime = parseInt(Dom.audio.currentTime);
-            progress = parseFloat(curTime / totalTime * 100);
-            if (progress > 99.9) {
-                clearInterval(itv);
-                alert("共修吉祥圆满,去报个数吧~");
-                window.location.href = "{:U('Countin/addNum')}";
-            } else {
-                $("#play_bar").css("width", progress + "%");
-            }
-        }, 1000);
-    }
 </script>
 </body>
 </html>
