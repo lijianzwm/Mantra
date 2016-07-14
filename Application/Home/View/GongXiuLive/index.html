@@ -101,7 +101,6 @@
                     Dom.countdownBox.hide();
                     Dom.playBar.hide();
                     var state = '{$state}';
-                    alert("123123");
                     if (state == "ready") {
                         var remainSeconds = parseInt('{$countdownSeconds}');
                         countDown(remainSeconds);
@@ -132,9 +131,10 @@
     }
 
     function playFromBegTime(begTime) {
-        firstPlay = true;
         Dom.audio.play();
         Dom.audio.currentTime = begTime;
+        alert(begTime);
+        alert(Dom.audio.currentTime);
     }
 
     function playBar() {
