@@ -80,10 +80,10 @@
         document.addEventListener("DOMContentLoaded", function() {
             var audio = document.getElementById("audio");
             audio.addEventListener('canplay', function (evt) {
-                alert("123123");
                 Dom.countdownBox.hide();
                 Dom.playBar.hide();
                 var state = '{$state}';
+                alert("123123");
                 if (state == "ready") {
                     var remainSeconds = parseInt('{$countdownSeconds}');
                     countDown(remainSeconds);
