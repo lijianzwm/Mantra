@@ -8,8 +8,8 @@
     <script src="__PUBLIC__/lib/jquery-3.0.0.min.js"></script>
     <script src="__PUBLIC__/lib/bootstrap/js/bootstrap.min.js"></script>
     <style>
-        body{
-            background-color:#EFE8D8;
+        body {
+            background-color: #EFE8D8;
         }
     </style>
 </head>
@@ -28,7 +28,8 @@
         <h1 class="text-center">距共修开始:<strong id="remain_seconds"></strong></h1>
     </div>
     <div class="progress" id="play_bar_wrapper">
-        <div id="play_bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" ><span class="sr-only"></span></div>
+        <div id="play_bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+             aria-valuemin="0" aria-valuemax="100"><span class="sr-only"></span></div>
     </div>
     <div class="content lead text-center" id="text_page">
         <br>
@@ -51,7 +52,14 @@
         <p>能灭一切害&nbsp;&nbsp;&nbsp;护国胜无敌</p>
         <p>最胜阳焰天&nbsp;&nbsp;&nbsp;我今皈命礼</p>
         <br/>
-        <p>噢<small>木</small> 阿帝塔雅 玛类斯<small>诶</small> 萨<small>巴</small>哈&nbsp;【尽力持诵】</p>
+        <p>噢
+            <small>木</small>
+            阿帝塔雅 玛类斯
+            <small>诶</small>
+            萨
+            <small>巴</small>
+            哈&nbsp;【尽力持诵】
+        </p>
         <h3 class="text-left">祈愿：</h3>
         <p>恳祈胜加持&nbsp;&nbsp;&nbsp;愿尊我一心</p>
         <p>赐大胜威权&nbsp;&nbsp;&nbsp;护国息灾疫</p>
@@ -77,7 +85,14 @@
 
 <script type="text/javascript">
     (function () {
-        document.addEventListener("DOMContentLoaded", function() {
+        Dom = {
+            audio: document.getElementById("audio"),
+            countdownBox: $('#countdown_wrapper'),
+            remainSeconds: $('#remain_seconds'),
+            playBar: $('#play_bar_wrapper')
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
             var audio = document.getElementById("audio");
             audio.addEventListener('canplay', function (evt) {
                 Dom.countdownBox.hide();
@@ -92,55 +107,51 @@
                     playFromBegTime(begTime);
 //                playBar();
                 }
-            } );
+            });
         });
     })();
 
+    function countDown(remainSeconds) {
+        Dom.countdownBox.show();
+        var i = setInterval(function () {
+            if (remainSeconds <= 0) {
+                Dom.audio.play();
+                clearInterval(i);
+                Dom.countdownBox.hide();
+                $('#video_wrapper').show();
+            } else {
+                Dom.remainSeconds.html(remainSeconds);
+                remainSeconds -= 1;
+            }
+        }, 1000);
+    }
 
-        Dom.countdownBox.hide();
-        Dom.playBar.hide();
+    function playFromBegTime(begTime) {
+        firstPlay = true;
+        Dom.audio.play();
+        Dom.audio.currentTime = begTime;
+    }
 
-        function countDown(remainSeconds) {
-            Dom.countdownBox.show();
-            var i = setInterval(function () {
-                if (remainSeconds <= 0) {
-                    Dom.audio.play();
-                    clearInterval(i);
-                    Dom.countdownBox.hide();
-                    $('#video_wrapper').show();
-                } else {
-                    Dom.remainSeconds.html(remainSeconds);
-                    remainSeconds -= 1;
-                }
-            }, 1000);
-        }
+    function playBar() {
 
-        function playFromBegTime(begTime) {
-            firstPlay = true;
-            Dom.audio.play();
-            Dom.audio.currentTime = begTime;
-        }
+        var totalTime = parseInt('{$totalTime}');
+        var curTime;
+        var progress;
+        Dom.playBar.show();
 
-        function playBar(){
-
-            var totalTime = parseInt('{$totalTime}');
-            var curTime;
-            var progress;
-            Dom.playBar.show();
-
-            //1秒钟更新1次进度条
-            var itv = setInterval(function () {
-                curTime = parseInt(Dom.audio.currentTime);
-                progress = parseFloat(curTime / totalTime * 100);
-                if ( progress > 99.9 ) {
-                    clearInterval(itv);
-                    alert("共修吉祥圆满,去报个数吧~");
-                    window.location.href="{:U('Countin/addNum')}";
-                } else {
-                    $("#play_bar").css("width", progress+"%");
-                }
-            }, 1000);
-        }
+        //1秒钟更新1次进度条
+        var itv = setInterval(function () {
+            curTime = parseInt(Dom.audio.currentTime);
+            progress = parseFloat(curTime / totalTime * 100);
+            if (progress > 99.9) {
+                clearInterval(itv);
+                alert("共修吉祥圆满,去报个数吧~");
+                window.location.href = "{:U('Countin/addNum')}";
+            } else {
+                $("#play_bar").css("width", progress + "%");
+            }
+        }, 1000);
+    }
 </script>
 </body>
 </html>
