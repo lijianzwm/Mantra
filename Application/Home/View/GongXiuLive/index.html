@@ -90,14 +90,19 @@
         Dom.countdownBox.hide();
         Dom.playBar.hide();
 
-        if (state == "ready") {
-            var remainSeconds = parseInt('{$countdownSeconds}');
-            countDown(remainSeconds);
-        } else if (state == "started") {
-            var begTime = parseInt('{$begTime}');
-            playFromBegTime(begTime);
-            playBar();
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            var audio = document.getElementById("audio");
+            audio.addEventListener('canplay', function (evt) {
+                if (state == "ready") {
+                    var remainSeconds = parseInt('{$countdownSeconds}');
+                    countDown(remainSeconds);
+                } else if (state == "started") {
+                    var begTime = parseInt('{$begTime}');
+                    playFromBegTime(begTime);
+                    playBar();
+                }
+            } );
+        });
 
         function countDown(remainSeconds) {
             Dom.countdownBox.show();
@@ -115,6 +120,7 @@
         }
 
         function playFromBegTime(begTime) {
+            firstPlay = true;
             Dom.audio.play();
             Dom.audio.currentTime = begTime;
         }
