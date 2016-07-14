@@ -18,7 +18,7 @@ class TestController extends Controller{
     public function index(){
 //        layout(false);
 
-        CheckService::checkApiParam("dharma", "决定幢");
+//        CheckService::checkApiParam("dharma", "决定幢");
 
 //        if( StageGXService::isInStage() ){
 //            dump("in stage");
