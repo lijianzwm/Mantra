@@ -131,12 +131,10 @@
         }
 
         function playBar() {
-
             var totalTime = parseInt('{$totalTime}');
             var curTime;
             var progress;
             Dom.playBar.show();
-
             //1秒钟更新1次进度条
             var itv = setInterval(function () {
                 curTime = parseInt(Dom.audio.currentTime);
