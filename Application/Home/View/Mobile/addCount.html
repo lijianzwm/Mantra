@@ -69,6 +69,15 @@
         myAjax(url, data, succFunc, errorFunc);
     }
 
+    function succFunc(data){
+        alert("报数成功!");
+    }
+
+    function errorFunc(data){
+        alert(data.msg);
+    }
+
+
 </script>
 </body>
 </html>
