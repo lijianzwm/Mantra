@@ -66,10 +66,10 @@
             cache: false,
             dataType: 'json',
             success: function (data) {
+                $("#loading").removeClass("show");
                 if (data.error_code) {
                     alert(data.msg);
                 }else{
-                    $("#loading").removeClass("show");
                     dialog.success("注册成功!","{:U('Mobile/addCount')}");
                 }
             },
