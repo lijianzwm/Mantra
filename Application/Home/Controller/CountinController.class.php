@@ -30,6 +30,7 @@ class CountinController extends CommonController{
         $this->assign("total", $total);
 
         if( BrowserService::isMobileTencentBrowser() ){
+            layout(false);
             $this->display('m_addNum');
         }else{
             $this->display('addNum');
