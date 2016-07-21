@@ -79,6 +79,7 @@
                     alert("报数成功!");
                     var totalNum = parseInt(num) + parseInt('{$todayNum}');
                     $("#today_num").html(totalNum);
+                    $('#num').val('');
                 }else{
                     alert(data.msg);
                 }
