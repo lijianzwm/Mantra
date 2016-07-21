@@ -13,6 +13,15 @@ use Common\Service\CountinService;
 class CountinController extends CommonController{
 
     public function addNum(){
+
+        //判断是否为微信浏览器或手机QQ浏览器
+        if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ||
+            preg_match('/QQBrowser/i',$_SERVER['HTTP_USER_AGENT' ])
+        ) {
+            redirect(U("Mobile/addCount"));
+        }
+
+
         $userid = session("userid");
         $todayNum = CountinService::getUserTodayNumById($userid);
         $total = CountinService::getUserTotalNumById($userid);

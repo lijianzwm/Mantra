@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>摩利支天共修</title>
+    <link rel="stylesheet" href="__PUBLIC__/lib/frozenui/css/frozen.css">
+</head>
+<body>
+<header class="ui-header ui-header-positive ui-border-b">
+    <h1>绑定微信号</h1>
+</header>
+<section class="ui-container">
+    <div class="ui-form ui-border-t">
+        <br/>
+        <div class="ui-whitespace" style="text-align:center;">
+            <h1>用户登录</h1>
+        </div>
+        <br/>
+        <form>
+            <input type="hidden" name="openid" id="openid" value="{$openid}" />
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label>昵称</label>
+                <input type="text" id="username" name="username" placeholder="请输入昵称..." required autofocus>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label>密码</label>
+                <input type="password" id="password" name="password" placeholder="请输入密码..." required>
+            </div>
+        </form>
+        <div class="ui-btn-wrap">
+            <button class="ui-btn-lg ui-btn-primary" onclick="wxBind()">
+                绑定微信号
+            </button>
+        </div>
+        <div class="ui-btn-wrap">
+            <button class="ui-btn-lg ui-btn-primary" onclick="regist()">
+                新用户注册
+            </button>
+        </div>
+    </div>
+</section>
+<div class="ui-loading-block" id="loading">
+    <div class="ui-loading-cnt">
+        <i class="ui-loading-bright"></i>
+        <p>绑定中...</p>
+    </div>
+</div>
+<script type="text/javascript" class="demo-script">
+    // var el = $.loading({content:'加载中...'});
+    // el.on("loading:hide",function(){
+    //     console.log("loading hide");
+    // });
+</script>
+<script src="__PUBLIC__/lib/jquery-3.0.0.min.js"></script>
+<script>
+
+    function wxBind() {
+
+        $("#loading").addClass("show");
+
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        $.ajax({
+            url: "{:U('Mobile/wxBindHandler')}",
+            data: {
+                username: username,
+                password: password,
+                openid: '{$openid}'
+            },
+            type: 'post',
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                $("#loading").removeClass("show");
+                if (data.error_code) {
+                    alert(data.msg);
+                } else {
+                    window.location.href = "{:U('Mobile/addCount')}";
+                }
+            },
+            error: function () {
+                alert("用户登陆请求异常！");
+            }
+        });
+    }
+
+    function regist(){
+        window.location.href = "{:U('Mobile/regist', array( 'openid'=>'$openid'))}";
+    }
+
+</script>
+</body>
+</html>
+
