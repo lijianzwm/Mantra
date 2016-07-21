@@ -54,19 +54,6 @@
 </script>
 <script src="__PUBLIC__/lib/jquery-3.0.0.min.js"></script>
 <script>
-
-    $(document).ready(
-            function () {
-                var username = localStorage.username;
-                var password = localStorage.password;
-                if( username && password ){
-                    $("#username").val(username);
-                    $("#password").val(password);
-                    login();
-                }
-            }
-    );
-
     function login() {
 
         $("#loading").addClass("show");
@@ -90,7 +77,7 @@
                 } else {
                     localStorage.username = username;
                     localStorage.password = password;
-                    window.location.href = "{:U('Mobile/addCount')}";
+                    window.location.href = "{:U('Login/addCount')}";
                 }
             },
             error: function () {
