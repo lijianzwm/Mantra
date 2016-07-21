@@ -61,6 +61,10 @@
     function addNum() {
         userid = $('#userid').val();
         num = $('#num').val();
+        if( num == "" ){
+            alert("请填写持咒数目!");
+            return;
+        }
         var aj = $.ajax( {
             url:"{:U('Api/Countin/addNum')}",// 跳转到 action
             data:{
