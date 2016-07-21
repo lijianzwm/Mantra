@@ -18,6 +18,7 @@ class LoginController extends Controller{
 
     public function login(){
         if( BrowserService::isMobileTencentBrowser() ){
+            layout(false);
             $this->display('m_login');
         }else{
             $this->display('login');
@@ -88,6 +89,7 @@ class LoginController extends Controller{
 
     public function regist(){
         if( BrowserService::isMobileTencentBrowser() ){
+            layout(false);
             $this->display('m_regist');
         }else{
             $this->display('regist');
