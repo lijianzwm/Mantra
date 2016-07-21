@@ -16,7 +16,9 @@ class BrowserService{
      * 判断是否为腾讯系浏览器(手机QQ,微信内置浏览器)
      */
     public static function isMobileTencentBrowser(){
-        if (isset ($_SERVER['HTTP_X_WAP_PROFILE'])) {
+        if ( preg_match('/QQ/i',$_SERVER['HTTP_USER_AGENT' ]) ||
+            strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false
+        ){
             return true;
         }else{
             return false;
