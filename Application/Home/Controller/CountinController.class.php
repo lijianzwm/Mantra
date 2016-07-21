@@ -9,6 +9,7 @@
 namespace Home\Controller;
 
 use Common\Service\CountinService;
+use Common\Service\BrowserService;
 
 class CountinController extends CommonController{
 
@@ -27,7 +28,13 @@ class CountinController extends CommonController{
         $this->assign("userid", $userid);
         $this->assign("todayNum", $todayNum);
         $this->assign("total", $total);
-        $this->display();
+
+        if( BrowserService::isMobileTencentBrowser() ){
+            $this->display('m_addNum');
+        }else{
+            $this->display('addNum');
+        }
+
     }
 
     public function counter(){

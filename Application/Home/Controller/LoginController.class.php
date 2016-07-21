@@ -11,11 +11,17 @@ namespace Home\Controller;
 use Think\Controller;
 use Common\Service\UserService;
 use Common\Service\CountinService;
+use Common\Service\BrowserService;
+use Think\Page;
 
 class LoginController extends Controller{
 
     public function login(){
-        $this->display();
+        if( BrowserService::isMobileTencentBrowser() ){
+            $this->display('m_login');
+        }else{
+            $this->display('login');
+        }
     }
 
     public function findPassword(){
@@ -78,6 +84,21 @@ class LoginController extends Controller{
         session("username", null);
         session("showname", null);
         redirect(U('Index/index'));
+    }
+
+    public function regist(){
+        if( BrowserService::isMobileTencentBrowser() ){
+            $this->display('m_regist');
+        }else{
+            $this->display('regist');
+        }
+    }
+
+    /**
+     * 自动登录
+     */
+    public function autoLogin(){
+        $this->display();
     }
 
 
