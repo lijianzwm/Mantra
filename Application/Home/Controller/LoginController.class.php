@@ -98,6 +98,7 @@ class LoginController extends Controller{
      * 自动登录
      */
     public function autoLogin(){
+        layout(false);
         $this->display();
     }
 

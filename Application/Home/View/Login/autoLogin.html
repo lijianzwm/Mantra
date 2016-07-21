@@ -31,6 +31,8 @@
                 $("#username").val(username);
                 $("#password").val(password);
                 login();
+            }else{
+                window.location.href="{:U('Login/login')}";
             }
         }
     );
