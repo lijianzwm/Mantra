@@ -10,6 +10,7 @@ namespace Home\Controller;
 
 use Common\Service\CountinService;
 use Common\Service\BrowserService;
+use Common\Service\UserService;
 
 class CountinController extends CommonController{
 
@@ -17,6 +18,7 @@ class CountinController extends CommonController{
         $userid = session("userid");
         $todayNum = CountinService::getUserTodayNumById($userid);
         $total = CountinService::getUserTotalNumById($userid);
+        $user = UserService::getUserById($userid);
         if( $total == null ){
             $total = "用户不存在！";
             $todayNum = "用户不存在！";
@@ -26,6 +28,7 @@ class CountinController extends CommonController{
             }
         }
         $this->assign("userid", $userid);
+        $this->assign("showname", $user['showname']);
         $this->assign("todayNum", $todayNum);
         $this->assign("total", $total);
 
