@@ -18,7 +18,7 @@
         <form>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label>昵称</label>
-                <input type="text" id="username" name="username" placeholder="请输入昵称..." required autofocus>
+                <input type="text" id="username" name="username" placeholder="请输入昵称..." required>
             </div>
             <div class="ui-form-item ui-form-item-show ui-border-b">
                 <label>密码</label>
@@ -51,6 +51,24 @@
 </script>
 <script src="__PUBLIC__/lib/jquery-3.0.0.min.js"></script>
 <script>
+
+    $(document).ready(
+        function () {
+            $("#loading").addClass("show");
+            var username = localStorage.username;
+            var password = localStorage.password;
+            if( username && password ){
+                $("#username").val(username);
+                $("#password").val(password);
+                $("#loading").removeClass("show");
+                login();
+            }else{
+                $("#username").focus();
+                $("#loading").removeClass("show");
+            }
+        }
+    );
+
     function login() {
 
         $("#loading").addClass("show");
