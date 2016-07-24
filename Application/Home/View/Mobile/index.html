@@ -216,13 +216,13 @@
                 if( !data.error_code ){
                     var rank = data.ranklist;
                     for(var i=0;i<rank.length;i++){
-                        alert(JSON.stringify(rank));
-//                        $("#today_ranklist").append(
-//                                "<tr>" +
-//                                "<td>" + rank[i].
-//                                "</td>" +
-//                                "</tr>"
-//                        )
+                        $("#today_ranklist").append(
+                            "<tr>" +
+                                "<td>" + i+1 + "</td>" +
+                                "<td>"+ rank[i].name+ "</td>" +
+                                "<td>"+rank[i].num+ "</td>" +
+                            "</tr>"
+                        )
                     }
                 }else{
                     alert(data.msg);
