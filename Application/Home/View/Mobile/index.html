@@ -193,7 +193,7 @@
                 if( !data.error_code ){
                     var rank = data.ranklist;
                     alert(JSON.stringify(rank));
-                    $("#today_ranklist").appendChild("<thead><tr><th>名次</th><th>姓名</th><th>数目</th></tr></thead>");
+                    $("#today_ranklist").append("<thead><tr><th>名次</th><th>姓名</th><th>数目</th></tr></thead>");
                     for(var i=0;i<rank.length;i++){
                         if( rank[i].userid == '{$userid}'){
                             $("#today_ranklist").append("<tr style='color:red;'>");
