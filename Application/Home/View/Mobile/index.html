@@ -205,6 +205,7 @@
                     var rank = data.ranklist;
                     for(var i=0;i<rank.length;i++){
                         if( rank[i].userid == userid ){
+                            alert("equal");
                             $("#today_ranklist").append("<tr style='color:red;'>");
                         }else{
                             $("#today_ranklist").append("<tr>");
