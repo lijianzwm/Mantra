@@ -205,17 +205,22 @@
                     var rank = data.ranklist;
                     for(var i=0;i<rank.length;i++){
                         if( rank[i].userid == userid ){
-                            alert("equal");
-                            $("#today_ranklist").append("<tr style='color:red;'>");
+                            $("#today_ranklist").append(
+                                "<tr>" +
+                                    "<td><strong>" + (i+1) + "</strong></td>" +
+                                    "<td><strong>"+ rank[i].name+ "</strong></td>" +
+                                    "<td><strong>"+rank[i].num+ "</strong></td>" +
+                                "</tr>"
+                            )
                         }else{
-                            $("#today_ranklist").append("<tr>");
+                            $("#today_ranklist").append(
+                                "<tr>" +
+                                    "<td>" + (i+1) + "</td>" +
+                                    "<td>"+ rank[i].name+ "</td>" +
+                                    "<td>"+rank[i].num+ "</td>" +
+                                "</tr>"
+                            )
                         }
-                        $("#today_ranklist").append(
-                                "<td>" + (i+1) + "</td>" +
-                                "<td>"+ rank[i].name+ "</td>" +
-                                "<td>"+rank[i].num+ "</td>" +
-                            "</tr>"
-                        )
                     }
                 }else{
                     alert(data.msg);
