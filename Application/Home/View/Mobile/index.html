@@ -189,7 +189,7 @@
     function getTodayRanklist(){
 
         $("#now_loading").addClass("show");
-        $("#today_ranklist tr").remove();
+//        $("#today_ranklist").remove();
 
         var aj = $.ajax( {
             url:"{:U('/Api/Ranklist/getTodayRanklist')}",
@@ -202,8 +202,9 @@
                 $("#now_loading").removeClass("show");
                 if( !data.error_code ){
                     var rank = data.ranklist;
-                    alert(JSON.stringify(rank));
                     for(var i=0;i<rank.length;i++){
+                        alert(rank[i].userid);
+                        alert('{$userid}');
                         if( rank[i].userid == '{$userid}'){
                             $("#today_ranklist").append("<tr style='color:red;'>");
                         }else{
