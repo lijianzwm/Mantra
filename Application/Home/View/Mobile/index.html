@@ -190,7 +190,7 @@
     function getTodayRanklist(){
 
         $("#now_loading").addClass("show");
-//        $("#today_ranklist").remove();
+        $("#today_ranklist").children().remove();
 
         var aj = $.ajax( {
             url:"{:U('/Api/Ranklist/getTodayRanklist')}",
