@@ -203,14 +203,14 @@
                 if( !data.error_code ){
                     var rank = data.ranklist;
                     alert(JSON.stringify(rank));
-                    for(var i=1;i<rank.length+1;i++){
+                    for(var i=0;i<rank.length;i++){
                         if( rank[i].userid == '{$userid}'){
                             $("#today_ranklist").append("<tr style='color:red;'>");
                         }else{
                             $("#today_ranklist").append("<tr>");
                         }
                         $("#today_ranklist").append(
-                                "<td>" + i + "</td>" +
+                                "<td>" + (i+1) + "</td>" +
                                 "<td>"+ rank[i].name+ "</td>" +
                                 "<td>"+rank[i].num+ "</td>" +
                             "</tr>"
