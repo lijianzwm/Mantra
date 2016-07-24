@@ -114,7 +114,7 @@
 </section>
 
 <section class="ui-container" style="display:none;" id="paihang">
-    <table class="ui-table ui-border" id="today_ranklist">
+    <table class="ui-table ui-border">
         <thead>
         <tr>
             <th>排名</th>
@@ -122,6 +122,9 @@
             <th>数目</th>
         </tr>
         </thead>
+        <tbody  id="today_ranklist">
+
+        </tbody>
 
     </table>
 </section>
@@ -208,7 +211,7 @@
                             $("#today_ranklist").append("<tr>");
                         }
                         $("#today_ranklist").append(
-                                "<td>" + i+1 + "</td>" +
+                                "<td>" + parseInt(i)+1 + "</td>" +
                                 "<td>"+ rank[i].name+ "</td>" +
                                 "<td>"+rank[i].num+ "</td>" +
                             "</tr>"
