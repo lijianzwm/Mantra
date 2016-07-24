@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>摩利支天共修</title>
+    <link rel="stylesheet" href="__PUBLIC__/lib/frozenui/css/frozen.css">
+</head>
+<body>
+<header class="ui-header ui-header-stable ui-border-b">
+    <h1 id="baoshu_title">共修报数</h1>
+    <h1 id="yigui_title" style="display:none;">共修仪轨</h1>
+    <h1 id="paihang_title" style="display:none;">今日排行</h1>
+</header>
+<section class="ui-container" id="baoshu">
+    <div class="ui-form ui-border-t">
+        <br/>
+        <div class="ui-whitespace" style="text-align:center;">
+            <h1 style="font-size:30px;"><strong>用户</strong></h1>
+            <h1>今日:&nbsp;<strong style="color:red;" id="today_num">123</strong></h1>
+        </div>
+        <br/>
+        <form>
+            <input type="hidden" id="userid" value="{$userid}" />
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label>持咒数目</label>
+                <input type="text" id="num" name="num" placeholder="请输入持咒数目...">
+                <a href="#" onclick="clearNum()" class="ui-icon-close">
+                </a>
+            </div>
+        </form>
+        <br/>
+        <div class="ui-label-list">
+            <label class="ui-label" onclick="fillCount('7')">7遍</label>
+            <label class="ui-label" onclick="fillCount('108')">108遍</label>
+            <label class="ui-label" onclick="fillCount('300')">300遍</label>
+            <label class="ui-label" onclick="fillCount('1080')">1080遍</label>
+        </div>
+        <div class="ui-btn-wrap">
+            <button class="ui-btn-lg ui-btn-primary" onclick="addNum()">
+                报数
+            </button>
+        </div>
+    </div>
+
+</section>
+
+<section class="ui-container ui-center" id="yigui" style="display:none;">
+    <div class="ui-whitespace">
+        <h1><strong>聖摩利支天护国息灾共修仪轨</strong></h1>
+        <br/>
+        <p class="ui-txt-default">纳谟外嘉佑 玛哈德哇 玛类斯诶吖雅</p>
+        <br/>
+        <div class="ui-flex ui-flex-pack-start">
+            <h3 class="ui-txt-info">皈依：</h3>
+        </div>
+        <p class="ui-txt-default">稽首皈命佛&nbsp;&nbsp;&nbsp;说法度群迷</p>
+        <p class="ui-txt-default">稽首皈命法&nbsp;&nbsp;&nbsp;解脱三有苦</p>
+        <p class="ui-txt-default">稽首皈命僧&nbsp;&nbsp;&nbsp;无漏胜福田</p>
+        <p class="ui-txt-default">如是圣三宝&nbsp;&nbsp;&nbsp;尽形寿皈依</p>
+        <br/>
+        <p class="ui-txt-default">纳谟布达雅 纳谟达玛雅 纳谟桑噶雅&nbsp;【真言三遍】</p>
+        <br/>
+        <div class="ui-flex ui-flex-align-start">
+            <p class="ui-txt-justify">&nbsp;&nbsp;&nbsp;&nbsp;弟子众等&nbsp;一心皈命本尊&nbsp;大圣摩利支天&nbsp;北辰妙见菩萨&nbsp;及北斗七星诸圣眷属&nbsp;惟愿诸尊圣众&nbsp;统帅无量眷众&nbsp;显大威神&nbsp;加护国体&nbsp;&nbsp;恃凭尊等威德&nbsp;令我中华人民共和国&nbsp;国界安宁&nbsp;边疆稳固&nbsp;现前滋扰&nbsp;宿敌怨障&nbsp;悉皆摧碎&nbsp;无敢再犯&nbsp;</p>
+        </div>
+        <br/>
+        <div class="ui-flex ui-flex-pack-start">
+            <h3 class="ui-txt-info">本尊赞：</h3>
+        </div>
+        <p class="ui-txt-default">稽首摩利支&nbsp;&nbsp;&nbsp;大圣神通力</p>
+        <p class="ui-txt-default">统帅北斗众&nbsp;&nbsp;&nbsp;诸天星宿聚</p>
+        <p class="ui-txt-default">能灭一切害&nbsp;&nbsp;&nbsp;护国胜无敌</p>
+        <p class="ui-txt-default">最胜阳焰天&nbsp;&nbsp;&nbsp;我今皈命礼</p>
+        <br/>
+        <p class="ui-txt-default">噢<small>木</small> 阿帝塔雅 玛类斯<small>诶</small> 萨<small>巴</small>哈&nbsp;【尽力持诵】</p>
+        <br/>
+        <div class="ui-flex ui-flex-pack-start">
+            <h3 class="ui-txt-info">祈愿：</h3>
+        </div>
+        <p>恳祈胜加持&nbsp;&nbsp;&nbsp;愿尊我一心</p>
+        <p>赐大胜威权&nbsp;&nbsp;&nbsp;护国息灾疫</p>
+        <div class="ui-flex ui-flex-pack-start">
+            <h3 class="ui-txt-info">圣眷赞：</h3>
+        </div>
+            <p>稽首妙见士&nbsp;&nbsp;&nbsp;北斗星宿尊</p>
+            <p>大威德息灾&nbsp;&nbsp;&nbsp;皈命我赞礼</p>
+        <div class="ui-flex ui-flex-pack-start">
+            <h3 class="ui-txt-info">回向：</h3>
+        </div>
+            <p>皈命摩利支&nbsp;&nbsp;&nbsp;三密速加持</p>
+            <p>如尊大自在&nbsp;&nbsp;&nbsp;我亦具如是</p>
+            <p>祈尊敕眷众&nbsp;&nbsp;&nbsp;显圣护国威</p>
+            <p>不令国界险&nbsp;&nbsp;&nbsp;尽破诸贼敌</p>
+            <p>虔诚赞我主&nbsp;&nbsp;&nbsp;最胜大无畏</p>
+            <p>常覆护国体&nbsp;&nbsp;&nbsp;仇怨悉灭摧</p>
+            <p>祈赐圣国主&nbsp;&nbsp;&nbsp;常当圣加持</p>
+            <p>民众悉归心&nbsp;&nbsp;&nbsp;和合无歧意</p>
+            <p>善哉摩利支&nbsp;&nbsp;&nbsp;赐国运昌盛</p>
+            <p>唯于我等愿&nbsp;&nbsp;&nbsp;祈垂胜悉地</p>
+        <div class="ui-flex ui-flex-pack-start">
+            <h3 class="ui-txt-info">回向词：</h3>
+        </div>
+        <p class="ui-txt-justify">&nbsp;&nbsp;&nbsp;&nbsp;将此共修功德回向&nbsp;中华人民共和国&nbsp;&nbsp;国运昌盛&nbsp;国界安宁&nbsp;边疆稳固&nbsp;现前滋扰&nbsp;宿敌怨障&nbsp;悉皆摧碎&nbsp;无敢再犯&nbsp;。回向一切众生离苦得乐&nbsp;佛法久住，法轮常转；祈愿大恩上师吉祥金刚阿阇梨及所有高僧大德、法体康健、长久住世。</p>
+        <br/>
+        <div class="ui-flex ui-flex-pack-end">
+            <div><p class="ui-txt-info">吉祥圆满</p></div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+</section>
+
+<section class="ui-container" style="display:none;" id="paihang">
+    <table class="ui-table ui-border">
+        <thead>
+        <tr>
+            <th>名次</th>
+            <th>姓名</th>
+            <th>数目</th>
+        </tr>
+        </thead>
+        <tbody id="today_ranklist">
+            <for start="0" end="count($ranklist)">
+                <if condition="$ranklist[$i]['userid'] eq $yourUserid">
+                    <tr style="color:red;">
+                        <td>{$i+1}</td>
+                        <td>{$ranklist.$i.name}</td>
+                        <td>{$ranklist.$i.num}</td>
+                    </tr>
+                    <else />
+                    <tr>
+                        <td>{$i+1}</td>
+                        <td>{$ranklist.$i.name}</td>
+                        <td>{$ranklist.$i.num}</td>
+                    </tr>
+                </if>
+            </for>
+        </tbody>
+    </table>
+</section>
+
+<div class="ui-loading-block" id="now_loading">
+    <div class="ui-loading-cnt">
+        <i class="ui-loading-bright"></i>
+        <p>加载中...</p>
+    </div>
+</div>
+<script type="text/javascript" class="demo-script">
+    // var el = $.loading({content:'加载中...'});
+    // el.on("loading:hide",function(){
+    //     console.log("loading hide");
+    // });
+</script>
+
+
+<footer class="ui-footer ui-footer-stable ui-border-t">
+    <ul class="ui-tiled">
+        <li onclick="switchTab('baoshu')"><i>
+            <div  id="baoshu_img"  style="display:none;" ><img class="img-circle" src="__PUBLIC__/Image/mobile/baoshu-icon.png" alt="" width="45" height="45"></div>
+            <div id="baoshu_img_active">
+                <img class="img-circle" src="__PUBLIC__/Image/mobile/baoshu-icon-active.png"  alt="" width="45" height="45">
+            </div>
+        </i></li>
+
+        <li onclick="switchTab('yigui')"><i>
+            <div id="yigui_img" ><img class="img-circle" src="__PUBLIC__/Image/mobile/yigui-icon.png"  alt="" width="45" height="45"></div>
+            <div id="yigui_img_active" style="display:none;" ><img class="img-circle" src="__PUBLIC__/Image/mobile/yigui-icon-active.png" alt="" width="45" height="45"></div>
+        </i></li>
+
+        <li onclick="switchTab('paihang')"><i>
+            <div id="paihang_img" ><img class="img-circle" src="__PUBLIC__/Image/mobile/rank-icon.png" alt="" width="45" height="45"></div>
+            <div id="paihang_img_active" style="display:none;" ><img class="img-circle" src="__PUBLIC__/Image/mobile/rank-icon-active.png" alt="" width="45" height="45"></div>
+        </i></li>
+    </ul>
+</footer>
+
+<script src="__PUBLIC__/lib/jquery-3.0.0.min.js"></script>
+<script type="text/javascript">
+
+    curTab = 'baoshu';
+
+    function switchTab( tabId ){
+        if( curTab !== tabId ){
+            $("#"+curTab+"_img_active").toggle();
+            $("#"+curTab+"_img").toggle();
+            $("#"+curTab+"_title").toggle();
+            $("#"+curTab).toggle();
+            curTab = tabId;
+            $("#"+tabId+"_img_active").toggle();
+            $("#"+tabId+"_img").toggle();
+            $("#"+tabId+"_title").toggle();
+            $("#"+tabId).toggle();
+            if( tabId === 'paihang' ){
+                getTodayRanklist();
+            }
+        }
+    }
+
+    function getTodayRanklist(){
+
+        $("#now_loading").addClass("show");
+        $("#today_ranklist").remove();
+
+        var aj = $.ajax( {
+            url:"{:U('/Api/Ranklist/getTodayRanklist')}",
+            data:{
+            },
+            type:'post',
+            cache:false,
+            dataType:'json',
+            success:function(data) {
+                $("#now_loading").removeClass("show");
+                if( !data.error_code ){
+                    var rank = data.ranklist;
+                    for(var i=0;i<rank.length;i++){
+                        alert(JSON.stringify(rank));
+//                        $("#today_ranklist").append(
+//                                "<tr>" +
+//                                "<td>" + rank[i].
+//                                "</td>" +
+//                                "</tr>"
+//                        )
+                    }
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error : function() {
+                alert("查询本日排行榜请求失败！");
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>
