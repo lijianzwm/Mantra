@@ -168,6 +168,7 @@
 <script type="text/javascript">
 
     curTab = 'baoshu';
+    userid = '{$userid}';
 
     function switchTab( tabId ){
         if( curTab !== tabId ){
@@ -203,7 +204,7 @@
                 if( !data.error_code ){
                     var rank = data.ranklist;
                     for(var i=0;i<rank.length;i++){
-                        if( parseInt(rank[i].userid) == parseInt('{$userid}') ){
+                        if( rank[i].userid == userid ){
                             $("#today_ranklist").append("<tr style='color:red;'>");
                         }else{
                             $("#today_ranklist").append("<tr>");
