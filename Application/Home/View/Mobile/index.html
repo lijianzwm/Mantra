@@ -203,9 +203,7 @@
                 if( !data.error_code ){
                     var rank = data.ranklist;
                     for(var i=0;i<rank.length;i++){
-                        alert(rank[i].userid);
-                        alert('{$userid}');
-                        if( rank[i].userid == '{$userid}'){
+                        if( parseInt(rank[i].userid) == parseInt('{$userid}') ){
                             $("#today_ranklist").append("<tr style='color:red;'>");
                         }else{
                             $("#today_ranklist").append("<tr>");
