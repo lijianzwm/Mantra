@@ -114,9 +114,7 @@
 </section>
 
 <section class="ui-container" style="display:none;" id="paihang">
-    <table class="ui-table ui-border" id="today_ranklist">
 
-    </table>
 </section>
 
 <div class="ui-loading-block" id="now_loading">
@@ -158,6 +156,7 @@
 <script type="text/javascript">
 
     curTab = 'baoshu';
+    $("#paihang").append("<table class='ui-table ui-border' id='today_ranklist'></table>");
 
     function switchTab( tabId ){
         if( curTab !== tabId ){
