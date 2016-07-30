@@ -24,7 +24,7 @@ class LoginController extends Controller{
         if( BrowserService::isMobileTencentBrowser() ){
             layout(false);
             if( $username && $password ){
-                $this->assgin("username", $username);
+                $this->assign("username", $username);
                 $this->assign("password", $password);
             }
             $this->display('m_login');
