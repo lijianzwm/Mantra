@@ -17,8 +17,16 @@ use Think\Page;
 class LoginController extends Controller{
 
     public function login(){
+
+        $username = I("username");
+        $password = I("password");
+
         if( BrowserService::isMobileTencentBrowser() ){
             layout(false);
+            if( $username && $password ){
+                $this->assgin("username", $username);
+                $this->assign("password", $password);
+            }
             $this->display('m_login');
         }else{
             $this->display('login');
