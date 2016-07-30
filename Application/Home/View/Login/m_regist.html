@@ -67,7 +67,8 @@
                 if (data.error_code) {
                     alert(data.msg);
                 }else{
-                    dialog.success("注册成功!","{:U('Mobile/addCount')}");
+                    alert("注册成功!");
+                    window.location.href="{:U('Mobile/addCount')}";
                 }
             },
             error: function () {
