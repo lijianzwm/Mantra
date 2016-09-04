@@ -74,7 +74,9 @@
     }
 
     function succFunc(data){
-        window.location.href="{:U('Login/userCenter')}";
+        localStorage.username = username;
+        localStorage.password = password;
+        window.location.href = "{:U('Countin/addNum')}";
     }
 
     function errorFunc( data ){

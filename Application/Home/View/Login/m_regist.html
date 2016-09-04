@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>摩利支天共修</title>
+    <link rel="stylesheet" href="__PUBLIC__/lib/frozenui/css/frozen.css">
+</head>
+<body>
+<section class="ui-container">
+    <div class="ui-form ui-border-t">
+        <br/>
+        <div class="ui-whitespace" style="text-align:center;">
+            <h1>摩利支天共修注册</h1>
+        </div>
+        <br/>
+        <form>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label>昵称</label>
+                <input type="text" id="username" name="username" placeholder="请输入昵称..." required autofocus>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label>密码</label>
+                <input type="password" id="password" name="password" placeholder="请输入密码..." required>
+            </div>
+            <div class="ui-form-item ui-form-item-show ui-border-b">
+                <label>确认</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="请确认密码..." required>
+            </div>
+        </form>
+        <div class="ui-btn-wrap">
+            <button class="ui-btn-lg ui-btn-primary" onclick="regist()">
+                注册
+            </button>
+        </div>
+    </div>
+</section>
+<div class="ui-loading-block" id="loading">
+    <div class="ui-loading-cnt">
+        <i class="ui-loading-bright"></i>
+        <p>注册中...</p>
+    </div>
+</div>
+<script type="text/javascript" class="demo-script">
+    // var el = $.loading({content:'加载中...'});
+    // el.on("loading:hide",function(){
+    //     console.log("loading hide");
+    // });
+</script>
+<script src="__PUBLIC__/lib/jquery-3.0.0.min.js"></script>
+<script>
+
+    function registHandler(username,password){
+        $("#loading").addClass("show");
+        $.ajax({
+            url: "{:U('Api/Login/regist')}",
+            data: {
+                username:username,
+                password:password
+            },
+            type: 'post',
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                $("#loading").removeClass("show");
+                if (data.error_code) {
+                    alert(data.msg);
+                }else{
+                    alert("注册成功!");
+                    window.location.href="{:U('Login/login')}" + "?username="+username+"&password="+password;
+                }
+            },
+            error: function () {
+                alert("ajax请求失败!");
+            }
+        });
+    }
+
+    function checkConfirmPassword(password,confirm_pwd){
+        if( password != confirm_pwd ){
+            alert("两次密码输入不一致");
+            return false;
+        }
+        return true;
+    }
+
+    function regist() {
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var confirmPassword = $('#confirm_password').val();
+        if( checkConfirmPassword(password,confirmPassword)){
+            registHandler(username, password);
+        }
+    }
+</script>
+</body>
+</html>
+
