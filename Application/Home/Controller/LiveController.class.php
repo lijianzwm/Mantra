@@ -15,4 +15,10 @@ class LiveController extends Controller{
     public function live(){
         $this->display();
     }
+
+    public function hls(){
+        layout(false);
+        $this->display();
+    }
+
 }
