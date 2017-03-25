@@ -11,7 +11,7 @@ namespace Home\Controller;
 
 use Think\Controller;
 
-class BiliiliLiveController extends Controller{
+class BilibiliLiveController extends Controller{
     public function index(){
         $this->display();
     }
