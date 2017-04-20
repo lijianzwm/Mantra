@@ -9,7 +9,7 @@ namespace Home\Controller;
 
 use Think\Controller;
 
-class LoginController extends Controller{
+class VideoController extends Controller{
 
     public function player(){
         $videoid = I("video");
