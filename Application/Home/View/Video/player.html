@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"   content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <title>准提心脉同心同德网络开示</title>
+    <!-- 通用自适应flash／h5 -->
+    <link rel="stylesheet" href="//g.alicdn.com/de/prismplayer/1.6.3/skins/default/index.css" />
+    <script type="text/javascript" src="//g.alicdn.com/de/prismplayer/1.6.3/prism-h5-min.js"></script>
+</head>
+<body>
+<div class="prism-player" id="J_prismPlayer"></div>
+<script>
+    // 获取窗口宽度
+    if (window.innerWidth)
+        winWidth = window.innerWidth;
+    else if ((document.body) && (document.body.clientWidth))
+        winWidth = document.body.clientWidth;
+    // 获取窗口高度
+    if (window.innerHeight)
+        winHeight = window.innerHeight;
+    else if ((document.body) && (document.body.clientHeight))
+        winHeight = document.body.clientHeight;
+    // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+    if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+    {
+        winHeight = document.documentElement.clientHeight;
+        winWidth = document.documentElement.clientWidth;
+    }
+    var player = new prismplayer({
+        id: "J_prismPlayer",
+        width: parseInt(winWidth*0.8).toString()+'px',
+        height: parseInt(winWidth/16*9).toString()+'px',
+        showBarTime: 3000000,
+        autoplay: false,
+        //必填项
+        vid : '{$vid}',
+        accId : 'z8yQPbjkRy05ccYh',
+        accSecret : 'WqMCRZfArvuHLAKgPk416PrdUSJwLB',
+        apiKey : 'm2z42u8eayhvkvwxbrg69uv38ukwct4lhtme7a31qzgpdygz267bdq5997yx8kih',
+    });
+</script>
+</body>
+</html>
